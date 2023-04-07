@@ -1,20 +1,20 @@
 from dataclasses import dataclass
-from enum import Enum
-from typing import Optional
-
+from enum import IntEnum
 
 class Denoising():
     """
     """
 
     def __init__(self):	
-        self._N2V_BSD = N2V_BSD64()
+        self._N2V_BSD64 = N2V_BSD64()
         self._N2V_SEM = N2V_SEM()
-        self._RGB = Denoising.RGB
-        self._flywing = Denoising.flywing
+        self._N2N_SEM = None
+        self._RGB = N2V_RGB()
+        self._flywing = Flywing()
+        self._DSB2018 = None
 
     @property
-    def BSD64(self):
+    def N2V_BSD64(self):
         return self._N2V_BSD64
 
     @property
@@ -32,8 +32,7 @@ class Denoising():
 
     @classmethod
     def list_datasets(cls) -> list[str]:
-        return ["N2V_BSD", "SEM", "RGB", "flywing"]
-
+        return ["N2V_BSD", "SEM", "RGB", "flywing", 'DSB2018']  
 
 
 @dataclass
@@ -48,7 +47,6 @@ class PortfolioEntry():
     description: str
     license: str
     citation: str
-
 
 
 class N2V_BSD64(PortfolioEntry):
@@ -80,12 +78,15 @@ class N2V_SEM(PortfolioEntry):
     def __init__(self):
         super().__init__(
             name="N2V_SEM",
-            link="https://download.fht.org/jug/n2v/RGB.zip",
+            link="https://download.fht.org/jug/n2v/SEM.zip",
             description=
-                "",
+                "Cropped images from a SEM dataset from T.-O. Buchholz et al "
+                "(Methods Cell Biol, 2020).",
             license="CC-BY",
             citation=
-                ""
+                "T.-O. Buchholz, A. Krull, R. Shahidi, G. Pigino, G. Jékely, "
+                "F. Jug, \"Content-aware image restoration for electron "
+                "microscopy\", Methods Cell Biol 152, 277-289"
         )
 
 class N2V_RGB(PortfolioEntry):
@@ -103,3 +104,48 @@ class N2V_RGB(PortfolioEntry):
                 " 2019, pp. 2124-2132"
         )
 
+class Flywing(PortfolioEntry):
+    def __init__(self):
+        super().__init__(
+            name="N2V_flywing",
+            link="https://download.fht.org/jug/n2v/flywing-data.zip",
+            description=
+                "Flywing 3D dataset from T.-O. Buchholz et al (Methods Cell Biol, "
+                "2020).",
+            license="CC-BY",
+            citation=
+                "T.-O. Buchholz, A. Krull, R. Shahidi, G. Pigino, G. Jékely, "
+                "F. Jug, \"Content-aware image restoration for electron "
+                "microscopy\", Methods Cell Biol 152, 277-289."
+        )
+
+
+class DSB2018(PortfolioEntry):
+    
+    class NoiseLevel(IntEnum):
+        N0 = 0
+        N10 = 10
+        N20 = 20
+    
+    def __init__(self, noise_level: NoiseLevel = NoiseLevel.N0):
+        super().__init__(
+            name="DSB2018",
+            link=f"https://zenodo.org/record/5156969/files/DSB2018_n"
+                "{noise_level.value}"
+                ".zip?download=1",
+            description=
+                "From the Kaggle 2018 Data Science Bowl challenge, the "
+                "training and validation sets consist of 3800 and 670 patches "
+                "respectively, while the test set counts 50 images.\n"
+                "Original data: "
+                "https://www.kaggle.com/competitions/data-science-bowl-2018/data",
+            license="GPL-3.0",
+            citation=
+            "Caicedo, J.C., Goodman, A., Karhohs, K.W. et al. Nucleus "
+            "segmentation across imaging experiments: the 2018 Data Science "
+            "Bowl. Nat Methods 16, 1247–1253 (2019). "
+            "https://doi.org/10.1038/s41592-019-0612-7"
+        )
+
+        # remember noise level
+        self._noise_level = noise_level
