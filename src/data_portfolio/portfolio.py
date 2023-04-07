@@ -1,5 +1,8 @@
+from pathlib import Path
 from dataclasses import dataclass
 from enum import IntEnum
+from typing import Union
+
 
 class Denoising():
     """
@@ -48,6 +51,17 @@ class PortfolioEntry():
     license: str
     citation: str
 
+    def download(self, path: Union[str, Path], create_parents: bool = True) -> dict:
+        """Download the dataset to the given path.
+
+        Args:
+            path (Union[str, Path]): Path in which the data should be downloaded
+            create_parents (bool, optional): Create parent directories if they don't exist. Defaults to True.
+
+        Returns:
+            dict: A dictionnary containing path to the different files or folders.
+        """
+        pass
 
 class N2V_BSD64(PortfolioEntry):
     def __init__(self):
