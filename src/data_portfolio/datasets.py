@@ -32,21 +32,25 @@ class N2V_BSD68(PortfolioEntry):
         )
 
 
-"""
 class N2V_SEM(PortfolioEntry):
     def __init__(self) -> None:
         super().__init__(
             name="N2V_SEM",
             url="https://download.fht.org/jug/n2v/SEM.zip",
+            file_name="SEM.zip",
+            md5_hash="953a815333805a423b7019bd16cc3341",
             description="Cropped images from a SEM dataset from T.-O. Buchholz et al "
             "(Methods Cell Biol, 2020).",
             license="CC-BY",
             citation="T.-O. Buchholz, A. Krull, R. Shahidi, G. Pigino, G. Jékely, "
             'F. Jug, "Content-aware image restoration for electron '
             'microscopy", Methods Cell Biol 152, 277-289',
+            files={
+                ".": ["train.tif", "validation.tif"],
+            }
         )
 
-
+"""
 class N2V_RGB(PortfolioEntry):
     def __init__(self) -> None:
         super().__init__(

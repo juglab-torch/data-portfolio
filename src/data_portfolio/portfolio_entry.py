@@ -73,7 +73,7 @@ class PortfolioEntry:
             print("MD5 hash is correct.")
 
         # check if data has been unzipped before
-        data_path = Path(path, self.name[:-4])
+        data_path = Path(path, self.file_name[:-4])
         # TODO progress bar
         print(f"Unzipping {zip_path} to {data_path}.")
         with zipfile.ZipFile(zip_path, "r") as zip_ref:

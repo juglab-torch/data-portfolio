@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from .datasets import N2V_BSD68
+from .datasets import N2V_BSD68, N2V_SEM
 
 
 class Denoising:
@@ -8,7 +8,7 @@ class Denoising:
 
     def __init__(self) -> None:
         self._N2V_BSD68 = N2V_BSD68()
-        self._N2V_SEM = None
+        self._N2V_SEM = N2V_SEM()
         self._N2N_SEM = None
         self._RGB = None
         self._flywing = None
@@ -32,7 +32,7 @@ class Denoising:
 
     @classmethod
     def list_datasets(cls) -> list[str]:
-        return ["N2V_BSD", "SEM", "RGB", "flywing", "DSB2018"]
+        return ["N2V_BSD", "N2V_SEM"]
 
 
 @dataclass
