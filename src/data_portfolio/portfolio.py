@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from .datasets import N2V_BSD68, N2V_SEM, N2V_RGB
+from .datasets import N2V_BSD68, N2V_SEM, N2V_RGB, Flywing
 
 
 class Segmentation:
@@ -25,7 +25,7 @@ class Denoising:
         self._N2V_BSD68 = N2V_BSD68()
         self._N2V_SEM = N2V_SEM()
         self._N2V_RGB = N2V_RGB()
-        self._flywing = None
+        self._flywing = Flywing()
 
     @property
     def N2V_BSD68(self) -> N2V_BSD68:

@@ -64,26 +64,29 @@ class N2V_RGB(PortfolioEntry):
             "Conference on Computer Vision and Pattern Recognition (CVPR),"
             " 2019, pp. 2124-2132",
             files={
-                "RGB": ["longbeach.png"],
+                "RGB": ["longBeach.png"],
             }
         )
 
-"""
 
 class Flywing(PortfolioEntry):
     def __init__(self) -> None:
         super().__init__(
-            name="N2V_flywing",
+            name="Flywing",
             url="https://download.fht.org/jug/n2v/flywing-data.zip",
-            description="Flywing 3D dataset from T.-O. Buchholz et al (Methods Cell Biol, "
-            "2020).",
+            file_name="flywing-data.zip",
+            md5_hash="769f4e265f8ab8ccea1893087df019da",
+            description="Image of a membrane-labeled fly wing (35x692x520 pixels).",
             license="CC-BY",
-            citation="T.-O. Buchholz, A. Krull, R. Shahidi, G. Pigino, G. Jékely, "
-            'F. Jug, "Content-aware image restoration for electron '
-            'microscopy", Methods Cell Biol 152, 277-289.',
+            citation="Buchholz, T.O., Prakash, M., Schmidt, D., Krull, A., Jug, "
+            "F.: Denoiseg: joint denoising and segmentation. In: European "
+            "Conference on Computer Vision (ECCV). pp. 324–337. Springer (2020) 8, 9",
+            files={   
+                "flywing-data": ["flywing.tif"],
+            }
         )
 
-
+"""
 class DSB2018(PortfolioEntry):
     class NoiseLevel(IntEnum):
         N0 = 0
