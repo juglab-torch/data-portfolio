@@ -16,16 +16,49 @@ class DownloadProgressBar(tqdm):
             self.update(b * bsize - self.n)
 
 
-@dataclass
 class PortfolioEntry:
-    name: str
-    url: str
-    description: str
-    license: str
-    citation: str
-    file_name: str
-    md5_hash: str
-    files: dict[str, list]
+
+    def __init__(self, name: str, url: str, description: str, license: str, citation: str, file_name: str, md5_hash: str, files: dict[str, list]) -> None:
+        self._name = name
+        self._url = url
+        self._description = description
+        self._license = license
+        self._citation = citation
+        self._file_name = file_name
+        self._md5_hash = md5_hash
+        self._files = files
+    
+    @property
+    def name(self) -> str:
+        return self._name
+    
+    @property
+    def url(self) -> str:
+        return self._url
+    
+    @property
+    def description(self) -> str:
+        return self._description
+    
+    @property
+    def license(self) -> str:   
+        return self._license
+    
+    @property
+    def citation(self) -> str:
+        return self._citation
+
+    @property
+    def file_name(self) -> str:
+        return self._file_name
+
+    @property
+    def md5_hash(self) -> str:
+        return self._md5_hash
+    
+    @property
+    def files(self) -> dict[str, list]:
+        return self._files
 
     def download(
         self,
@@ -35,9 +68,13 @@ class PortfolioEntry:
     ) -> dict:
         """Download dataset to the given path.
 
+        Note that the dataset will be downloaded to a zip file and then extracted,
+        which will overwrite any existing files.
+
         Args:
         ----
             path (Union[str, Path]): Folder in which the data should be downloaded
+            check_md5 (bool, optional): Check md5 hash of the downloaded file. Defaults to True.
             create_parents (bool, optional): Create parent directories if they don't exist. Defaults to True.
 
         Returns:
@@ -54,31 +91,41 @@ class PortfolioEntry:
         # check if zip file exists
         zip_path = Path(path, self.file_name)
         if not zip_path.exists():
-            # download and unzip data
             print(f"Downloading {self.name} to {path} might take some time.")
+
+            # download data
             with DownloadProgressBar(
                 unit="B", unit_scale=True, miniters=1, desc=self.url.split("/")[-1]
             ) as t:
                 request.urlretrieve(self.url, filename=zip_path, reporthook=t.update_to)
+
             print("Download finished.")
 
         # check if md5 hash is correct
         if check_md5:
             print(f"Checking MD5 hash of {zip_path}.")
+
+            # compute hash
             hash = hashlib.md5(open(zip_path, "rb").read()).hexdigest()
+
+            # compare with expected hash
             if hash != self.md5_hash:
                 raise ValueError(
                     f"MD5 hash of {zip_path} is not correct. Expected {self.md5_hash}, got {hash}."
                 )
+            
             print("MD5 hash is correct.")
 
-        # check if data has been unzipped before
+        # unzip data
         data_path = Path(path, self.file_name[:-4])
         # TODO progress bar
         if zipfile.is_zipfile(zip_path):
             print(f"Unzipping {zip_path} to {data_path}.")
+
+            # unzip data
             with zipfile.ZipFile(zip_path, "r") as zip_ref:
                 zip_ref.extractall(data_path)
+
             print("Unzipping finished.")
 
         # TODO create dictionnary with paths to files
