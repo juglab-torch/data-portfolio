@@ -46,24 +46,29 @@ class N2V_SEM(PortfolioEntry):
             'F. Jug, "Content-aware image restoration for electron '
             'microscopy", Methods Cell Biol 152, 277-289',
             files={
-                ".": ["train.tif", "validation.tif"],
+                "SEM": ["train.tif", "validation.tif"],
             }
         )
 
-"""
 class N2V_RGB(PortfolioEntry):
     def __init__(self) -> None:
         super().__init__(
             name="N2V_RGB",
             url="https://download.fht.org/jug/n2v/RGB.zip",
+            file_name="RGB.zip",
+            md5_hash="ad80d2fee3ae0a93208687e30ad2b63a",
             description="Banner of the CVPR 2019 conference with extra noise.",
             license="CC0",
             citation='A. Krull, T.-O. Buchholz and F. Jug, "Noise2Void - Learning '
             'Denoising From Single Noisy Images," 2019 IEEE/CVF '
             "Conference on Computer Vision and Pattern Recognition (CVPR),"
             " 2019, pp. 2124-2132",
+            files={
+                "RGB": ["longbeach.png"],
+            }
         )
 
+"""
 
 class Flywing(PortfolioEntry):
     def __init__(self) -> None:
