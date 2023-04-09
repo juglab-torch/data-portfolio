@@ -1,17 +1,33 @@
 from dataclasses import dataclass
 
-from .datasets import N2V_BSD68, N2V_SEM, N2V_RGB, Flywing
+from .denoising_datasets import N2V_BSD68, N2V_SEM, N2V_RGB, Flywing
+from .segmentation_datasets import NoiseLevel, DSB2018
 
 
 class Segmentation:
     """Ensemble of segmentation datasets.
     """
     def __init__(self) -> None:
-        self._DSB2018 = None
+        self._DSB2018_n0 = DSB2018(NoiseLevel.N0)
+        self._DSB2018_n10 = DSB2018(NoiseLevel.N10)
+        self._DSB2018_n20 = DSB2018(NoiseLevel.N20) 
 
+    @property
+    def DSB2018_n0(self) -> DSB2018:   
+        return self._DSB2018_n0
+    
+    @property
+    def DSB2018_n10(self) -> DSB2018:
+        return self._DSB2018_n10
+    
+    @property
+    def DSB2018_n20(self) -> DSB2018:
+        return self._DSB2018_n20
+
+    # TODO build from attributes rather than manually
     @staticmethod
     def list_datasets() -> list[str]:
-        return []
+        return ["DSB2018_n0", "DSB2018_n10", "DSB2018_n20"]
 
     def __str__(self) -> str:
         return f"Segmentation datasets: {self.list_datasets()}"
