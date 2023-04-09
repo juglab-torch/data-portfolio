@@ -57,7 +57,7 @@ class PortfolioEntry:
             # download and unzip data
             print(f"Downloading {self.name} to {path} might take some time.")
             with DownloadProgressBar(
-                unit="MB", unit_scale=True, miniters=1, desc=self.url.split("/")[-1]
+                unit="B", unit_scale=True, miniters=1, desc=self.url.split("/")[-1]
             ) as t:
                 request.urlretrieve(self.url, filename=zip_path, reporthook=t.update_to)
             print("Download finished.")
@@ -75,10 +75,11 @@ class PortfolioEntry:
         # check if data has been unzipped before
         data_path = Path(path, self.file_name[:-4])
         # TODO progress bar
-        print(f"Unzipping {zip_path} to {data_path}.")
-        with zipfile.ZipFile(zip_path, "r") as zip_ref:
-            zip_ref.extractall(data_path)
-        print("Unzipping finished.")
+        if zipfile.is_zipfile(zip_path):
+            print(f"Unzipping {zip_path} to {data_path}.")
+            with zipfile.ZipFile(zip_path, "r") as zip_ref:
+                zip_ref.extractall(data_path)
+            print("Unzipping finished.")
 
         # TODO create dictionnary with paths to files
         return self.files

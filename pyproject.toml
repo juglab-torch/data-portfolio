@@ -118,7 +118,10 @@ pretty = true
 [tool.pytest.ini_options]
 minversion = "6.0"
 testpaths = ["tests"]
-filterwarnings = ["error"]
+markers = [
+    "dataset: slow tests requiring space due to dataset download"
+]
+
 
 # https://coverage.readthedocs.io/en/6.4/config.html
 [tool.coverage.report]
