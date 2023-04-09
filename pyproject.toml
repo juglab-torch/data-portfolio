@@ -31,7 +31,7 @@ classifiers = [
     # "Typing :: Typed",
 ]
 # add your package dependencies here
-dependencies = []
+dependencies = ["tqdm"]
 
 # https://peps.python.org/pep-0621/#dependencies-optional-dependencies
 # "extras" (e.g. for `pip install .[test]`)
@@ -46,6 +46,9 @@ dev = [
     "pdbpp",  # https://github.com/pdbpp/pdbpp
     "rich",  # https://github.com/Textualize/rich
     "ruff",
+]
+example = [
+    "jupyter"
 ]
 
 [project.urls]

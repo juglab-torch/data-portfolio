@@ -8,3 +8,5 @@ except PackageNotFoundError:
     __version__ = "uninstalled"
 __author__ = "Joran Deschamps"
 __email__ = "joran.deschamps@fht.org"
+
+from .portfolio import Portfolio
