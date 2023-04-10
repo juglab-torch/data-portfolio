@@ -1,16 +1,22 @@
 from dataclasses import dataclass
 
 from .denoising_datasets import N2V_BSD68, N2V_SEM, N2V_RGB, Flywing
-from .segmentation_datasets import NoiseLevel, DSB2018
+from .denoiseg_datasets import NoiseLevel, DSB2018, SegFlywing, MouseNuclei
 
 
-class Segmentation:
-    """Ensemble of segmentation datasets.
+class DenoiSeg:
+    """Ensemble of DenoiSeg datasets.
     """
     def __init__(self) -> None:
         self._DSB2018_n0 = DSB2018(NoiseLevel.N0)
         self._DSB2018_n10 = DSB2018(NoiseLevel.N10)
-        self._DSB2018_n20 = DSB2018(NoiseLevel.N20) 
+        self._DSB2018_n20 = DSB2018(NoiseLevel.N20)
+        self._SegFlywing_n0 = SegFlywing(NoiseLevel.N0)
+        self._SegFlywing_n10 = SegFlywing(NoiseLevel.N10)
+        self._SegFlywing_n20 = SegFlywing(NoiseLevel.N20)
+        self._MouseNuclei_n0 = MouseNuclei(NoiseLevel.N0)
+        self._MouseNuclei_n10 = MouseNuclei(NoiseLevel.N10)
+        self._MouseNuclei_n20 = MouseNuclei(NoiseLevel.N20)
 
     @property
     def DSB2018_n0(self) -> DSB2018:   
@@ -23,11 +29,37 @@ class Segmentation:
     @property
     def DSB2018_n20(self) -> DSB2018:
         return self._DSB2018_n20
+    
+    @property
+    def Flywing_n0(self) -> SegFlywing:
+        return self._SegFlywing_n0
+    
+    @property
+    def Flywing_n10(self) -> SegFlywing:
+        return self._SegFlywing_n10
+    
+    @property
+    def Flywing_n20(self) -> SegFlywing:
+        return self._SegFlywing_n20
+    
+    @property
+    def MouseNuclei_n0(self) -> MouseNuclei:
+        return self._MouseNuclei_n0
+    
+    @property
+    def MouseNuclei_n10(self) -> MouseNuclei:
+        return self._MouseNuclei_n10
+    
+    @property
+    def MouseNuclei_n20(self) -> MouseNuclei:
+        return self._MouseNuclei_n20
 
     # TODO build from attributes rather than manually
     @staticmethod
     def list_datasets() -> list[str]:
-        return ["DSB2018_n0", "DSB2018_n10", "DSB2018_n20"]
+        return ["DSB2018_n0", "DSB2018_n10", "DSB2018_n20",
+                "Flywing_n0", "Flywing_n10", "Flywing_n20",
+                "MouseNuclei_n0", "MouseNuclei_n10", "MouseNuclei_n20"]
 
     def __str__(self) -> str:
         return f"Segmentation datasets: {self.list_datasets()}"
@@ -71,16 +103,16 @@ class Portfolio:
 
     def __init__(self) -> None:
         self._denoising = Denoising()
-        self._segmentation = Segmentation()
+        self._denoiseg = DenoiSeg()
 
     @property
     def denoising(self) -> Denoising:
         return self._denoising
     
     @property
-    def segmentation(self) -> Segmentation:
-        return self._segmentation
+    def denoiseg(self) -> DenoiSeg:
+        return self._denoiseg
 
     def __str__(self) -> str:
-        return f"Portfolio:\nDenoising datasets: {self.denoising.list_datasets()}\nSegmentation datasets: {self.segmentation.list_datasets()}"
+        return f"Portfolio:\nDenoising datasets: {self.denoising.list_datasets()}\nDenoiSeg datasets: {self.denoiseg.list_datasets()}"
         f""
