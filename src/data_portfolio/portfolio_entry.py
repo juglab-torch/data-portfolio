@@ -55,7 +55,7 @@ class PortfolioEntry:
         file_name: str,
         md5_hash: str,
         files: Dict[str, list],
-        **kwargs: str | int,
+        **kwargs: str,
     ) -> None:
         self._name = name
         self._url = url

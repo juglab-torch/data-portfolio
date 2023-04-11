@@ -1,10 +1,9 @@
-from enum import IntEnum
-from typing import Union
+from enum import Enum
 
 from .portfolio_entry import PortfolioEntry
 
 
-class NoiseLevel(IntEnum):
+class NoiseLevel(str, Enum):
     """An IntEnum representing the noise level of a dataset.
 
     N0 corresponds to the noise-free version of the dataset, N10 and N20 to
@@ -12,9 +11,9 @@ class NoiseLevel(IntEnum):
     of 10 and 20, respectively.
     """
 
-    N0 = 0
-    N10 = 10
-    N20 = 20
+    N0 = "0"
+    N10 = "10"
+    N20 = "20"
 
 
 class NoisyDataset:
@@ -25,9 +24,7 @@ class NoisyDataset:
     noise_level (NoiseLevel): Noise level of the dataset.
     """
 
-    def __init__(
-        self, noise_level: NoiseLevel = NoiseLevel.N0, **kwargs: Union[str, int]
-    ) -> None:
+    def __init__(self, noise_level: NoiseLevel = NoiseLevel.N0, **kwargs: str) -> None:
         self._noise_level = noise_level
 
     @property
@@ -59,7 +56,7 @@ class DSB2018(PortfolioEntry, NoisyDataset):
             noise_level=noise_level,
             name="DSB2018",
             url=self._get_url(noise_level),
-            file_name=f"DSB2018_n{noise_level.value}.zip",
+            file_name=f"DSB2018_n{noise_level}.zip",
             md5_hash=self._get_hash(noise_level),
             description="From the Kaggle 2018 Data Science Bowl challenge, the "
             "training and validation sets consist of 3800 and 670 patches "
@@ -119,7 +116,7 @@ class SegFlywing(PortfolioEntry, NoisyDataset):
             noise_level=noise_level,
             name="Flywing",
             url=self._get_url(noise_level),
-            file_name=f"Flywing_n{noise_level.value}.zip",
+            file_name=f"Flywing_n{noise_level}.zip",
             md5_hash=self._get_hash(noise_level),
             description="This dataset consist of 1428 training and 252 "
             "validation patches of a membrane labeled fly wing. The test set "
@@ -176,7 +173,7 @@ class MouseNuclei(PortfolioEntry, NoisyDataset):
             noise_level=noise_level,
             name="MouseNuclei",
             url=self._get_url(noise_level),
-            file_name=f"MouseNuclei_n{noise_level.value}.zip",
+            file_name=f"MouseNuclei_n{noise_level}.zip",
             md5_hash=self._get_hash(noise_level),
             description="A dataset depicting diverse and non-uniformly "
             "clustered nuclei in the mouse skull, consisting of 908 training "
