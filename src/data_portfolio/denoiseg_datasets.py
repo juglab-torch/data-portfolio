@@ -1,18 +1,62 @@
 from enum import IntEnum
+from typing import Union
 
 from .portfolio_entry import PortfolioEntry
 
 
 class NoiseLevel(IntEnum):
+    """An IntEnum representing the noise level of a dataset.
+
+    N0 corresponds to the noise-free version of the dataset, N10 and N20 to
+    images corrupted with Gaussian noise with zero-mean and standard deviations
+    of 10 and 20, respectively.
+    """
+
     N0 = 0
     N10 = 10
     N20 = 20
 
 
-class DSB2018(PortfolioEntry):
+class NoisyDataset:
+    """A mixin class for datasets with different noise levels.
+
+    Attributes
+    ----------
+    noise_level (NoiseLevel): Noise level of the dataset.
+    """
+
+    def __init__(
+        self, noise_level: NoiseLevel = NoiseLevel.N0, **kwargs: Union[str, int]
+    ) -> None:
+        self._noise_level = noise_level
+
+    @property
+    def noise_level(self) -> NoiseLevel:
+        """Noise level of the dataset."""
+        return self._noise_level
+
+
+class DSB2018(PortfolioEntry, NoisyDataset):
+    """The 2018 Data Science Bowl dataset used by DenoiSeg.
+
+    The dataset is available in three different noise levels: N0, N10 and N20.
+
+
+    Attributes
+    ----------
+    noise_level (NoiseLevel): Noise level of the dataset.
+    """
 
     def __init__(self, noise_level: NoiseLevel = NoiseLevel.N0) -> None:
+        """Initialize a DSB2018 instance.
+
+        Parameters
+        ----------
+        noise_level : NoiseLevel, optional
+            Noise level of the dataset, by default NoiseLevel.N0
+        """
         super().__init__(
+            noise_level=noise_level,
             name="DSB2018",
             url=self._get_url(noise_level),
             file_name=f"DSB2018_n{noise_level.value}.zip",
@@ -33,17 +77,14 @@ class DSB2018(PortfolioEntry):
             },
         )
 
-        # remember noise level
-        self._noise_level = noise_level
-
     @staticmethod
     def _get_url(noise: NoiseLevel) -> str:
         if noise == NoiseLevel.N0:
-            return 'https://zenodo.org/record/5156969/files/DSB2018_n0.zip?download=1'
+            return "https://zenodo.org/record/5156969/files/DSB2018_n0.zip?download=1"
         elif noise == NoiseLevel.N10:
-            return 'https://zenodo.org/record/5156977/files/DSB2018_n10.zip?download=1'
+            return "https://zenodo.org/record/5156977/files/DSB2018_n10.zip?download=1"
         else:
-            return 'https://zenodo.org/record/5156983/files/DSB2018_n20.zip?download=1'
+            return "https://zenodo.org/record/5156983/files/DSB2018_n20.zip?download=1"
 
     @staticmethod
     def _get_hash(noise: NoiseLevel) -> str:
@@ -54,44 +95,54 @@ class DSB2018(PortfolioEntry):
         else:
             return "81abc17313582a4f04f501e3dce1fe88"
 
-    @property
-    def noise_level(self) -> NoiseLevel:
-        return self._noise_level
+
+class SegFlywing(PortfolioEntry, NoisyDataset):
+    """Flywing dataset used by DenoiSeg.
+
+    The dataset is available in three different noise levels: N0, N10 and N20.
 
 
-class SegFlywing(PortfolioEntry):
+    Attributes
+    ----------
+    noise_level (NoiseLevel): Noise level of the dataset.
+    """
 
-    def __init__(self, noise: NoiseLevel = NoiseLevel.N0) -> None:
+    def __init__(self, noise_level: NoiseLevel = NoiseLevel.N0) -> None:
+        """Initialize a Flywing instance.
+
+        Parameters
+        ----------
+        noise_level : NoiseLevel, optional
+            Noise level of the dataset, by default NoiseLevel.N0
+        """
         super().__init__(
+            noise_level=noise_level,
             name="Flywing",
-            url=self._get_url(noise),
-            file_name=f"Flywing_n{noise.value}.zip",
-            md5_hash=self._get_hash(noise),
+            url=self._get_url(noise_level),
+            file_name=f"Flywing_n{noise_level.value}.zip",
+            md5_hash=self._get_hash(noise_level),
             description="This dataset consist of 1428 training and 252 "
             "validation patches of a membrane labeled fly wing. The test set "
             "is comprised of 50 additional images.",
             license="CC BY-SA 4.0",
             citation="Buchholz, T.O., Prakash, M., Schmidt, D., Krull, A., Jug, "
             "F.: Denoiseg: joint denoising and segmentation. In: European "
-            "Conference on Computer Vision (ECCV). pp. 324–337. Springer (2020) 8, 9",
+            "Conference on Computer Vision (ECCV). pp. 324-337. Springer (2020) 8, 9",
             files={
                 "train": ["train_data.npz"],
                 "test": ["test_data.npz"],
             },
         )
 
-        # remember noise level
-        self._noise_level = noise
-
     @staticmethod
     def _get_url(noise: NoiseLevel) -> str:
         if noise == NoiseLevel.N0:
-            return 'https://zenodo.org/record/5156991/files/Flywing_n0.zip?download=1'
+            return "https://zenodo.org/record/5156991/files/Flywing_n0.zip?download=1"
         elif noise == NoiseLevel.N10:
-            return 'https://zenodo.org/record/5156993/files/Flywing_n10.zip?download=1'
+            return "https://zenodo.org/record/5156993/files/Flywing_n10.zip?download=1"
         else:
-            return 'https://zenodo.org/record/5156995/files/Flywing_n20.zip?download=1'
-        
+            return "https://zenodo.org/record/5156995/files/Flywing_n20.zip?download=1"
+
     @staticmethod
     def _get_hash(noise: NoiseLevel) -> str:
         if noise == NoiseLevel.N0:
@@ -100,41 +151,55 @@ class SegFlywing(PortfolioEntry):
             return "64d5300073e02c9651ec88c368c302e8"
         else:
             return "b8fbb96026bd10fd034b8c1270f6edbb"
-        
 
-class MouseNuclei(PortfolioEntry):
 
-    def __init__(self, noise: NoiseLevel = NoiseLevel.N0) -> None:
+class MouseNuclei(PortfolioEntry, NoisyDataset):
+    """Mouse nuclei dataset used by DenoiSeg.
+
+    The dataset is available in three different noise levels: N0, N10 and N20.
+
+
+    Attributes
+    ----------
+    noise_level (NoiseLevel): Noise level of the dataset.
+    """
+
+    def __init__(self, noise_level: NoiseLevel = NoiseLevel.N0) -> None:
+        """Initialize a MouseNuclei instance.
+
+        Parameters
+        ----------
+        noise_level : NoiseLevel, optional
+            Noise level of the dataset, by default NoiseLevel.N0
+        """
         super().__init__(
+            noise_level=noise_level,
             name="MouseNuclei",
-            url=self._get_url(noise),
-            file_name=f"MouseNuclei_n{noise.value}.zip",
-            md5_hash=self._get_hash(noise),
+            url=self._get_url(noise_level),
+            file_name=f"MouseNuclei_n{noise_level.value}.zip",
+            md5_hash=self._get_hash(noise_level),
             description="A dataset depicting diverse and non-uniformly "
             "clustered nuclei in the mouse skull, consisting of 908 training "
             "and 160 validation patches. The test set counts 67 additional images",
             license="CC BY-SA 4.0",
             citation="Buchholz, T.O., Prakash, M., Schmidt, D., Krull, A., Jug, "
             "F.: Denoiseg: joint denoising and segmentation. In: European "
-            "Conference on Computer Vision (ECCV). pp. 324–337. Springer (2020) 8, 9",
+            "Conference on Computer Vision (ECCV). pp. 324-337. Springer (2020) 8, 9",
             files={
                 "train": ["train_data.npz"],
                 "test": ["test_data.npz"],
             },
         )
 
-        # remember noise level
-        self._noise_level = noise
-
     @staticmethod
     def _get_url(noise: NoiseLevel) -> str:
         if noise == NoiseLevel.N0:
-            return 'https://zenodo.org/record/5157001/files/Mouse_n0.zip?download=1'
+            return "https://zenodo.org/record/5157001/files/Mouse_n0.zip?download=1"
         elif noise == NoiseLevel.N10:
-            return 'https://zenodo.org/record/5157003/files/Mouse_n10.zip?download=1'
+            return "https://zenodo.org/record/5157003/files/Mouse_n10.zip?download=1"
         else:
-            return 'https://zenodo.org/record/5157008/files/Mouse_n20.zip?download=1'
-        
+            return "https://zenodo.org/record/5157008/files/Mouse_n20.zip?download=1"
+
     @staticmethod
     def _get_hash(noise: NoiseLevel) -> str:
         if noise == NoiseLevel.N0:
@@ -143,4 +208,3 @@ class MouseNuclei(PortfolioEntry):
             return "0b0776fa205057b49920b0ec3d1a5fc9"
         else:
             return "6e9d895ba3ac2c225883ed3ec94342f8"
-        

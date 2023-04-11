@@ -1,5 +1,4 @@
 import pytest
-
 from data_portfolio import Portfolio
 
 # TODO check that the downloaded files are correct

@@ -1,6 +1,5 @@
 import hashlib
 import zipfile
-from dataclasses import dataclass
 from pathlib import Path
 from typing import Union
 from urllib import request
@@ -10,15 +9,54 @@ from tqdm import tqdm
 
 # from https://stackoverflow.com/a/53877507
 class DownloadProgressBar(tqdm):
-    def update_to(self, b: float = 1, bsize: float = 1, tsize: float = None) -> None:
+    """Custom progress bar for download."""
+
+    def update_to(
+        self, b: float = 1, bsize: float = 1, tsize: Union[float, None] = None
+    ) -> None:
+        """Update tqdm progress bar.
+
+        Parameters
+        ----------
+        b : float, optional
+            Number of blocks transferred so far, by default 1
+        bsize : float, optional
+            Size of each block (in tqdm units), by default 1
+        tsize : Union[float, None], optional
+            Total size (in tqdm units), by default None
+        """
         if tsize is not None:
             self.total = tsize
             self.update(b * bsize - self.n)
 
 
 class PortfolioEntry:
+    """Base class for portfolio entries.
 
-    def __init__(self, name: str, url: str, description: str, license: str, citation: str, file_name: str, md5_hash: str, files: dict[str, list]) -> None:
+    Attributes
+    ----------
+        name (str): Name of the dataset.
+        url (str): URL of the dataset.
+        description (str): Description of the dataset.
+        license (str): License of the dataset.
+        citation (str): Citation to use when referring to the dataset.
+        file_name (str): Name of the downloaded file.
+        md5_hash (str): MD5 hash of the downloaded file.
+        files (dict[str, list]): Dictionary of files in the dataset.
+    """
+
+    def __init__(
+        self,
+        name: str,
+        url: str,
+        description: str,
+        license: str,
+        citation: str,
+        file_name: str,
+        md5_hash: str,
+        files: dict[str, list],
+        **kwargs: str | int,
+    ) -> None:
         self._name = name
         self._url = url
         self._description = description
@@ -27,60 +65,125 @@ class PortfolioEntry:
         self._file_name = file_name
         self._md5_hash = md5_hash
         self._files = files
-    
+
     @property
     def name(self) -> str:
+        """Name of the dataset.
+
+        Returns
+        -------
+        str
+            Name of the dataset.
+        """
         return self._name
-    
+
     @property
     def url(self) -> str:
+        """URL of the dataset.
+
+        Returns
+        -------
+        str
+            URL of the dataset.
+        """
         return self._url
-    
+
     @property
     def description(self) -> str:
+        """Description of the dataset.
+
+        Returns
+        -------
+        str
+            Description of the dataset.
+        """
         return self._description
-    
+
     @property
-    def license(self) -> str:   
+    def license(self) -> str:
+        """License of the dataset.
+
+        Returns
+        -------
+        str
+            License of the dataset.
+        """
         return self._license
-    
+
     @property
     def citation(self) -> str:
+        """Citation to use when referring to the dataset.
+
+        Returns
+        -------
+        str
+            Citation to use when referring to the dataset.
+        """
         return self._citation
 
     @property
     def file_name(self) -> str:
+        """Name of the downloaded file.
+
+        Returns
+        -------
+        str
+            Name of the downloaded file.
+        """
         return self._file_name
 
     @property
     def md5_hash(self) -> str:
+        """MD5 hash of the downloaded file.
+
+        Returns
+        -------
+        str
+            MD5 hash of the downloaded file.
+        """
         return self._md5_hash
-    
+
     @property
     def files(self) -> dict[str, list]:
+        """Dictionary of files in the dataset.
+
+        Returns
+        -------
+        dict[str, list]
+            Dictionary of files in the dataset.
+        """
         return self._files
 
     def download(
         self,
-        path: Union[str, Path],
+        path: str | Path,
         check_md5: bool = True,
         create_parents: bool = True,
     ) -> dict:
-        """Download dataset to the given path.
+        """Download dataset in the specified path.
 
-        Note that the dataset will be downloaded to a zip file and then extracted,
-        which will overwrite any existing files.
+        Parameters
+        ----------
+        path : str | Path
+            Path to the folder in which to download the dataset.
+        check_md5 : bool, optional
+            Whether to check the MD5 hash of the downloaded file, by default True.
+        create_parents : bool, optional
+            Whether to create parent directories if they do not exist, by default True.
 
-        Args:
-        ----
-            path (Union[str, Path]): Folder in which the data should be downloaded
-            check_md5 (bool, optional): Check md5 hash of the downloaded file. Defaults to True.
-            create_parents (bool, optional): Create parent directories if they don't exist. Defaults to True.
-
-        Returns:
+        Returns
         -------
-            dict: A dictionnary containing path to the different files or folders.
+        dict
+            Dictionary of downloaded files.
+
+        Raises
+        ------
+        ValueError
+            If path is not a directory.
+        ValueError
+            If the md5 hash of the downloaded file is different from the expected one.
         """
+        # TODO refactors in smaller functions
         path = Path(path)
         if path.exists() and not path.is_dir():
             raise ValueError(f"Path {path} is not a directory.")
@@ -106,14 +209,15 @@ class PortfolioEntry:
             print(f"Checking MD5 hash of {zip_path}.")
 
             # compute hash
-            hash = hashlib.md5(open(zip_path, "rb").read()).hexdigest()
+            file_hash = hashlib.md5(open(zip_path, "rb").read()).hexdigest()
 
             # compare with expected hash
-            if hash != self.md5_hash:
+            if file_hash != self.md5_hash:
                 raise ValueError(
-                    f"MD5 hash of {zip_path} is not correct. Expected {self.md5_hash}, got {hash}."
+                    f"MD5 hash of {zip_path} is not correct. "
+                    f"Expected {self.md5_hash}, got {file_hash}."
                 )
-            
+
             print("MD5 hash is correct.")
 
         # unzip data
@@ -128,5 +232,31 @@ class PortfolioEntry:
 
             print("Unzipping finished.")
 
-        # TODO create dictionnary with paths to files
         return self.files
+
+    def to_dict(self) -> dict:
+        """Convert PortfolioEntry to a dictionnary.
+
+        Returns
+        -------
+            dict: A dictionnary containing the PortfolioEntry attributes.
+        """
+        return {
+            "name": self.name,
+            "url": self.url,
+            "description": self.description,
+            "license": self.license,
+            "citation": self.citation,
+            "file_name": self.file_name,
+            "md5_hash": self.md5_hash,
+            "files": self.files,
+        }
+
+    def __str__(self) -> str:
+        """Convert PortfolioEntry to a string.
+
+        Returns
+        -------
+        str: A string containing the PortfolioEntry attributes.
+        """
+        return str(self.to_dict())

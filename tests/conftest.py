@@ -1,6 +1,6 @@
-import pytest
 import hashlib
 
+import pytest
 from data_portfolio.portfolio_entry import PortfolioEntry
 
 
@@ -18,6 +18,7 @@ class FaultyMD5(PortfolioEntry):
                 ".": ["Wikipedia-logo-v2.svg"],
             },
         )
+
 
 # TODO change scope?
 @pytest.fixture(scope="session")

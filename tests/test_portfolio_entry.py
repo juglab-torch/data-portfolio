@@ -26,7 +26,7 @@ def test_change_entry(faulty_portfolio_entry):
     faulty_portfolio_entry.citation
     faulty_portfolio_entry.file_name
     faulty_portfolio_entry.md5_hash
-    faulty_portfolio_entry.files 
+    faulty_portfolio_entry.files
 
     # Check that changing members raises errors
     with pytest.raises(AttributeError):
@@ -43,10 +43,10 @@ def test_change_entry(faulty_portfolio_entry):
 
     with pytest.raises(AttributeError):
         faulty_portfolio_entry.citation = ""
-    
+
     with pytest.raises(AttributeError):
         faulty_portfolio_entry.file_name = ""
-    
+
     with pytest.raises(AttributeError):
         faulty_portfolio_entry.md5_hash = ""
 

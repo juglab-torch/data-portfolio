@@ -1,7 +1,21 @@
 from .portfolio_entry import PortfolioEntry
 
+# TODO add descriptions in the class docstrings
+
 
 class N2V_BSD68(PortfolioEntry):
+    """BSD68 dataset.
+
+    Attributes
+    ----------
+    name (str): Name of the dataset.
+    url (str): URL of the dataset.
+    description (str): Description of the dataset.
+    license (str): License of the dataset.
+    citation (str): Citation to use when referring to the dataset.
+    files (dict): Dictionary containing the files to download.
+    """
+
     def __init__(self) -> None:
         super().__init__(
             name="N2V_BSD68",
@@ -15,7 +29,8 @@ class N2V_BSD68(PortfolioEntry):
             "All images were corrupted with Gaussian noise with standard "
             "deviation of 25 pixels. The test dataset contains the uncorrupted "
             "images as well.\n"
-            "Original dataset: https://www2.eecs.berkeley.edu/Research/Projects/CS/vision/bsds/",
+            "Original dataset: "
+            "https://www2.eecs.berkeley.edu/Research/Projects/CS/vision/bsds/",
             license="Unknown",
             citation='D. Martin, C. Fowlkes, D. Tal and J. Malik, "A database of '
             "human segmented natural images and its application to "
@@ -33,6 +48,18 @@ class N2V_BSD68(PortfolioEntry):
 
 
 class N2V_SEM(PortfolioEntry):
+    """SEM dataset.
+
+    Attributes
+    ----------
+    name (str): Name of the dataset.
+    url (str): URL of the dataset.
+    description (str): Description of the dataset.
+    license (str): License of the dataset.
+    citation (str): Citation to use when referring to the dataset.
+    files (dict): Dictionary containing the files to download.
+    """
+
     def __init__(self) -> None:
         super().__init__(
             name="N2V_SEM",
@@ -47,10 +74,23 @@ class N2V_SEM(PortfolioEntry):
             'microscopy", Methods Cell Biol 152, 277-289',
             files={
                 "SEM": ["train.tif", "validation.tif"],
-            }
+            },
         )
 
+
 class N2V_RGB(PortfolioEntry):
+    """RGB dataset.
+
+    Attributes
+    ----------
+    name (str): Name of the dataset.
+    url (str): URL of the dataset.
+    description (str): Description of the dataset.
+    license (str): License of the dataset.
+    citation (str): Citation to use when referring to the dataset.
+    files (dict): Dictionary containing the files to download.
+    """
+
     def __init__(self) -> None:
         super().__init__(
             name="N2V_RGB",
@@ -65,11 +105,23 @@ class N2V_RGB(PortfolioEntry):
             " 2019, pp. 2124-2132",
             files={
                 "RGB": ["longBeach.png"],
-            }
+            },
         )
 
 
 class Flywing(PortfolioEntry):
+    """Flywing dataset.
+
+    Attributes
+    ----------
+    name (str): Name of the dataset.
+    url (str): URL of the dataset.
+    description (str): Description of the dataset.
+    license (str): License of the dataset.
+    citation (str): Citation to use when referring to the dataset.
+    files (dict): Dictionary containing the files to download.
+    """
+
     def __init__(self) -> None:
         super().__init__(
             name="Flywing",
@@ -80,9 +132,8 @@ class Flywing(PortfolioEntry):
             license="CC-BY",
             citation="Buchholz, T.O., Prakash, M., Schmidt, D., Krull, A., Jug, "
             "F.: Denoiseg: joint denoising and segmentation. In: European "
-            "Conference on Computer Vision (ECCV). pp. 324–337. Springer (2020) 8, 9",
-            files={   
+            "Conference on Computer Vision (ECCV). pp. 324-337. Springer (2020) 8, 9",
+            files={
                 "flywing-data": ["flywing.tif"],
-            }
+            },
         )
-        

@@ -1,7 +1,6 @@
 import pytest
-
 from data_portfolio import Portfolio
-from data_portfolio.denoiseg_datasets import NoiseLevel
+
 
 @pytest.mark.dataset
 def test_dsb2018_n0(tmp_path):
