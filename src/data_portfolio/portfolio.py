@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from typing import List
 
 from .denoiseg_datasets import DSB2018, MouseNuclei, NoiseLevel, SegFlywing
 from .denoising_datasets import N2V_BSD68, N2V_RGB, N2V_SEM, Flywing
@@ -132,7 +133,7 @@ class DenoiSeg:
 
     # TODO build from attributes rather than manually
     @staticmethod
-    def list_datasets() -> list[str]:
+    def list_datasets() -> List[str]:
         """List datasets in the DenoiSeg ensemble.
 
         Returns
@@ -225,7 +226,7 @@ class Denoising:
         return self._flywing
 
     @staticmethod
-    def list_datasets() -> list[str]:
+    def list_datasets() -> List[str]:
         """List datasets in the Denoising ensemble.
 
         Returns
