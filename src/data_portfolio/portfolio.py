@@ -1,11 +1,101 @@
+import json
 from dataclasses import dataclass
-from typing import List
+from json import JSONEncoder
+from pathlib import Path
+from typing import Dict, List, Union
 
 from .denoiseg_datasets import DSB2018, MouseNuclei, NoiseLevel, SegFlywing
 from .denoising_datasets import N2V_BSD68, N2V_RGB, N2V_SEM, Flywing
+from .portfolio_entry import PortfolioEntry
 
 
-class DenoiSeg:
+# TODO make portfolios iterable
+class IterablePortfolio:
+    """Iterable portfolio class."""
+
+    def __init__(self, name: str) -> None:
+        self._name = name
+
+    @property
+    def name(self) -> str:
+        """Name of the portfolio.
+
+        Returns
+        -------
+        str
+            Name of the portfolio.
+        """
+        return self._name
+
+    def list_datasets(self) -> List[str]:
+        """List of datasets in the portfolio.
+
+        Returns
+        -------
+        list[str]
+            List of datasets in the portfolio.
+        """
+        attributes = []
+
+        # for each attribute
+        for attribute in vars(self).values():
+            if isinstance(attribute, PortfolioEntry):
+                attributes.append(attribute.name)
+
+        return attributes
+
+    def as_dict(self) -> Dict[str, Dict[str, str]]:
+        """Dictionary representation of a portfolio.
+
+        Returns
+        -------
+        dict[str]
+            Dictionary representation of the DenoiSeg portfolio.
+        """
+        entries = {}
+
+        # for each attribute
+        for attribute in vars(self).values():
+            # if the attribute is a PortfolioEntry
+            if isinstance(attribute, PortfolioEntry):
+                # add the attribute to the entries dictionary
+                entries[attribute.name] = {
+                    "URL": attribute.url,
+                    "Citation": attribute.citation,
+                }
+        return entries
+
+    def __str__(self) -> str:
+        """String representation of a portfolio.
+
+        Returns
+        -------
+        str
+        String representation of a portfolio.
+        """
+        return f"Denoising datasets: {self.list_datasets()}"
+
+
+class PortfolioEncoder(JSONEncoder):
+    """Portfolio encoder class."""
+
+    def default(self, o: IterablePortfolio) -> Dict[str, Dict[str, str]]:
+        """Default method for json export.
+
+        Parameters
+        ----------
+        o : IterablePortfolio
+            Portfolio to export.
+
+        Returns
+        -------
+        dict[str, str]
+            Dictionary representation of the portfolio.
+        """
+        return o.as_dict()
+
+
+class DenoiSeg(IterablePortfolio):
     """Portfolio of DenoiSeg datasets.
 
     Attributes
@@ -22,6 +112,8 @@ class DenoiSeg:
     """
 
     def __init__(self) -> None:
+        super().__init__("DenoiSeg")
+
         self._DSB2018_n0 = DSB2018(NoiseLevel.N0)
         self._DSB2018_n10 = DSB2018(NoiseLevel.N10)
         self._DSB2018_n20 = DSB2018(NoiseLevel.N20)
@@ -131,40 +223,8 @@ class DenoiSeg:
         """
         return self._MouseNuclei_n20
 
-    # TODO build from attributes rather than manually
-    @staticmethod
-    def list_datasets() -> List[str]:
-        """List datasets in the DenoiSeg ensemble.
 
-        Returns
-        -------
-        list[str]
-        List of datasets.
-        """
-        return [
-            "DSB2018_n0",
-            "DSB2018_n10",
-            "DSB2018_n20",
-            "Flywing_n0",
-            "Flywing_n10",
-            "Flywing_n20",
-            "MouseNuclei_n0",
-            "MouseNuclei_n10",
-            "MouseNuclei_n20",
-        ]
-
-    def __str__(self) -> str:
-        """String representation of the DenoiSeg portfolio.
-
-        Returns
-        -------
-        str
-            String representation of the DenoiSeg portfolio.
-        """
-        return f"Segmentation datasets: {self.list_datasets()}"
-
-
-class Denoising:
+class Denoising(IterablePortfolio):
     """Ensemble of denoising datasets.
 
     Attributes
@@ -176,6 +236,8 @@ class Denoising:
     """
 
     def __init__(self) -> None:
+        super().__init__("Denoising")
+
         self._N2V_BSD68 = N2V_BSD68()
         self._N2V_SEM = N2V_SEM()
         self._N2V_RGB = N2V_RGB()
@@ -225,27 +287,6 @@ class Denoising:
         """
         return self._flywing
 
-    @staticmethod
-    def list_datasets() -> List[str]:
-        """List datasets in the Denoising ensemble.
-
-        Returns
-        -------
-        list[str]
-        List of datasets.
-        """
-        return ["N2V_BSD", "N2V_SEM", "N2V_RGB", "flywing"]
-
-    def __str__(self) -> str:
-        """String representation of the Denoising portfolio.
-
-        Returns
-        -------
-        str
-        String representation of the Denoising portfolio.
-        """
-        return f"Denoising datasets: {self.list_datasets()}"
-
 
 @dataclass
 class Portfolio:
@@ -286,6 +327,8 @@ class Portfolio:
     def __str__(self) -> str:
         """String representation of the portfolio.
 
+        This method allows having a frendly representation of the portfolio as string.
+
         Returns
         -------
         str
@@ -296,3 +339,32 @@ class Portfolio:
             f"Denoising datasets: {self.denoising.list_datasets()}\n"
             f"DenoiSeg datasets: {self.denoiseg.list_datasets()}"
         )
+
+    def as_dict(self) -> dict[str, IterablePortfolio]:
+        """Portfolio as dictionary.
+
+        This method is used during json serialization to maintain human readable
+        keys.
+
+        Returns
+        -------
+        dict[str, IterablePortfolio]
+            Portfolio as dictionary.
+        """
+        attributes = {}
+
+        for attribute in vars(self).values():
+            attributes[attribute.name] = attribute
+
+        return attributes
+
+    def to_json(self, path: Union[str, Path]) -> None:
+        """Save portfolio to json file using the `as_dict` method.
+
+        Parameters
+        ----------
+        path : str or Path
+            Path to json file.
+        """
+        with open(path, "w") as f:
+            json.dump(self.as_dict(), f, indent=4, cls=PortfolioEncoder)

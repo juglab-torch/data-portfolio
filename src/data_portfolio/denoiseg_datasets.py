@@ -54,7 +54,7 @@ class DSB2018(PortfolioEntry, NoisyDataset):
         """
         super().__init__(
             noise_level=noise_level,
-            name="DSB2018",
+            name=f"DSB2018_n{noise_level}",
             url=self._get_url(noise_level),
             file_name=f"DSB2018_n{noise_level}.zip",
             md5_hash=self._get_hash(noise_level),
@@ -114,7 +114,7 @@ class SegFlywing(PortfolioEntry, NoisyDataset):
         """
         super().__init__(
             noise_level=noise_level,
-            name="Flywing",
+            name=f"Flywing_n{noise_level}",
             url=self._get_url(noise_level),
             file_name=f"Flywing_n{noise_level}.zip",
             md5_hash=self._get_hash(noise_level),
@@ -171,7 +171,7 @@ class MouseNuclei(PortfolioEntry, NoisyDataset):
         """
         super().__init__(
             noise_level=noise_level,
-            name="MouseNuclei",
+            name=f"MouseNuclei_n{noise_level}",
             url=self._get_url(noise_level),
             file_name=f"MouseNuclei_n{noise_level}.zip",
             md5_hash=self._get_hash(noise_level),
