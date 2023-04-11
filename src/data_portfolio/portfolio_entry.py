@@ -156,7 +156,7 @@ class PortfolioEntry:
 
     def download(
         self,
-        path: str | Path,
+        path: Union[str, Path],
         check_md5: bool = True,
         create_parents: bool = True,
     ) -> dict:
