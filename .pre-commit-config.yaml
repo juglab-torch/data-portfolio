@@ -32,3 +32,12 @@ repos:
         # # you have to add the things you want to type check against here
         # additional_dependencies:
         #   - numpy
+
+  # hook to export the list of datasets to a version-controlled file
+  - repo: local
+    hooks:
+      - id: export-portfolio-to-json
+        name: export-portfolio-to-json
+        entry: export_to_json_hook/export_portfolio_to_json.sh
+        language: script
+        pass_filenames: false
