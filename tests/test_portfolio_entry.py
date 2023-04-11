@@ -63,6 +63,23 @@ def test_change_entry(faulty_portfolio_entry):
         faulty_portfolio_entry.files = {}
 
 
+def test_portfolios_as_iterable(portfolio: Portfolio):
+    """Test that portfolios are iterable.
+
+    Parameters
+    ----------
+    portfolio : Portfolio
+        Portfolio to test.
+    """
+    # denoiseg
+    denoiseg_entries = [entry.name for entry in portfolio.denoiseg]
+    assert denoiseg_entries == portfolio.denoiseg.list_datasets()
+
+    # denoising
+    denoising_entries = [entry.name for entry in portfolio.denoising]
+    assert denoising_entries == portfolio.denoising.list_datasets()
+
+
 def test_list_datasets(portfolio: Portfolio):
     """Test that the list_datasets method works on portfolios.
 
