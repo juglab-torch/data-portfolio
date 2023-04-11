@@ -1,7 +1,7 @@
 import hashlib
 import zipfile
 from pathlib import Path
-from typing import Union
+from typing import Dict, Union
 from urllib import request
 
 from tqdm import tqdm
@@ -144,7 +144,7 @@ class PortfolioEntry:
         return self._md5_hash
 
     @property
-    def files(self) -> dict[str, list]:
+    def files(self) -> Dict[str, list]:
         """Dictionary of files in the dataset.
 
         Returns
