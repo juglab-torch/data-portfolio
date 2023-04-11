@@ -54,7 +54,7 @@ class PortfolioEntry:
         citation: str,
         file_name: str,
         md5_hash: str,
-        files: dict[str, list],
+        files: Dict[str, list],
         **kwargs: str | int,
     ) -> None:
         self._name = name
