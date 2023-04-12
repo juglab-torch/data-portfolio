@@ -97,13 +97,16 @@ jobs:
         with:
           files: datasets/datasets.json
 
-      - name: Commit changed file
+      # I prefer a PR to prevent a CI changing URLs and md5 directly (repo permissions)
+      # that way the CI creates a PR that needs to be manually merged
+      - name: Create PR
         if: steps.verify-changed-files.outputs.files_changed == 'true'
-        uses: stefanzweifel/git-auto-commit-action@v4
+        uses: peter-evans/create-pull-request@v5
         with:
-          commit_message: Update datasets.json
-          file_pattern: 'datasets/datasets.json'
-          commit_author: Author <actions@github.com> # defaults to author of the commit that triggered the run
+          add-paths: datasets/datasets.json
+          commit-message: Update datasets.json
+          branch: summary-update
+          delete-branch: true
 
   deploy:
     name: Deploy
