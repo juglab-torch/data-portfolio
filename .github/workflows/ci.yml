@@ -79,7 +79,7 @@ jobs:
 
     permissions:
       pull-requests: write
-      
+
     steps:
       - uses: actions/checkout@v3
 
@@ -100,16 +100,16 @@ jobs:
         with:
           files: datasets/datasets.json
 
-      # I prefer a PR to prevent a CI changing URLs and md5 directly (repo permissions)
-      # that way the CI creates a PR that needs to be manually merged
       - name: Create PR
         if: steps.verify-changed-files.outputs.files_changed == 'true'
-        uses: peter-evans/create-pull-request@v5
-        with:
-          add-paths: datasets/datasets.json
-          commit-message: Update datasets.json
-          branch: summary-update
-          delete-branch: true
+        run: |
+          git checkout -b update-summary
+          git add datasets/datasets.json
+          git commit -m "Update datasets.json"
+          gh pr create -B main -H update-summary --title 'Update datasets.json' --body 'Created by Github action'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
 
   deploy:
     name: Deploy
