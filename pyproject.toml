@@ -138,7 +138,7 @@ exclude_lines = [
     "raise NotImplementedError()",
 ]
 [tool.coverage.run]
-source = ["src"]
+source = ["data_portfolio"]
 
 # https://github.com/mgedmin/check-manifest#configuration
 # add files that you want check-manifest to explicitly ignore here
