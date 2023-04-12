@@ -103,6 +103,8 @@ jobs:
       - name: Create PR
         if: steps.verify-changed-files.outputs.files_changed == 'true'
         run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'  
           git checkout -b update-summary
           git add datasets/datasets.json
           git commit -m "Update datasets.json"
