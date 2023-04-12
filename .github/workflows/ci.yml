@@ -97,16 +97,13 @@ jobs:
         with:
           files: datasets/datasets.json
 
-      - name: Add github identity
-        uses: git-actions/set-user@v1
+      - name: Commit changed file
         if: steps.verify-changed-files.outputs.files_changed == 'true'
-
-      - name: Run step only when datasets.json changed.
-        if: steps.verify-changed-files.outputs.files_changed == 'true'
-        run: |
-          git add datasets/datasets.json
-          git commit -m "Update datasets json"
-          git push
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Update datasets.json
+          file_pattern: 'datasets/datasets.json'
+          commit_author: Author <actions@github.com> # defaults to author of the commit that triggered the run
 
   deploy:
     name: Deploy
