@@ -1,5 +1,6 @@
 import pytest
 from data_portfolio import Portfolio
+from data_portfolio.denoiseg_datasets import NoiseLevel, NoisyObject
 from data_portfolio.portfolio import PortfolioEntry
 
 from .utils import (
@@ -80,3 +81,10 @@ def test_no_empty_dataset_entry(portfolio: Portfolio):
     """
     for entry in portfolio.denoiseg:
         portoflio_entry_checker(entry)
+
+
+@pytest.mark.parametrize("noise_level", [NoiseLevel.N0, NoiseLevel.N10, NoiseLevel.N20])
+def test_noisy_dataset(noise_level):
+    """Test that the NoisyDataset class works properly."""
+    noisy_object = NoisyObject(noise_level=noise_level)
+    assert noisy_object.noise_level == noise_level

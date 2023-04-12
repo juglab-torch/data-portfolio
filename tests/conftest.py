@@ -34,7 +34,38 @@ class FaultyMD5(PortfolioEntry):
             files={
                 ".": ["Wikipedia-logo-v2.svg"],
             },
-            size=0.1,
+            size=0.4,
+        )
+
+
+class WikiLogo(PortfolioEntry):
+    """Wikipedia logo.
+
+    Attributes
+    ----------
+    name (str): Name of the dataset.
+    url (str): URL to the dataset.
+    file_name (str): Name of the file.
+    md5_hash (str): MD5 hash of the file.
+    description (str): Description of the dataset.
+    citation (str): Citation of the dataset.
+    license (str): License of the dataset.
+    files (dict): Dictionary of files.
+    """
+
+    def __init__(self) -> None:
+        super().__init__(
+            name="Wikipedia logo",
+            url="https://en.wikipedia.org/wiki/Wikipedia_logo#/media/File:Wikipedia-logo-v2.svg",
+            file_name="Wikipedia-logo-v2.svg",
+            md5_hash="d4212bdfeb53781492b52a3ea9479c74",
+            description="Wikipedia logo",
+            citation="Wikipedia",
+            license="CC BY-SA 3.0",
+            files={
+                ".": ["Wikipedia-logo-v2.svg"],
+            },
+            size=0.4,
         )
 
 
@@ -47,6 +78,18 @@ def faulty_portfolio_entry() -> FaultyMD5:
     FaultyMD5
         A PortfolioEntry with a faulty md5 hash."""
     return FaultyMD5()
+
+
+@pytest.fixture
+def wiki_logo() -> WikiLogo:
+    """Fixture for the Wikipedia logo.
+
+    Returns
+    -------
+    WikiLogo
+        The Wikipedia logo.
+    """
+    return WikiLogo()
 
 
 @pytest.fixture

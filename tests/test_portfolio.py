@@ -1,7 +1,25 @@
+import pytest
 from data_portfolio import Portfolio
+from data_portfolio.portfolio import IterablePortfolio
 
 
-def test_portfolios_as_iterable(portfolio: Portfolio):
+def list_iterable_portfolios():
+    """List all iterable portfolios."""
+    portfolio = Portfolio()
+
+    list_iter_portfolios = []
+    for attribute in vars(portfolio).values():
+        if isinstance(attribute, IterablePortfolio):
+            list_iter_portfolios.append(attribute)
+
+    return list_iter_portfolios
+
+
+ITERABLES = list_iterable_portfolios()
+
+
+@pytest.mark.parametrize("iter_portfolio", ITERABLES)
+def test_iterable_portfolios(iter_portfolio: IterablePortfolio):
     """Test that portfolios are iterable.
 
     Parameters
@@ -9,36 +27,40 @@ def test_portfolios_as_iterable(portfolio: Portfolio):
     portfolio : Portfolio
         Portfolio to test.
     """
-    # denoiseg
-    denoiseg_entries = [entry.name for entry in portfolio.denoiseg]
-    assert denoiseg_entries == portfolio.denoiseg.list_datasets()
-
-    # denoising
-    denoising_entries = [entry.name for entry in portfolio.denoising]
-    assert denoising_entries == portfolio.denoising.list_datasets()
+    entries = [entry.name for entry in iter_portfolio]
+    assert entries == iter_portfolio.list_datasets()
 
 
-def test_list_datasets(portfolio: Portfolio):
+@pytest.mark.parametrize("iter_portfolio", ITERABLES)
+def test_iterable_portfolio_list_datasets(iter_portfolio: IterablePortfolio):
     """Test that the list_datasets method works on portfolios.
+
+    Note: the list_datasets
 
     Parameters
     ----------
     portfolio : Portfolio
         Portfolio to test.
     """
+    datasets = (
+        iter_portfolio.list_datasets()
+    )  # names of entries, rather than attributes
+    assert len(datasets) > 0
+
+    for entry in datasets:
+        assert entry in iter_portfolio.as_dict().keys()
+
+
+@pytest.mark.parametrize("iter_portfolio", ITERABLES)
+def test_iterable_portfolio_as_dict(iter_portfolio: IterablePortfolio):
     # denoiseg
-    denoiseg_list = portfolio.denoiseg.list_datasets()
-    assert len(denoiseg_list) > 0
+    iter_as_dict = iter_portfolio.as_dict()
+    assert len(iter_as_dict) > 0
 
-    for entry in denoiseg_list:
-        assert entry in portfolio.denoiseg.as_dict().keys()
-
-    # denoising
-    denoising_list = portfolio.denoising.list_datasets()
-    assert len(denoising_list) > 0
-
-    for entry in denoising_list:
-        assert entry in portfolio.denoising.as_dict().keys()
+    # check entries
+    for entry in iter_as_dict.values():
+        assert "URL" in entry
+        assert "Citation" in entry
 
 
 def test_portfolio_as_dict(portfolio: Portfolio):
@@ -51,26 +73,7 @@ def test_portfolio_as_dict(portfolio: Portfolio):
     """
     portfolio_dict = portfolio.as_dict()
     assert len(portfolio_dict) > 0
-    assert portfolio.denoiseg.name in portfolio_dict
-    assert portfolio.denoising.name in portfolio_dict
-
-    # denoiseg
-    denoiseg_dict = portfolio.denoiseg.as_dict()
-    assert len(denoiseg_dict) > 0
-
-    # check entries
-    for entry in denoiseg_dict.values():
-        assert "URL" in entry
-        assert "Citation" in entry
-
-    # denoising
-    denoising_dict = portfolio.denoising.as_dict()
-    assert len(denoising_dict) > 0
-
-    # same here
-    for entry in denoising_dict.values():
-        assert "URL" in entry
-        assert "Citation" in entry
+    assert len(portfolio_dict) == len(ITERABLES)
 
 
 def test_export_to_json(tmp_path, portfolio: Portfolio):

@@ -1,7 +1,22 @@
 import pytest
+from data_portfolio.portfolio_entry import PortfolioEntry
 
 
-def test_faulty_md5(tmp_path, faulty_portfolio_entry):
+def test_download(tmp_path, wiki_logo: PortfolioEntry):
+    wiki_logo.download(tmp_path)
+
+
+def test_download_in_invalid_path(tmp_path, wiki_logo: PortfolioEntry):
+    """Test that downloading to an invalid path raises an error."""
+    file_name = "file.txt"
+    with open(tmp_path / file_name, "w") as f:
+        f.write("CATS ARE NICE.")
+
+    with pytest.raises(ValueError):
+        wiki_logo.download(tmp_path / file_name)
+
+
+def test_faulty_md5(tmp_path, faulty_portfolio_entry: PortfolioEntry):
     """Test that faulty md5 hash raises an error.
 
     Parameters

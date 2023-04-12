@@ -16,7 +16,7 @@ class NoiseLevel(str, Enum):
     N20 = "20"
 
 
-class NoisyDataset:
+class NoisyObject:
     """A mixin class for datasets with different noise levels.
 
     Attributes
@@ -33,7 +33,7 @@ class NoisyDataset:
         return self._noise_level
 
 
-class DSB2018(PortfolioEntry, NoisyDataset):
+class DSB2018(PortfolioEntry, NoisyObject):
     """The 2018 Data Science Bowl dataset used by DenoiSeg.
 
     The dataset is available in three different noise levels: N0, N10 and N20.
@@ -103,7 +103,7 @@ class DSB2018(PortfolioEntry, NoisyDataset):
             return 368.0
 
 
-class SegFlywing(PortfolioEntry, NoisyDataset):
+class SegFlywing(PortfolioEntry, NoisyObject):
     """Flywing dataset used by DenoiSeg.
 
     The dataset is available in three different noise levels: N0, N10 and N20.
@@ -170,7 +170,7 @@ class SegFlywing(PortfolioEntry, NoisyDataset):
             return 293.0
 
 
-class MouseNuclei(PortfolioEntry, NoisyDataset):
+class MouseNuclei(PortfolioEntry, NoisyObject):
     """Mouse nuclei dataset used by DenoiSeg.
 
     The dataset is available in three different noise levels: N0, N10 and N20.
