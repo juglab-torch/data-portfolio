@@ -71,6 +71,38 @@ jobs:
       - name: Coverage
         uses: codecov/codecov-action@v3
 
+  update_json:
+    name: Update datasets summary
+    needs: test
+    if: success()
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: 🐍 Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+
+      - name: Build package
+        run: python -m pip install .
+
+      - name: Run json export script
+        run: python scripts/export_portfolio_to_json.py
+
+      - name: Verify Changed files
+        uses: tj-actions/verify-changed-files@v14
+        id: verify-changed-files
+        with:
+          files: datasets/datasets.json
+
+      - name: Run step only when datasets.json changed.
+        if: steps.verify-changed-files.outputs.files_changed == 'true'
+        run: |
+          git add datasets/datasets.json
+          git commit -m "Update datasets json"
+
   deploy:
     name: Deploy
     needs: test
