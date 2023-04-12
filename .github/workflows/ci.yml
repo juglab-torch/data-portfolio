@@ -108,6 +108,7 @@ jobs:
           git checkout -b update-summary
           git add datasets/datasets.json
           git commit -m "Update datasets.json"
+          git push 
           gh pr create -B main -H update-summary --title 'Update datasets.json' --body 'Created by Github action'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
