@@ -15,6 +15,7 @@ LIGHT_DATASETS = list_light_datasets(Portfolio().denoising)
 HEAVY_DATASETS = list_heavy_datasets(Portfolio().denoising)
 
 
+@pytest.mark.dataset
 @pytest.mark.parametrize("dataset", LIGHT_DATASETS)
 def test_light_datasets(tmp_path, dataset: PortfolioEntry):
     """Test that all light denoising datasets download properly.
@@ -31,7 +32,7 @@ def test_light_datasets(tmp_path, dataset: PortfolioEntry):
     download_checker(tmp_path, dataset)
 
 
-@pytest.mark.large_dataset
+@pytest.mark.dataset
 @pytest.mark.parametrize("dataset", HEAVY_DATASETS)
 def test_heavy_datasets(tmp_path, dataset):
     """Test that all heavy denoising datasets download properly.
