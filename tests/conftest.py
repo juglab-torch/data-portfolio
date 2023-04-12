@@ -58,7 +58,7 @@ class WikiLogo(PortfolioEntry):
             name="Wikipedia logo",
             url="https://en.wikipedia.org/wiki/Wikipedia_logo#/media/File:Wikipedia-logo-v2.svg",
             file_name="Wikipedia-logo-v2.svg",
-            md5_hash="d4212bdfeb53781492b52a3ea9479c74",
+            md5_hash="3fbfc5f7eb496d7b7c417f517d4d1176",
             description="Wikipedia logo",
             citation="Wikipedia",
             license="CC BY-SA 3.0",
