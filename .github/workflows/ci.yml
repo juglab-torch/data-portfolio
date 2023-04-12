@@ -74,7 +74,7 @@ jobs:
   update_json:
     name: Update datasets summary
     needs: test
-    if: success()
+    if: success() && github.event_name == 'pull_request'
     runs-on: ubuntu-latest
 
     steps:
