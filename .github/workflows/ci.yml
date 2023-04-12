@@ -99,9 +99,11 @@ jobs:
 
       - name: Run step only when datasets.json changed.
         if: steps.verify-changed-files.outputs.files_changed == 'true'
+        uses: git-actions/set-user@v1
         run: |
           git add datasets/datasets.json
           git commit -m "Update datasets json"
+          git push
 
   deploy:
     name: Deploy
