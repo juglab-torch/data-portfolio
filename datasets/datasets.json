@@ -18,39 +18,39 @@
         }
     },
     "DenoiSeg": {
-        "DSB2018_nNoiseLevel.N0": {
+        "DSB2018_n0": {
             "URL": "https://zenodo.org/record/5156969/files/DSB2018_n0.zip?download=1",
             "Citation": "Caicedo, J.C., Goodman, A., Karhohs, K.W. et al. Nucleus segmentation across imaging experiments: the 2018 Data Science Bowl. Nat Methods 16, 1247-1253 (2019). https://doi.org/10.1038/s41592-019-0612-7"
         },
-        "DSB2018_nNoiseLevel.N10": {
+        "DSB2018_n10": {
             "URL": "https://zenodo.org/record/5156977/files/DSB2018_n10.zip?download=1",
             "Citation": "Caicedo, J.C., Goodman, A., Karhohs, K.W. et al. Nucleus segmentation across imaging experiments: the 2018 Data Science Bowl. Nat Methods 16, 1247-1253 (2019). https://doi.org/10.1038/s41592-019-0612-7"
         },
-        "DSB2018_nNoiseLevel.N20": {
+        "DSB2018_n20": {
             "URL": "https://zenodo.org/record/5156983/files/DSB2018_n20.zip?download=1",
             "Citation": "Caicedo, J.C., Goodman, A., Karhohs, K.W. et al. Nucleus segmentation across imaging experiments: the 2018 Data Science Bowl. Nat Methods 16, 1247-1253 (2019). https://doi.org/10.1038/s41592-019-0612-7"
         },
-        "Flywing_nNoiseLevel.N0": {
+        "Flywing_n0": {
             "URL": "https://zenodo.org/record/5156991/files/Flywing_n0.zip?download=1",
             "Citation": "Buchholz, T.O., Prakash, M., Schmidt, D., Krull, A., Jug, F.: Denoiseg: joint denoising and segmentation. In: European Conference on Computer Vision (ECCV). pp. 324-337. Springer (2020) 8, 9"
         },
-        "Flywing_nNoiseLevel.N10": {
+        "Flywing_n10": {
             "URL": "https://zenodo.org/record/5156993/files/Flywing_n10.zip?download=1",
             "Citation": "Buchholz, T.O., Prakash, M., Schmidt, D., Krull, A., Jug, F.: Denoiseg: joint denoising and segmentation. In: European Conference on Computer Vision (ECCV). pp. 324-337. Springer (2020) 8, 9"
         },
-        "Flywing_nNoiseLevel.N20": {
+        "Flywing_n20": {
             "URL": "https://zenodo.org/record/5156995/files/Flywing_n20.zip?download=1",
             "Citation": "Buchholz, T.O., Prakash, M., Schmidt, D., Krull, A., Jug, F.: Denoiseg: joint denoising and segmentation. In: European Conference on Computer Vision (ECCV). pp. 324-337. Springer (2020) 8, 9"
         },
-        "MouseNuclei_nNoiseLevel.N0": {
+        "MouseNuclei_n0": {
             "URL": "https://zenodo.org/record/5157001/files/Mouse_n0.zip?download=1",
             "Citation": "Buchholz, T.O., Prakash, M., Schmidt, D., Krull, A., Jug, F.: Denoiseg: joint denoising and segmentation. In: European Conference on Computer Vision (ECCV). pp. 324-337. Springer (2020) 8, 9"
         },
-        "MouseNuclei_nNoiseLevel.N10": {
+        "MouseNuclei_n10": {
             "URL": "https://zenodo.org/record/5157003/files/Mouse_n10.zip?download=1",
             "Citation": "Buchholz, T.O., Prakash, M., Schmidt, D., Krull, A., Jug, F.: Denoiseg: joint denoising and segmentation. In: European Conference on Computer Vision (ECCV). pp. 324-337. Springer (2020) 8, 9"
         },
-        "MouseNuclei_nNoiseLevel.N20": {
+        "MouseNuclei_n20": {
             "URL": "https://zenodo.org/record/5157008/files/Mouse_n20.zip?download=1",
             "Citation": "Buchholz, T.O., Prakash, M., Schmidt, D., Krull, A., Jug, F.: Denoiseg: joint denoising and segmentation. In: European Conference on Computer Vision (ECCV). pp. 324-337. Springer (2020) 8, 9"
         }
