@@ -1,65 +1,51 @@
 import pytest
 from data_portfolio import Portfolio
+from data_portfolio.portfolio import PortfolioEntry
+
+from .utils import (
+    download_checker,
+    list_heavy_datasets,
+    list_light_datasets,
+    portoflio_entry_checker,
+    unique_md5_checker,
+    unique_url_checker,
+)
+
+LIGHT_DATASETS = list_light_datasets(Portfolio().denoiseg)
+HEAVY_DATASETS = list_heavy_datasets(Portfolio().denoiseg)
 
 
-@pytest.mark.dataset
-def test_dsb2018_n0(tmp_path):
-    """Test that the DSB2018_n0 dataset downloads properly."""
-    Portfolio().denoiseg.DSB2018_n0.download(tmp_path, check_md5=True)
+@pytest.mark.parametrize("dataset", LIGHT_DATASETS)
+def test_light_datasets(tmp_path, dataset: PortfolioEntry):
+    """Test that all light DenoiSeg datasets download properly.
+
+    This test also checks the files and size.
+
+    Parameters
+    ----------
+    tmp_path : Path
+        Path to temporary directory.
+    dataset : Dataset
+        Dataset object.
+    """
+    download_checker(tmp_path, dataset)
 
 
-@pytest.mark.dataset
 @pytest.mark.large_dataset
-def test_dsb2018_n10(tmp_path):
-    """Test that the DSB2018_n10 dataset downloads properly."""
-    Portfolio().denoiseg.DSB2018_n10.download(tmp_path, check_md5=True)
+@pytest.mark.parametrize("dataset", HEAVY_DATASETS)
+def test_heavy_datasets(tmp_path, dataset):
+    """Test that all heavy DenoiSeg datasets download properly.
 
+    This test also checks the files and size.
 
-@pytest.mark.dataset
-@pytest.mark.large_dataset
-def test_dsb2018_n20(tmp_path):
-    """Test that the DSB2018_n20 dataset downloads properly."""
-    Portfolio().denoiseg.DSB2018_n20.download(tmp_path, check_md5=True)
-
-
-@pytest.mark.dataset
-def test_flywing_n0(tmp_path):
-    """Test that the Flywing_n0 dataset downloads properly."""
-    Portfolio().denoiseg.Flywing_n0.download(tmp_path, check_md5=True)
-
-
-@pytest.mark.dataset
-@pytest.mark.large_dataset
-def test_flywing_n10(tmp_path):
-    """Test that the Flywing_n10 dataset downloads properly."""
-    Portfolio().denoiseg.Flywing_n10.download(tmp_path, check_md5=True)
-
-
-@pytest.mark.dataset
-@pytest.mark.large_dataset
-def test_flywing_n20(tmp_path):
-    """Test that the Flywing_n20 dataset downloads properly."""
-    Portfolio().denoiseg.Flywing_n20.download(tmp_path, check_md5=True)
-
-
-@pytest.mark.dataset
-def test_mousenuclei_n0(tmp_path):
-    """Test that the MouseNuclei_n0 dataset downloads properly."""
-    Portfolio().denoiseg.MouseNuclei_n0.download(tmp_path, check_md5=True)
-
-
-@pytest.mark.dataset
-@pytest.mark.large_dataset
-def test_mousenuclei_n10(tmp_path):
-    """Test that the MouseNuclei_n10 dataset downloads properly."""
-    Portfolio().denoiseg.MouseNuclei_n10.download(tmp_path, check_md5=True)
-
-
-@pytest.mark.dataset
-@pytest.mark.large_dataset
-def test_mousenuclei_n20(tmp_path):
-    """Test that the MouseNuclei_n20 dataset downloads properly."""
-    Portfolio().denoiseg.MouseNuclei_n20.download(tmp_path, check_md5=True)
+    Parameters
+    ----------
+    tmp_path : Path
+        Path to temporary directory.
+    dataset : Dataset
+        Dataset object.
+    """
+    download_checker(tmp_path, dataset)
 
 
 def test_unique_hashes(portfolio: Portfolio):
@@ -70,14 +56,7 @@ def test_unique_hashes(portfolio: Portfolio):
     portfolio : Portfolio
         Portfolio object.
     """
-    hashes = []
-    for entry in portfolio.denoiseg:
-        assert entry.md5_hash is not None, f"{entry.name} has no md5 hash."
-
-        # add to list of hashes
-        hashes.append(entry.md5_hash)
-
-    assert len(hashes) == len(set(hashes)), "DenoiSeg hashes are not unique."
+    unique_md5_checker(portfolio.denoiseg)
 
 
 def test_unique_urls(portfolio: Portfolio):
@@ -88,11 +67,16 @@ def test_unique_urls(portfolio: Portfolio):
     portfolio : Portfolio
         Portfolio object.
     """
-    urls = []
+    unique_url_checker(portfolio.denoiseg)
+
+
+def test_no_empty_dataset_entry(portfolio: Portfolio):
+    """Test that no DenoiSeg dataset entry is empty.
+
+    Parameters
+    ----------
+    portfolio : Portfolio
+        Portfolio object.
+    """
     for entry in portfolio.denoiseg:
-        assert entry.url is not None, f"{entry.name} has no URL."
-
-        # add to list of hashes
-        urls.append(entry.url)
-
-    assert len(urls) == len(set(urls)), "DenoiSeg URLs are not unique."
+        portoflio_entry_checker(entry)

@@ -69,9 +69,10 @@ class DSB2018(PortfolioEntry, NoisyDataset):
             "Bowl. Nat Methods 16, 1247-1253 (2019). "
             "https://doi.org/10.1038/s41592-019-0612-7",
             files={
-                "train": ["train_data.npz"],
-                "test": ["test_data.npz"],
+                f"DSB2018_n{noise_level.value}/train": ["train_data.npz"],
+                f"DSB2018_n{noise_level.value}/test": ["test_data.npz"],
             },
+            size=self._get_size(noise_level),
         )
 
     @staticmethod
@@ -91,6 +92,15 @@ class DSB2018(PortfolioEntry, NoisyDataset):
             return "aa16c116949d8b8cd573d7bbeacbd0c3"
         else:
             return "81abc17313582a4f04f501e3dce1fe88"
+
+    @staticmethod
+    def _get_size(noise: NoiseLevel) -> float:
+        if noise == NoiseLevel.N0:
+            return 40.2
+        elif noise == NoiseLevel.N10:
+            return 366.0
+        else:
+            return 368.0
 
 
 class SegFlywing(PortfolioEntry, NoisyDataset):
@@ -126,9 +136,10 @@ class SegFlywing(PortfolioEntry, NoisyDataset):
             "F.: Denoiseg: joint denoising and segmentation. In: European "
             "Conference on Computer Vision (ECCV). pp. 324-337. Springer (2020) 8, 9",
             files={
-                "train": ["train_data.npz"],
-                "test": ["test_data.npz"],
+                f"Flywing_n{noise_level.value}/train": ["train_data.npz"],
+                f"Flywing_n{noise_level.value}/test": ["test_data.npz"],
             },
+            size=self._get_size(noise_level),
         )
 
     @staticmethod
@@ -148,6 +159,15 @@ class SegFlywing(PortfolioEntry, NoisyDataset):
             return "64d5300073e02c9651ec88c368c302e8"
         else:
             return "b8fbb96026bd10fd034b8c1270f6edbb"
+
+    @staticmethod
+    def _get_size(noise: NoiseLevel) -> float:
+        if noise == NoiseLevel.N0:
+            return 47.0
+        elif noise == NoiseLevel.N10:
+            return 282.0
+        else:
+            return 293.0
 
 
 class MouseNuclei(PortfolioEntry, NoisyDataset):
@@ -183,9 +203,10 @@ class MouseNuclei(PortfolioEntry, NoisyDataset):
             "F.: Denoiseg: joint denoising and segmentation. In: European "
             "Conference on Computer Vision (ECCV). pp. 324-337. Springer (2020) 8, 9",
             files={
-                "train": ["train_data.npz"],
-                "test": ["test_data.npz"],
+                f"Mouse_n{noise_level.value}/train": ["train_data.npz"],
+                f"Mouse_n{noise_level.value}/test": ["test_data.npz"],
             },
+            size=self._get_size(noise_level),
         )
 
     @staticmethod
@@ -205,3 +226,12 @@ class MouseNuclei(PortfolioEntry, NoisyDataset):
             return "0b0776fa205057b49920b0ec3d1a5fc9"
         else:
             return "6e9d895ba3ac2c225883ed3ec94342f8"
+
+    @staticmethod
+    def _get_size(noise: NoiseLevel) -> float:
+        if noise == NoiseLevel.N0:
+            return 12.4
+        elif noise == NoiseLevel.N10:
+            return 161.0
+        else:
+            return 160.0

@@ -124,7 +124,6 @@ minversion = "6.0"
 testpaths = ["tests"]
 markers = [
     "large_dataset: slow tests due to large dataset download",
-    "dataset: tests that require a dataset download",
 ]
 
 

@@ -43,6 +43,7 @@ class PortfolioEntry:
         file_name (str): Name of the downloaded file.
         md5_hash (str): MD5 hash of the downloaded file.
         files (dict[str, list]): Dictionary of files in the dataset.
+        size (int): Size of the dataset in MB.
     """
 
     def __init__(
@@ -55,6 +56,7 @@ class PortfolioEntry:
         file_name: str,
         md5_hash: str,
         files: Dict[str, list],
+        size: float = 0,
         **kwargs: str,
     ) -> None:
         self._name = name
@@ -65,6 +67,7 @@ class PortfolioEntry:
         self._file_name = file_name
         self._md5_hash = md5_hash
         self._files = files
+        self._size = size
 
     @property
     def name(self) -> str:
@@ -153,6 +156,17 @@ class PortfolioEntry:
             Dictionary of files in the dataset.
         """
         return self._files
+
+    @property
+    def size(self) -> float:
+        """Size of the dataset in MB.
+
+        Returns
+        -------
+        float
+            Size of the dataset in MB.
+        """
+        return self._size
 
     def download(
         self,

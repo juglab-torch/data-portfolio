@@ -63,7 +63,7 @@ class IterablePortfolio:
         return self._name
 
     def list_datasets(self) -> list[str]:
-        """List datasets in the portfolio.
+        """List datasets in the portfolio using friendly names.
 
         Returns
         -------

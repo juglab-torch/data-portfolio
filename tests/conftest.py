@@ -34,6 +34,7 @@ class FaultyMD5(PortfolioEntry):
             files={
                 ".": ["Wikipedia-logo-v2.svg"],
             },
+            size=0.1,
         )
 
 
