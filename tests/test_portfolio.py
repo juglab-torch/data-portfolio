@@ -61,6 +61,9 @@ def test_iterable_portfolio_as_dict(iter_portfolio: IterablePortfolio):
     for entry in iter_as_dict.values():
         assert "URL" in entry
         assert "Citation" in entry
+        assert "Description" in entry
+        assert "License" in entry
+        assert "File size" in entry
 
 
 def test_portfolio_as_dict(portfolio: Portfolio):
@@ -99,7 +102,6 @@ def test_export_to_json(tmp_path, portfolio: Portfolio):
     with open(path_to_file) as f:
         data = json.load(f)
 
-        assert portfolio.denoiseg.name in data
-        assert data[portfolio.denoiseg.name] == portfolio.denoiseg.as_dict()
-        assert portfolio.denoising.name in data
-        assert data[portfolio.denoising.name] == portfolio.denoising.as_dict()
+        for entry in ITERABLES:
+            assert entry.name in data
+            assert data[entry.name] == entry.as_dict()

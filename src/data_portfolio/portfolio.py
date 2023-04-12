@@ -113,7 +113,10 @@ class IterablePortfolio:
                 # add the attribute to the entries dictionary
                 entries[attribute.name] = {
                     "URL": attribute.url,
+                    "Description": attribute.description,
                     "Citation": attribute.citation,
+                    "License": attribute.license,
+                    "File size": f"{attribute.size} MB",
                 }
         return entries
 
