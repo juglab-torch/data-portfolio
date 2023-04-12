@@ -49,6 +49,10 @@
         "MouseNuclei_n10": {
             "URL": "https://zenodo.org/record/5157003/files/Mouse_n10.zip?download=1",
             "Citation": "Buchholz, T.O., Prakash, M., Schmidt, D., Krull, A., Jug, F.: Denoiseg: joint denoising and segmentation. In: European Conference on Computer Vision (ECCV). pp. 324-337. Springer (2020) 8, 9"
+        },
+        "MouseNuclei_n20": {
+            "URL": "https://zenodo.org/record/5157008/files/Mouse_n20.zip?download=1",
+            "Citation": "Buchholz, T.O., Prakash, M., Schmidt, D., Krull, A., Jug, F.: Denoiseg: joint denoising and segmentation. In: European Conference on Computer Vision (ECCV). pp. 324-337. Springer (2020) 8, 9"
         }
     }
 }

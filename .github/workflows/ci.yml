@@ -77,11 +77,13 @@ jobs:
     if: success()
     runs-on: ubuntu-latest
 
-    permissions:
-      pull-requests: write
-
     steps:
       - uses: actions/checkout@v3
+      
+      - name: Checkout PR
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh pr checkout ${{ github.event.pull_request.number }}
 
       - name: 🐍 Set up Python
         uses: actions/setup-python@v4
@@ -100,19 +102,19 @@ jobs:
         with:
           files: datasets/datasets.json
 
-      - name: Create PR
+      - name: Commit changes
         if: steps.verify-changed-files.outputs.files_changed == 'true'
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'  
-          git checkout -b update-summary
           git add datasets/datasets.json
           git commit -m "Update datasets.json"
-          git push --set-upstream origin update-summary
-          gh pr create -B main -H update-summary --title 'Update datasets.json' --body 'Created by Github action'
+
+      - name: Push changes
+        if: steps.verify-changed-files.outputs.files_changed == 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        
+        run: git push        
 
   deploy:
     name: Deploy
