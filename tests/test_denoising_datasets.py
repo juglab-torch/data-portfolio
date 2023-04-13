@@ -14,7 +14,7 @@ DATASETS = list(Portfolio().denoising)
 
 @pytest.mark.dataset
 @pytest.mark.parametrize("dataset", DATASETS)
-def test_light_datasets(tmp_path, dataset: PortfolioEntry):
+def test_datasets(tmp_path, dataset: PortfolioEntry):
     """Test that all denoising datasets download properly.
 
     This test also checks the files and size.
