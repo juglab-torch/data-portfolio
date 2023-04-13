@@ -1,6 +1,6 @@
 import pytest
-from data_portfolio import Portfolio
-from data_portfolio.portfolio import IterablePortfolio
+from microscopy_portfolio import Portfolio
+from microscopy_portfolio.portfolio import IterablePortfolio
 
 
 def list_iterable_portfolios():

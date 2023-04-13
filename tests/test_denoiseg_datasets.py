@@ -1,7 +1,7 @@
 import pytest
-from data_portfolio import Portfolio
-from data_portfolio.denoiseg_datasets import NoiseLevel, NoisyObject
-from data_portfolio.portfolio import PortfolioEntry
+from microscopy_portfolio import Portfolio
+from microscopy_portfolio.denoiseg_datasets import NoiseLevel, NoisyObject
+from microscopy_portfolio.portfolio import PortfolioEntry
 
 from .utils import (
     download_checker,

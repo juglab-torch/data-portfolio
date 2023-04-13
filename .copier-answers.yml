@@ -6,12 +6,12 @@ author_name: Joran Deschamps
 git_versioning: true
 github_username: jdeschamps
 mode: tooling
-module_name: data_portfolio
+module_name: microscopy_portfolio
 project_license: BSD-3-Clause
-project_name: data-portfolio
+project_name: microscopy-portfolio
 project_short_description: A helper package to download example datasets used in various
-    publications by the Jug lab, including data featured in N2V, P(P)N2V, DivNoising,
-    HDN, EmbedSeg, etc.
+    publications and deep-learning algorithms, including data featured in N2V, P(P)N2V, 
+    DivNoising, HDN, EmbedSeg, etc.
 test_pre_release: true
 use_black: true
 use_mypy: true
