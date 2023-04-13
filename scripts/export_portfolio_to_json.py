@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from data_portfolio import Portfolio
+from microscopy_portfolio import Portfolio
 
 if __name__ == "__main__":
     # Create a portfolio object

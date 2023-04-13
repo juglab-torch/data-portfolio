@@ -3,8 +3,8 @@ from pathlib import Path
 from typing import Dict, List
 
 import pytest
-from data_portfolio.portfolio import IterablePortfolio
-from data_portfolio.portfolio_entry import PortfolioEntry
+from microscopy_portfolio.portfolio import IterablePortfolio
+from microscopy_portfolio.portfolio_entry import PortfolioEntry
 
 
 def file_checker(path: Path, root_name: str, files: Dict[str, List[str]]) -> None:

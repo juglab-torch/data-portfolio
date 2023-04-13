@@ -1,6 +1,6 @@
 import pytest
-from data_portfolio import Portfolio
-from data_portfolio.portfolio_entry import PortfolioEntry
+from microscopy_portfolio import Portfolio
+from microscopy_portfolio.portfolio_entry import PortfolioEntry
 
 from .utils import (
     download_checker,

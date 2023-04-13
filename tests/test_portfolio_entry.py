@@ -1,5 +1,5 @@
 import pytest
-from data_portfolio.portfolio_entry import PortfolioEntry
+from microscopy_portfolio.portfolio_entry import PortfolioEntry
 
 
 def test_download(tmp_path, pale_blue_dot: PortfolioEntry):
