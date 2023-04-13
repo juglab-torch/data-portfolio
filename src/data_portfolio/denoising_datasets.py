@@ -40,10 +40,14 @@ class N2V_BSD68(PortfolioEntry):
             "Canada, 2001, pp. 416-423 vol.2, doi: "
             "10.1109/ICCV.2001.937655.",
             files={
-                "test": ["bsd68_gaussian25.npy", "bsd68_groundtruth.npy"],
-                "train": ["DCNN400_train_gaussian25.npy"],
-                "val": ["DCNN400_validation_gaussian25.npy"],
+                "BSD68_reproducibility_data/test": [
+                    "bsd68_gaussian25.npy",
+                    "bsd68_groundtruth.npy",
+                ],
+                "BSD68_reproducibility_data/train": ["DCNN400_train_gaussian25.npy"],
+                "BSD68_reproducibility_data/val": ["DCNN400_validation_gaussian25.npy"],
             },
+            size=875.0,
         )
 
 
@@ -73,8 +77,9 @@ class N2V_SEM(PortfolioEntry):
             'F. Jug, "Content-aware image restoration for electron '
             'microscopy", Methods Cell Biol 152, 277-289',
             files={
-                "SEM": ["train.tif", "validation.tif"],
+                ".": ["train.tif", "validation.tif"],
             },
+            size=13.0,
         )
 
 
@@ -104,8 +109,9 @@ class N2V_RGB(PortfolioEntry):
             "Conference on Computer Vision and Pattern Recognition (CVPR),"
             " 2019, pp. 2124-2132",
             files={
-                "RGB": ["longBeach.png"],
+                ".": ["longBeach.png"],
             },
+            size=10.4,
         )
 
 
@@ -134,6 +140,7 @@ class Flywing(PortfolioEntry):
             "F.: Denoiseg: joint denoising and segmentation. In: European "
             "Conference on Computer Vision (ECCV). pp. 324-337. Springer (2020) 8, 9",
             files={
-                "flywing-data": ["flywing.tif"],
+                ".": ["flywing.tif"],
             },
+            size=10.2,
         )

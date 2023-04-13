@@ -1,65 +1,33 @@
 import pytest
 from data_portfolio import Portfolio
+from data_portfolio.denoiseg_datasets import NoiseLevel, NoisyObject
+from data_portfolio.portfolio import PortfolioEntry
+
+from .utils import (
+    download_checker,
+    portoflio_entry_checker,
+    unique_md5_checker,
+    unique_url_checker,
+)
+
+DATASETS = list(Portfolio().denoiseg)
 
 
 @pytest.mark.dataset
-def test_dsb2018_n0(tmp_path):
-    """Test that the DSB2018_n0 dataset downloads properly."""
-    Portfolio().denoiseg.DSB2018_n0.download(tmp_path, check_md5=True)
+@pytest.mark.parametrize("dataset", DATASETS)
+def test_light_datasets(tmp_path, dataset: PortfolioEntry):
+    """Test that all DenoiSeg datasets download properly.
 
+    This test also checks the files and size.
 
-@pytest.mark.dataset
-@pytest.mark.large_dataset
-def test_dsb2018_n10(tmp_path):
-    """Test that the DSB2018_n10 dataset downloads properly."""
-    Portfolio().denoiseg.DSB2018_n10.download(tmp_path, check_md5=True)
-
-
-@pytest.mark.dataset
-@pytest.mark.large_dataset
-def test_dsb2018_n20(tmp_path):
-    """Test that the DSB2018_n20 dataset downloads properly."""
-    Portfolio().denoiseg.DSB2018_n20.download(tmp_path, check_md5=True)
-
-
-@pytest.mark.dataset
-def test_flywing_n0(tmp_path):
-    """Test that the Flywing_n0 dataset downloads properly."""
-    Portfolio().denoiseg.Flywing_n0.download(tmp_path, check_md5=True)
-
-
-@pytest.mark.dataset
-@pytest.mark.large_dataset
-def test_flywing_n10(tmp_path):
-    """Test that the Flywing_n10 dataset downloads properly."""
-    Portfolio().denoiseg.Flywing_n10.download(tmp_path, check_md5=True)
-
-
-@pytest.mark.dataset
-@pytest.mark.large_dataset
-def test_flywing_n20(tmp_path):
-    """Test that the Flywing_n20 dataset downloads properly."""
-    Portfolio().denoiseg.Flywing_n20.download(tmp_path, check_md5=True)
-
-
-@pytest.mark.dataset
-def test_mousenuclei_n0(tmp_path):
-    """Test that the MouseNuclei_n0 dataset downloads properly."""
-    Portfolio().denoiseg.MouseNuclei_n0.download(tmp_path, check_md5=True)
-
-
-@pytest.mark.dataset
-@pytest.mark.large_dataset
-def test_mousenuclei_n10(tmp_path):
-    """Test that the MouseNuclei_n10 dataset downloads properly."""
-    Portfolio().denoiseg.MouseNuclei_n10.download(tmp_path, check_md5=True)
-
-
-@pytest.mark.dataset
-@pytest.mark.large_dataset
-def test_mousenuclei_n20(tmp_path):
-    """Test that the MouseNuclei_n20 dataset downloads properly."""
-    Portfolio().denoiseg.MouseNuclei_n20.download(tmp_path, check_md5=True)
+    Parameters
+    ----------
+    tmp_path : Path
+        Path to temporary directory.
+    dataset : Dataset
+        Dataset object.
+    """
+    download_checker(tmp_path, dataset)
 
 
 def test_unique_hashes(portfolio: Portfolio):
@@ -70,14 +38,7 @@ def test_unique_hashes(portfolio: Portfolio):
     portfolio : Portfolio
         Portfolio object.
     """
-    hashes = []
-    for entry in portfolio.denoiseg:
-        assert entry.md5_hash is not None, f"{entry.name} has no md5 hash."
-
-        # add to list of hashes
-        hashes.append(entry.md5_hash)
-
-    assert len(hashes) == len(set(hashes)), "DenoiSeg hashes are not unique."
+    unique_md5_checker(portfolio.denoiseg)
 
 
 def test_unique_urls(portfolio: Portfolio):
@@ -88,11 +49,23 @@ def test_unique_urls(portfolio: Portfolio):
     portfolio : Portfolio
         Portfolio object.
     """
-    urls = []
+    unique_url_checker(portfolio.denoiseg)
+
+
+def test_no_empty_dataset_entry(portfolio: Portfolio):
+    """Test that no DenoiSeg dataset entry is empty.
+
+    Parameters
+    ----------
+    portfolio : Portfolio
+        Portfolio object.
+    """
     for entry in portfolio.denoiseg:
-        assert entry.url is not None, f"{entry.name} has no URL."
+        portoflio_entry_checker(entry)
 
-        # add to list of hashes
-        urls.append(entry.url)
 
-    assert len(urls) == len(set(urls)), "DenoiSeg URLs are not unique."
+@pytest.mark.parametrize("noise_level", [NoiseLevel.N0, NoiseLevel.N10, NoiseLevel.N20])
+def test_noisy_dataset(noise_level):
+    """Test that the NoisyDataset class works properly."""
+    noisy_object = NoisyObject(noise_level=noise_level)
+    assert noisy_object.noise_level == noise_level

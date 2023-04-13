@@ -10,9 +10,21 @@ from .denoising_datasets import N2V_BSD68, N2V_RGB, N2V_SEM, Flywing
 from .portfolio_entry import PortfolioEntry
 
 
-# TODO make portfolios iterable
 class IterablePortfolio:
-    """Iterable portfolio class."""
+    """Iterable portfolio class.
+
+    Subclass this class and add PortfolioEntry objects as attributes.
+
+
+    Attributes
+    ----------
+    _name : str
+        Name of the portfolio.
+    _datasets : List[PortfolioEntry]
+        List of datasets in the portfolio.
+    _current_index : int
+    Current index of the iterator.
+    """
 
     def __init__(self, name: str) -> None:
         self._name = name
@@ -63,7 +75,10 @@ class IterablePortfolio:
         return self._name
 
     def list_datasets(self) -> list[str]:
-        """List datasets in the portfolio.
+        """List datasets in the portfolio using friendly names.
+
+        The friendly names are the names of the portfolio entries, rather
+        than that of the IterablePortfolio attributes.
 
         Returns
         -------
@@ -82,7 +97,7 @@ class IterablePortfolio:
     def as_dict(self) -> dict[str, dict[str, str]]:
         """Dictionary representation of a portfolio.
 
-        Used to serialize the class to json.
+        Used to serialize the class to json, with friendly name as entries.
 
         Returns
         -------
@@ -98,7 +113,10 @@ class IterablePortfolio:
                 # add the attribute to the entries dictionary
                 entries[attribute.name] = {
                     "URL": attribute.url,
+                    "Description": attribute.description,
                     "Citation": attribute.citation,
+                    "License": attribute.license,
+                    "File size": f"{attribute.size} MB",
                 }
         return entries
 
@@ -110,7 +128,7 @@ class IterablePortfolio:
         str
         String representation of a portfolio.
         """
-        return f"Denoising datasets: {self.list_datasets()}"
+        return f"{self.name} datasets: {self.list_datasets()}"
 
 
 class ItarablePortfolioEncoder(JSONEncoder):

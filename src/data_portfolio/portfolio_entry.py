@@ -43,6 +43,7 @@ class PortfolioEntry:
         file_name (str): Name of the downloaded file.
         md5_hash (str): MD5 hash of the downloaded file.
         files (dict[str, list]): Dictionary of files in the dataset.
+        size (int): Size of the dataset in MB.
     """
 
     def __init__(
@@ -55,6 +56,7 @@ class PortfolioEntry:
         file_name: str,
         md5_hash: str,
         files: Dict[str, list],
+        size: float = 0,
         **kwargs: str,
     ) -> None:
         self._name = name
@@ -65,6 +67,7 @@ class PortfolioEntry:
         self._file_name = file_name
         self._md5_hash = md5_hash
         self._files = files
+        self._size = size
 
     @property
     def name(self) -> str:
@@ -154,11 +157,21 @@ class PortfolioEntry:
         """
         return self._files
 
+    @property
+    def size(self) -> float:
+        """Size of the dataset in MB.
+
+        Returns
+        -------
+        float
+            Size of the dataset in MB.
+        """
+        return self._size
+
     def download(
         self,
         path: Union[str, Path],
         check_md5: bool = True,
-        create_parents: bool = True,
     ) -> dict:
         """Download dataset in the specified path.
 
@@ -168,8 +181,6 @@ class PortfolioEntry:
             Path to the folder in which to download the dataset.
         check_md5 : bool, optional
             Whether to check the MD5 hash of the downloaded file, by default True.
-        create_parents : bool, optional
-            Whether to create parent directories if they do not exist, by default True.
 
         Returns
         -------
@@ -189,32 +200,37 @@ class PortfolioEntry:
             raise ValueError(f"Path {path} is not a directory.")
 
         if not path.exists():
-            path.mkdir(parents=create_parents)
+            path.mkdir()
 
         # check if zip file exists
-        zip_path = Path(path, self.file_name)
-        if not zip_path.exists():
+        file_path = Path(path, self.file_name)
+        if not file_path.exists():
             print(f"Downloading {self.name} to {path} might take some time.")
 
             # download data
             with DownloadProgressBar(
                 unit="B", unit_scale=True, miniters=1, desc=self.url.split("/")[-1]
             ) as t:
-                request.urlretrieve(self.url, filename=zip_path, reporthook=t.update_to)
+                request.urlretrieve(
+                    self.url, filename=file_path, reporthook=t.update_to
+                )
 
             print("Download finished.")
 
+        if not file_path.exists():
+            raise ValueError(f"File {file_path} does not exist. Error downloading it.")
+
         # check if md5 hash is correct
         if check_md5:
-            print(f"Checking MD5 hash of {zip_path}.")
+            print(f"Checking MD5 hash of {file_path}.")
 
             # compute hash
-            file_hash = hashlib.md5(open(zip_path, "rb").read()).hexdigest()
+            file_hash = hashlib.md5(open(file_path, "rb").read()).hexdigest()
 
             # compare with expected hash
             if file_hash != self.md5_hash:
                 raise ValueError(
-                    f"MD5 hash of {zip_path} is not correct. "
+                    f"MD5 hash of {file_path} is not correct. "
                     f"Expected {self.md5_hash}, got {file_hash}."
                 )
 
@@ -223,11 +239,11 @@ class PortfolioEntry:
         # unzip data
         data_path = Path(path, self.file_name[:-4])
         # TODO progress bar
-        if zipfile.is_zipfile(zip_path):
-            print(f"Unzipping {zip_path} to {data_path}.")
+        if zipfile.is_zipfile(file_path):
+            print(f"Unzipping {file_path} to {data_path}.")
 
             # unzip data
-            with zipfile.ZipFile(zip_path, "r") as zip_ref:
+            with zipfile.ZipFile(file_path, "r") as zip_ref:
                 zip_ref.extractall(data_path)
 
             print("Unzipping finished.")
@@ -250,6 +266,7 @@ class PortfolioEntry:
             "file_name": self.file_name,
             "md5_hash": self.md5_hash,
             "files": self.files,
+            "size": self.size,
         }
 
     def __str__(self) -> str:

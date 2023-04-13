@@ -1,66 +1,63 @@
 import pytest
 from data_portfolio import Portfolio
+from data_portfolio.portfolio_entry import PortfolioEntry
 
-# TODO check that the downloaded files are correct
+from .utils import (
+    download_checker,
+    portoflio_entry_checker,
+    unique_md5_checker,
+    unique_url_checker,
+)
 
-
-@pytest.mark.dataset
-@pytest.mark.large_dataset
-def test_n2v_bsd68(tmp_path):
-    """Test that the N2V_BSD68 dataset downloads properly."""
-    Portfolio().denoising.N2V_BSD68.download(tmp_path, check_md5=True)
-
-
-@pytest.mark.dataset
-def test_n2v_sem(tmp_path):
-    """Test that the N2V_SEM dataset downloads properly."""
-    Portfolio().denoising.N2V_SEM.download(tmp_path, check_md5=True)
+DATASETS = list(Portfolio().denoising)
 
 
 @pytest.mark.dataset
-def test_n2v_rgb(tmp_path):
-    """Test that the N2V_RGB dataset downloads properly."""
-    Portfolio().denoising.N2V_RGB.download(tmp_path, check_md5=True)
+@pytest.mark.parametrize("dataset", DATASETS)
+def test_light_datasets(tmp_path, dataset: PortfolioEntry):
+    """Test that all denoising datasets download properly.
+
+    This test also checks the files and size.
+
+    Parameters
+    ----------
+    tmp_path : Path
+        Path to temporary directory.
+    dataset : Dataset
+        Dataset object.
+    """
+    download_checker(tmp_path, dataset)
 
 
-@pytest.mark.dataset
-def test_flywing(tmp_path):
-    """Test that the flywing dataset downloads properly."""
-    Portfolio().denoising.flywing.download(tmp_path, check_md5=True)
-
-
-@pytest.mark.dataset
 def test_unique_hashes(portfolio: Portfolio):
-    """Test that all Denoising dataset hashes are unique.
+    """Test that all denoising dataset hashes are unique.
 
     Parameters
     ----------
     portfolio : Portfolio
         Portfolio object.
     """
-    hashes = []
-    for entry in portfolio.denoising:
-        assert entry.md5_hash is not None, f"{entry.name} has no md5 hash."
-
-        # add to list of hashes
-        hashes.append(entry.md5_hash)
-
-    assert len(hashes) == len(set(hashes)), "Denoising hashes are not unique."
+    unique_md5_checker(portfolio.denoising)
 
 
 def test_unique_urls(portfolio: Portfolio):
-    """Test that all Denoising dataset URLs are unique.
+    """Test that all denoising dataset URLs are unique.
 
     Parameters
     ----------
     portfolio : Portfolio
         Portfolio object.
     """
-    urls = []
+    unique_url_checker(portfolio.denoising)
+
+
+def test_no_empty_dataset_entry(portfolio: Portfolio):
+    """Test that no denoising dataset entry is empty.
+
+    Parameters
+    ----------
+    portfolio : Portfolio
+        Portfolio object.
+    """
     for entry in portfolio.denoising:
-        assert entry.url is not None, f"{entry.name} has no URL."
-
-        # add to list of hashes
-        urls.append(entry.url)
-
-    assert len(urls) == len(set(urls)), "Denoising URLs are not unique."
+        portoflio_entry_checker(entry)
