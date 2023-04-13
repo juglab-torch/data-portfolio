@@ -34,5 +34,5 @@ jobs:
 
       - name: 🧪 Run Tests
         # we run without -m "not dataset" to test all datasets
-        run: pytest --color=yes
+        run: pytest -s --color=yes
         
