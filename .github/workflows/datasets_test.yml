@@ -1,10 +1,11 @@
-name: Check datasets
+name: Dataset tests
 
 on:
+  workflow_dispatch:
   schedule:
     # run every month
     - cron: 0 0 1 * *
-    
+
 jobs:
   test:
     name: ${{ matrix.platform }} (${{ matrix.python-version }})
@@ -32,5 +33,6 @@ jobs:
           python -m pip install .[test] ${{ github.event_name == 'schedule' && '--pre' || ''  }}
 
       - name: 🧪 Run Tests
+        # we run without -m "not dataset" to test all datasets
         run: pytest --color=yes
         
