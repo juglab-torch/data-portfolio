@@ -7,26 +7,6 @@ from data_portfolio.portfolio import IterablePortfolio
 from data_portfolio.portfolio_entry import PortfolioEntry
 
 
-def list_light_datasets(iter_portfolio: IterablePortfolio):
-    """List all light datasets in an IterablePortfolio."""
-    datasets = []
-    for dataset in iter_portfolio:
-        if dataset.size <= 50:
-            datasets.append(dataset)
-
-    return datasets
-
-
-def list_heavy_datasets(iter_portfolio: IterablePortfolio):
-    """List all heavy datasets in an IterablePortfolio."""
-    datasets = []
-    for dataset in iter_portfolio:
-        if dataset.size > 50:
-            datasets.append(dataset)
-
-    return datasets
-
-
 def file_checker(path: Path, root_name: str, files: Dict[str, List[str]]) -> None:
     for folder, file_list in files.items():
         folder_path = path / root_name / folder

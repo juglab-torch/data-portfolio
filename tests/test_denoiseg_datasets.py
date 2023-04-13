@@ -5,38 +5,18 @@ from data_portfolio.portfolio import PortfolioEntry
 
 from .utils import (
     download_checker,
-    list_heavy_datasets,
-    list_light_datasets,
     portoflio_entry_checker,
     unique_md5_checker,
     unique_url_checker,
 )
 
-LIGHT_DATASETS = list_light_datasets(Portfolio().denoiseg)
-HEAVY_DATASETS = list_heavy_datasets(Portfolio().denoiseg)
+DATASETS = list(Portfolio().denoiseg)
 
 
 @pytest.mark.dataset
-@pytest.mark.parametrize("dataset", LIGHT_DATASETS)
+@pytest.mark.parametrize("dataset", DATASETS)
 def test_light_datasets(tmp_path, dataset: PortfolioEntry):
-    """Test that all light DenoiSeg datasets download properly.
-
-    This test also checks the files and size.
-
-    Parameters
-    ----------
-    tmp_path : Path
-        Path to temporary directory.
-    dataset : Dataset
-        Dataset object.
-    """
-    download_checker(tmp_path, dataset)
-
-
-@pytest.mark.dataset
-@pytest.mark.parametrize("dataset", HEAVY_DATASETS)
-def test_heavy_datasets(tmp_path, dataset):
-    """Test that all heavy DenoiSeg datasets download properly.
+    """Test that all DenoiSeg datasets download properly.
 
     This test also checks the files and size.
 
