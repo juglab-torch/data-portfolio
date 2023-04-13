@@ -1,4 +1,4 @@
-# Data Portfolio
+# Microscopy Portfolio
 
 [![License](https://img.shields.io/pypi/l/microscopy-portfolio.svg?color=green)](https://github.com/juglab-torch/microscopy-portfolio/raw/main/LICENSE)
 [![PyPI](https://img.shields.io/pypi/v/microscopy-portfolio.svg?color=green)](https://pypi.org/project/microscopy-portfolio)
