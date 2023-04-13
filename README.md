@@ -25,7 +25,7 @@ Follow the [example notebook](examples/example.ipynb) for details on how to use 
 The portfolio can be instantiated as follow:
 
 ```python
-from data_portfolio import Portfolio
+from microscopy_portfolio import Portfolio
 
 portfolio = Portfolio()
 ```
