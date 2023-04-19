@@ -6,7 +6,7 @@ from json import JSONEncoder
 from pathlib import Path
 
 from .denoiseg_datasets import DSB2018, MouseNuclei, NoiseLevel, SegFlywing
-from .denoising_datasets import N2V_BSD68, N2V_RGB, N2V_SEM, Flywing
+from .denoising_datasets import N2V_BSD68, N2V_RGB, N2V_SEM, Convallaria, Flywing
 from .portfolio_entry import PortfolioEntry
 
 
@@ -288,6 +288,7 @@ class Denoising(IterablePortfolio):
     N2V_SEM (N2V_SEM): SEM dataset.
     N2V_RGB (N2V_RGB): RGB dataset.
     flywing (Flywing): Flywing dataset.
+    Convallaria (Convallaria): Convallaria dataset.
     """
 
     def __init__(self) -> None:
@@ -295,6 +296,7 @@ class Denoising(IterablePortfolio):
         self._N2V_SEM = N2V_SEM()
         self._N2V_RGB = N2V_RGB()
         self._flywing = Flywing()
+        self._Convallaria = Convallaria()
 
         super().__init__("Denoising")
 
@@ -338,9 +340,20 @@ class Denoising(IterablePortfolio):
         Returns
         -------
         Flywing
-        Flywing dataset.
+            Flywing dataset.
         """
         return self._flywing
+
+    @property
+    def Convallaria(self) -> Convallaria:
+        """Convallaria dataset.
+
+        Returns
+        -------
+        Convallaria
+            Convallaria dataset.
+        """
+        return self._Convallaria
 
 
 @dataclass
