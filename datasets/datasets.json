@@ -11,22 +11,29 @@
             "URL": "https://download.fht.org/jug/n2v/SEM.zip",
             "Description": "Cropped images from a SEM dataset from T.-O. Buchholz et al (Methods Cell Biol, 2020).",
             "Citation": "T.-O. Buchholz, A. Krull, R. Shahidi, G. Pigino, G. J\u00e9kely, F. Jug, \"Content-aware image restoration for electron microscopy\", Methods Cell Biol 152, 277-289",
-            "License": "CC-BY",
+            "License": "CC-BY-4.0",
             "File size": "13.0 MB"
         },
         "N2V_RGB": {
             "URL": "https://download.fht.org/jug/n2v/RGB.zip",
             "Description": "Banner of the CVPR 2019 conference with extra noise.",
             "Citation": "A. Krull, T.-O. Buchholz and F. Jug, \"Noise2Void - Learning Denoising From Single Noisy Images,\" 2019 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), 2019, pp. 2124-2132",
-            "License": "CC0",
+            "License": "CC-BY-4.0",
             "File size": "10.4 MB"
         },
         "Flywing": {
             "URL": "https://download.fht.org/jug/n2v/flywing-data.zip",
             "Description": "Image of a membrane-labeled fly wing (35x692x520 pixels).",
             "Citation": "Buchholz, T.O., Prakash, M., Schmidt, D., Krull, A., Jug, F.: Denoiseg: joint denoising and segmentation. In: European Conference on Computer Vision (ECCV). pp. 324-337. Springer (2020) 8, 9",
-            "License": "CC-BY",
+            "License": "CC-BY-4.0",
             "File size": "10.2 MB"
+        },
+        "Convallaria": {
+            "URL": "https://cloud.mpi-cbg.de/index.php/s/BE8raMtHQlgLDF3/download",
+            "Description": "Image of a convallaria flower (35x692x520 pixels).\nThe image also comes with a defocused image in order to allow \nestimating the noise distribution.",
+            "Citation": "Krull, A., Vi\u010dar, T., Prakash, M., Lalit, M., & Jug, F. (2020). Probabilistic noise2void: Unsupervised content-aware denoising. Frontiers in Computer Science, 2, 5.",
+            "License": "CC-BY-4.0",
+            "File size": "344.0 MB"
         }
     },
     "DenoiSeg": {
