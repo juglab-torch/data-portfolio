@@ -251,11 +251,11 @@ class PortfolioEntry:
         return self.files
 
     def to_dict(self) -> dict:
-        """Convert PortfolioEntry to a dictionnary.
+        """Convert PortfolioEntry to a dictionary.
 
         Returns
         -------
-            dict: A dictionnary containing the PortfolioEntry attributes.
+            dict: A dictionary containing the PortfolioEntry attributes.
         """
         return {
             "name": self.name,
