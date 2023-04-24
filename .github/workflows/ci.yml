@@ -126,6 +126,8 @@ jobs:
     permissions:
       # IMPORTANT: this permission is mandatory for trusted publishing
       id-token: write
+
+      # This permission allows writing releases
       contents: write
 
     steps:
