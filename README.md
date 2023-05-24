@@ -9,7 +9,7 @@
 
 A helper package to download example datasets used in various publications by the Jug lab, including data featured in N2V, P(P)N2V, DivNoising, HDN, EmbedSeg, etc.
 
-The complete list of datasets can be found [here](datasets/datasets.json).
+The complete list of datasets can be found [here](https://raw.githubusercontent.com/CAREamics/microscopy-portfolio/main/datasets/datasets.json).
 
 ## Installation
 
