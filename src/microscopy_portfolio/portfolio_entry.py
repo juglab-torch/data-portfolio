@@ -196,6 +196,16 @@ class PortfolioEntry:
         """
         return self._tags
 
+    def get_registry_name(self) -> str:
+        """Return the name of the entry in the global registry.
+
+        Returns
+        -------
+        str
+            Name of the entry.
+        """
+        return self.portfolio + "-" + self.name
+
     def download(
         self,
         path: Union[str, Path],

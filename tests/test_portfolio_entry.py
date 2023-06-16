@@ -75,3 +75,11 @@ def test_change_entry(faulty_portfolio_entry):
 
     with pytest.raises(AttributeError):
         faulty_portfolio_entry.files = {}
+
+
+def test_registry_name(pale_blue_dot):
+    """Test that the registry name is correct."""
+    assert (
+        pale_blue_dot.get_registry_name()
+        == pale_blue_dot.portfolio + "-" + pale_blue_dot.name
+    )
