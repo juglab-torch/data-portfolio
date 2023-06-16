@@ -8,11 +8,11 @@ import hashlib
 import os
 from pathlib import Path
 
-from microscopy_portfolio import Portfolio
+from microscopy_portfolio import PortfolioManager
 
 if __name__ == "__main__":
     # Create a portfolio object
-    portfolio = Portfolio()
+    portfolio = PortfolioManager()
 
     # Download dataset
     root = Path("data")

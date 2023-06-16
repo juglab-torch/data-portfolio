@@ -1,15 +1,16 @@
 import pytest
-from microscopy_portfolio import Portfolio
+
+from microscopy_portfolio import PortfolioManager
 from microscopy_portfolio.portfolio_entry import PortfolioEntry
 
 from .utils import (
     download_checker,
     portoflio_entry_checker,
-    unique_md5_checker,
+    unique_hash_checker,
     unique_url_checker,
 )
 
-DATASETS = list(Portfolio().denoising)
+DATASETS = list(PortfolioManager().denoising)
 
 
 @pytest.mark.dataset
@@ -29,7 +30,7 @@ def test_datasets(tmp_path, dataset: PortfolioEntry):
     download_checker(tmp_path, dataset)
 
 
-def test_unique_hashes(portfolio: Portfolio):
+def test_unique_hashes(portfolio: PortfolioManager):
     """Test that all denoising dataset hashes are unique.
 
     Parameters
@@ -37,10 +38,10 @@ def test_unique_hashes(portfolio: Portfolio):
     portfolio : Portfolio
         Portfolio object.
     """
-    unique_md5_checker(portfolio.denoising)
+    unique_hash_checker(portfolio.denoising)
 
 
-def test_unique_urls(portfolio: Portfolio):
+def test_unique_urls(portfolio: PortfolioManager):
     """Test that all denoising dataset URLs are unique.
 
     Parameters
@@ -51,7 +52,7 @@ def test_unique_urls(portfolio: Portfolio):
     unique_url_checker(portfolio.denoising)
 
 
-def test_no_empty_dataset_entry(portfolio: Portfolio):
+def test_no_empty_dataset_entry(portfolio: PortfolioManager):
     """Test that no denoising dataset entry is empty.
 
     Parameters

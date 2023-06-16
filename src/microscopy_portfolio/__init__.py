@@ -4,11 +4,11 @@ A helper package to download example datasets used in various publications and
 deep-learning algorithms, including data featured in N2V, P(P)N2V, DivNoising, HDN,
 EmbedSeg, etc.
 """
-__all__ = ["Portfolio", "__author__", "__email__", "__version__"]
+__all__ = ["PortfolioManager", "__author__", "__email__", "__version__"]
 
 from importlib.metadata import PackageNotFoundError, version
 
-from .portfolio import Portfolio
+from .portfolio import PortfolioManager
 
 try:
     __version__ = version("microscopy-portfolio")

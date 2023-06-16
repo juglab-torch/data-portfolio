@@ -12,7 +12,7 @@
 
 A helper package to download example datasets used in various publications by the Jug lab, including data featured in N2V, P(P)N2V, DivNoising, HDN, EmbedSeg, etc.
 
-The complete list of datasets can be found [here](datasets/datasets.json).
+The complete list of datasets can be found [here](src/microscopy_portfolio/datasets/datasets.json).
 
 ## Installation
 
@@ -28,9 +28,9 @@ Follow the [example notebook](examples/example.ipynb) for details on how to use 
 The portfolio can be instantiated as follow:
 
 ```python
-from microscopy_portfolio import Portfolio
+from microscopy_portfolio import PortfolioManager
 
-portfolio = Portfolio()
+portfolio = PortfolioManager()
 ```
 
 You can explore the different datasets easily:

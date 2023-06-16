@@ -1,11 +1,12 @@
 import pytest
-from microscopy_portfolio import Portfolio
+
+from microscopy_portfolio import PortfolioManager
 from microscopy_portfolio.portfolio import IterablePortfolio
 
 
 def list_iterable_portfolios():
     """List all iterable portfolios."""
-    portfolio = Portfolio()
+    portfolio = PortfolioManager()
 
     list_iter_portfolios = []
     for attribute in vars(portfolio).values():
@@ -66,7 +67,7 @@ def test_iterable_portfolio_as_dict(iter_portfolio: IterablePortfolio):
         assert "File size" in entry
 
 
-def test_portfolio_as_dict(portfolio: Portfolio):
+def test_portfolio_as_dict(portfolio: PortfolioManager):
     """Test that the as_dict method works on portfolios.
 
     Parameters:
@@ -79,7 +80,7 @@ def test_portfolio_as_dict(portfolio: Portfolio):
     assert len(portfolio_dict) == len(ITERABLES)
 
 
-def test_export_to_json(tmp_path, portfolio: Portfolio):
+def test_export_to_json(tmp_path, portfolio: PortfolioManager):
     """Test that the export Portfolio to json works.
 
     Parameters
@@ -107,7 +108,7 @@ def test_export_to_json(tmp_path, portfolio: Portfolio):
             assert data[entry.name] == entry.as_dict()
 
 
-def test_export_to_registry(tmp_path, portfolio: Portfolio):
+def test_export_to_registry(tmp_path, portfolio: PortfolioManager):
     """Test that the export Portfolio to registry works.
 
     Parameters
@@ -128,7 +129,7 @@ def test_export_to_registry(tmp_path, portfolio: Portfolio):
     portfolio_dict = portfolio.as_dict()
 
     # count the number of entries
-    count_entries = 0
+    count_entries = 1  # count test dataset
     for key in portfolio_dict.keys():
         count_entries += len(portfolio_dict[key].list_datasets())
 
@@ -136,16 +137,24 @@ def test_export_to_registry(tmp_path, portfolio: Portfolio):
     with open(path_to_file) as f:
         # read lines
         lines = f.readlines()
+
+        # remove comments and empty lines
+        lines = [
+            line
+            for line in lines
+            if not line.startswith("#") and not line.startswith("\n")
+        ]
         assert len(lines) == count_entries
 
         # iterate over lines
         for line in lines:
             # split line and name
-            name, url = line.strip().split(" ")
+            name, _, _ = line.strip().split(" ")
             portfolio_name, entry_name = name.split("-")
 
-            # check that the portfolio exists
-            assert portfolio_name in portfolio_dict
+            if portfolio_name != "test":
+                # check that the portfolio exists
+                assert portfolio_name in portfolio_dict
 
-            # check that the entry exists
-            assert entry_name in portfolio_dict[portfolio_name].list_datasets()
+                # check that the entry exists
+                assert entry_name in portfolio_dict[portfolio_name].list_datasets()

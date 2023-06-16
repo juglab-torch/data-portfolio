@@ -1,33 +1,9 @@
-import hashlib
-import zipfile
 from pathlib import Path
-from typing import Dict, List, Union
-from urllib import request
+from typing import Any, Dict, List, Optional, Union
 
-from tqdm import tqdm
+from pooch import Unzip
 
-
-# from https://stackoverflow.com/a/53877507
-class DownloadProgressBar(tqdm):
-    """Custom progress bar for download."""
-
-    def update_to(
-        self, b: float = 1, bsize: float = 1, tsize: Union[float, None] = None
-    ) -> None:
-        """Update tqdm progress bar.
-
-        Parameters
-        ----------
-        b : float, optional
-            Number of blocks transferred so far, by default 1
-        bsize : float, optional
-            Size of each block (in tqdm units), by default 1
-        tsize : Union[float, None], optional
-            Total size (in tqdm units), by default None
-        """
-        if tsize is not None:
-            self.total = tsize
-            self.update(b * bsize - self.n)
+from .utils import get_poochfolio
 
 
 class PortfolioEntry:
@@ -42,10 +18,11 @@ class PortfolioEntry:
         license (str): License of the dataset.
         citation (str): Citation to use when referring to the dataset.
         file_name (str): Name of the downloaded file.
-        md5_hash (str): MD5 hash of the downloaded file.
+        hash (str): SHA256 hash of the downloaded file.
         files (dict[str, list]): Dictionary of files in the dataset.
         size (int): Size of the dataset in MB.
         tags (list[str]): List of tags associated to the dataset.
+        is_zip (bool): Whether the dataset is a zip file.
     """
 
     def __init__(
@@ -57,23 +34,29 @@ class PortfolioEntry:
         license: str,
         citation: str,
         file_name: str,
-        md5_hash: str,
+        sha256: str,
         files: Dict[str, list],
         size: float,
         tags: List[str],
+        is_zip: bool = True,
         **kwargs: str,
     ) -> None:
         self._portfolio = portfolio
+
+        if " " in name:
+            raise ValueError("Dataset name cannot contain spaces.")
         self._name = name
+
         self._url = url
         self._description = description
         self._license = license
         self._citation = citation
         self._file_name = file_name
-        self._md5_hash = md5_hash
+        self._hash = sha256
         self._files = files
         self._size = size
         self._tags = tags
+        self._is_zip = is_zip
 
     @property
     def portfolio(self) -> str:
@@ -153,15 +136,15 @@ class PortfolioEntry:
         return self._file_name
 
     @property
-    def md5_hash(self) -> str:
-        """MD5 hash of the downloaded file.
+    def hash(self) -> str:
+        """SHA256 hash of the downloaded file.
 
         Returns
         -------
         str
-            MD5 hash of the downloaded file.
+            SHA256 hash of the downloaded file.
         """
-        return self._md5_hash
+        return self._hash
 
     @property
     def files(self) -> Dict[str, list]:
@@ -196,6 +179,26 @@ class PortfolioEntry:
         """
         return self._tags
 
+    @property
+    def is_zip(self) -> bool:
+        """Whether the dataset is a zip file.
+
+        Returns
+        -------
+        bool
+            Whether the dataset is a zip file.
+        """
+        return self._is_zip
+
+    def __str__(self) -> str:
+        """Convert PortfolioEntry to a string.
+
+        Returns
+        -------
+        str: A string containing the PortfolioEntry attributes.
+        """
+        return str(self.to_dict())
+
     def get_registry_name(self) -> str:
         """Return the name of the entry in the global registry.
 
@@ -205,88 +208,6 @@ class PortfolioEntry:
             Name of the entry.
         """
         return self.portfolio + "-" + self.name
-
-    def download(
-        self,
-        path: Union[str, Path],
-        check_md5: bool = True,
-    ) -> dict:
-        """Download dataset in the specified path.
-
-        Parameters
-        ----------
-        path : str | Path
-            Path to the folder in which to download the dataset.
-        check_md5 : bool, optional
-            Whether to check the MD5 hash of the downloaded file, by default True.
-
-        Returns
-        -------
-        dict
-            Dictionary of downloaded files.
-
-        Raises
-        ------
-        ValueError
-            If path is not a directory.
-        ValueError
-            If the md5 hash of the downloaded file is different from the expected one.
-        """
-        # TODO refactors in smaller functions
-        path = Path(path)
-        if path.exists() and not path.is_dir():
-            raise ValueError(f"Path {path} is not a directory.")
-
-        if not path.exists():
-            path.mkdir()
-
-        # check if zip file exists
-        file_path = Path(path, self.file_name)
-        if not file_path.exists():
-            print(f"Downloading {self.name} to {path} might take some time.")
-
-            # download data
-            with DownloadProgressBar(
-                unit="B", unit_scale=True, miniters=1, desc=self.url.split("/")[-1]
-            ) as t:
-                request.urlretrieve(
-                    self.url, filename=file_path, reporthook=t.update_to
-                )
-
-            print("Download finished.")
-
-        if not file_path.exists():
-            raise ValueError(f"File {file_path} does not exist. Error downloading it.")
-
-        # check if md5 hash is correct
-        if check_md5:
-            print(f"Checking MD5 hash of {file_path}.")
-
-            # compute hash
-            file_hash = hashlib.md5(open(file_path, "rb").read()).hexdigest()
-
-            # compare with expected hash
-            if file_hash != self.md5_hash:
-                raise ValueError(
-                    f"MD5 hash of {file_path} is not correct. "
-                    f"Expected {self.md5_hash}, got {file_hash}."
-                )
-
-            print("MD5 hash is correct.")
-
-        # unzip data
-        data_path = Path(path, self.file_name[:-4])
-        # TODO progress bar
-        if zipfile.is_zipfile(file_path):
-            print(f"Unzipping {file_path} to {data_path}.")
-
-            # unzip data
-            with zipfile.ZipFile(file_path, "r") as zip_ref:
-                zip_ref.extractall(data_path)
-
-            print("Unzipping finished.")
-
-        return self.files
 
     def to_dict(self) -> dict:
         """Convert PortfolioEntry to a dictionary.
@@ -302,16 +223,43 @@ class PortfolioEntry:
             "license": self.license,
             "citation": self.citation,
             "file_name": self.file_name,
-            "md5_hash": self.md5_hash,
+            "md5_hash": self.hash,
             "files": self.files,
             "size": self.size,
         }
 
-    def __str__(self) -> str:
-        """Convert PortfolioEntry to a string.
+    def download(
+        self,
+        path: Optional[Union[str, Path]] = None,
+    ) -> Union[List[str], Any]:
+        """Download dataset in the specified path.
+
+        By default the files will be downloaded in the system's cache folder,
+        and can be retrieved using this function without downloading the file
+        anew (thanks pooch!).
+
+        Parameters
+        ----------
+        path : str | Path
+            Path to the folder in which to download the dataset. Defaults to
+            None.
 
         Returns
         -------
-        str: A string containing the PortfolioEntry attributes.
+        List[str]
+            List of path(s) to the downloaded file(s).
         """
-        return str(self.to_dict())
+        poochfolio = get_poochfolio(path)
+
+        # download data
+        if self.is_zip:
+            return poochfolio.fetch(
+                fname=self.get_registry_name(),
+                processor=Unzip(),
+                progressbar=True,
+            )
+        else:
+            return poochfolio.fetch(
+                fname=self.get_registry_name(),
+                progressbar=True,
+            )

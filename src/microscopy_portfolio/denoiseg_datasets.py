@@ -48,13 +48,14 @@ class DSB2018(PortfolioEntry, NoisyObject):
         name (str): Name of the dataset.
         url (str): URL of the dataset.
         file_name (str): Name of the downloaded file.
-        md5_hash (str): MD5 hash of the downloaded file.
+        hash (str): SHA256 hash of the downloaded file.
         description (str): Description of the dataset.
         license (str): License of the dataset.
         citation (str): Citation to use when referring to the dataset.
         files (dict): Dictionary containing the files to download.
         size (float): Size of the dataset in MB.
         tags (list): List of tags associated to the dataset.
+        is_zip (bool): Whether the dataset is a zip file.
     """
 
     def __init__(self, noise_level: NoiseLevel = NoiseLevel.N0) -> None:
@@ -71,7 +72,7 @@ class DSB2018(PortfolioEntry, NoisyObject):
             name=f"DSB2018_n{noise_level.value}",
             url=self._get_url(noise_level),
             file_name=f"DSB2018_n{noise_level.value}.zip",
-            md5_hash=self._get_hash(noise_level),
+            sha256=self._get_hash(noise_level),
             description="From the Kaggle 2018 Data Science Bowl challenge, the "
             "training and validation sets consist of 3800 and 670 patches "
             "respectively, while the test set counts 50 images.\n"
@@ -102,11 +103,11 @@ class DSB2018(PortfolioEntry, NoisyObject):
     @staticmethod
     def _get_hash(noise: NoiseLevel) -> str:
         if noise == NoiseLevel.N0:
-            return "80513b1eda8e08df1d8dcc5543ad1ad1"
+            return "729d7683ccfa1ad437f666256b23e73b3b3b3da6a8e47bb37303f0c64376a299"
         elif noise == NoiseLevel.N10:
-            return "aa16c116949d8b8cd573d7bbeacbd0c3"
+            return "a4cf731aa0652f8198275f8ce29fb98e0c76c391a96b6092d0792fe447e4103a"
         else:
-            return "81abc17313582a4f04f501e3dce1fe88"
+            return "6a732a12bf18fecc590230b1cd4df5e32acfa1b35ef2fca42db811cb8277c67c"
 
     @staticmethod
     def _get_size(noise: NoiseLevel) -> float:
@@ -131,13 +132,14 @@ class SegFlywing(PortfolioEntry, NoisyObject):
         name (str): Name of the dataset.
         url (str): URL of the dataset.
         file_name (str): Name of the downloaded file.
-        md5_hash (str): MD5 hash of the downloaded file.
+        hash (str): SHA256 hash of the downloaded file.
         description (str): Description of the dataset.
         license (str): License of the dataset.
         citation (str): Citation to use when referring to the dataset.
         files (dict): Dictionary containing the files to download.
         size (float): Size of the dataset in MB.
         tags (list): List of tags associated to the dataset.
+        is_zip (bool): Whether the dataset is a zip file.
     """
 
     def __init__(self, noise_level: NoiseLevel = NoiseLevel.N0) -> None:
@@ -154,7 +156,7 @@ class SegFlywing(PortfolioEntry, NoisyObject):
             name=f"Flywing_n{noise_level.value}",
             url=self._get_url(noise_level),
             file_name=f"Flywing_n{noise_level.value}.zip",
-            md5_hash=self._get_hash(noise_level),
+            sha256=self._get_hash(noise_level),
             description="This dataset consist of 1428 training and 252 "
             "validation patches of a membrane labeled fly wing. The test set "
             "is comprised of 50 additional images.",
@@ -182,11 +184,11 @@ class SegFlywing(PortfolioEntry, NoisyObject):
     @staticmethod
     def _get_hash(noise: NoiseLevel) -> str:
         if noise == NoiseLevel.N0:
-            return "09e0af44f0f9862abae3816d7069604a"
+            return "3fb49ba44e7e3e20b4fc3c77754f1bbff7184af7f343f23653f258d50e5d5aca"
         elif noise == NoiseLevel.N10:
-            return "64d5300073e02c9651ec88c368c302e8"
+            return "c599981b0900e6b43f0a742f84a5fde664373600dc5334f537b61a76a7be2a3c"
         else:
-            return "b8fbb96026bd10fd034b8c1270f6edbb"
+            return "604b3a3a081eaa57ee25d708bc9b76b85d05235ba09d7c2b25b171e201ea966f"
 
     @staticmethod
     def _get_size(noise: NoiseLevel) -> float:
@@ -211,13 +213,14 @@ class MouseNuclei(PortfolioEntry, NoisyObject):
         name (str): Name of the dataset.
         url (str): URL of the dataset.
         file_name (str): Name of the downloaded file.
-        md5_hash (str): MD5 hash of the downloaded file.
+        hash (str): SHA256 hash of the downloaded file.
         description (str): Description of the dataset.
         license (str): License of the dataset.
         citation (str): Citation to use when referring to the dataset.
         files (dict): Dictionary containing the files to download.
         size (float): Size of the dataset in MB.
         tags (list): List of tags associated to the dataset.
+        is_zip (bool): Whether the dataset is a zip file.
     """
 
     def __init__(self, noise_level: NoiseLevel = NoiseLevel.N0) -> None:
@@ -234,7 +237,7 @@ class MouseNuclei(PortfolioEntry, NoisyObject):
             name=f"MouseNuclei_n{noise_level.value}",
             url=self._get_url(noise_level),
             file_name=f"MouseNuclei_n{noise_level.value}.zip",
-            md5_hash=self._get_hash(noise_level),
+            sha256=self._get_hash(noise_level),
             description="A dataset depicting diverse and non-uniformly "
             "clustered nuclei in the mouse skull, consisting of 908 training "
             "and 160 validation patches. The test set counts 67 additional images",
@@ -262,11 +265,11 @@ class MouseNuclei(PortfolioEntry, NoisyObject):
     @staticmethod
     def _get_hash(noise: NoiseLevel) -> str:
         if noise == NoiseLevel.N0:
-            return "b747d013cba186a02c97937acef4b972"
+            return "5d6fd2fc23ab991a8fde4bd0ec5e9fc9299f9a9ddc2a8acb7095f9b02ff3c9d7"
         elif noise == NoiseLevel.N10:
-            return "0b0776fa205057b49920b0ec3d1a5fc9"
+            return "de634496e3e46a4887907b713fe6f575e410c3006046054bce67ef9398523c2c"
         else:
-            return "6e9d895ba3ac2c225883ed3ec94342f8"
+            return "d3d1bf8c89bb97a673a0791874e5b75a6a516ccaaeece0244b4e1e0afe7ab3ec"
 
     @staticmethod
     def _get_size(noise: NoiseLevel) -> float:

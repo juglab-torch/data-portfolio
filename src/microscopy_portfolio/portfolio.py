@@ -5,7 +5,13 @@ from dataclasses import dataclass
 from json import JSONEncoder
 from pathlib import Path
 
-from .denoiseg_datasets import DENOISEG, DSB2018, MouseNuclei, NoiseLevel, SegFlywing
+from .denoiseg_datasets import (
+    DENOISEG,
+    DSB2018,
+    MouseNuclei,
+    NoiseLevel,
+    SegFlywing,
+)
 from .denoising_datasets import (
     DENOISING,
     N2V_BSD68,
@@ -15,6 +21,7 @@ from .denoising_datasets import (
     Flywing,
 )
 from .portfolio_entry import PortfolioEntry
+from .utils.pale_blue_dot import PaleBlueDot
 
 
 class IterablePortfolio:
@@ -364,7 +371,7 @@ class Denoising(IterablePortfolio):
 
 
 @dataclass
-class Portfolio:
+class PortfolioManager:
     """Portfolio of datasets.
 
     Attributes
@@ -429,7 +436,8 @@ class Portfolio:
         attributes = {}
 
         for attribute in vars(self).values():
-            attributes[attribute.name] = attribute
+            if isinstance(attribute, IterablePortfolio):
+                attributes[attribute.name] = attribute
 
         return attributes
 
@@ -458,4 +466,15 @@ class Portfolio:
         with open(path, "w") as file:
             for key in portfolios.keys():
                 for entry in portfolios[key]:
-                    file.write(f"{entry.get_registry_name()} {entry.url}\n")
+                    file.write(
+                        f"{entry.get_registry_name()} " f"{entry.hash} {entry.url}\n"
+                    )
+
+            # add pale blue dot for testing purposes
+            file.write("\n")
+            file.write("# Test sample\n")
+            pale_blue_dot = PaleBlueDot()
+            file.write(
+                f"{pale_blue_dot.get_registry_name()} "
+                f"{pale_blue_dot.hash} {pale_blue_dot.url}\n"
+            )
