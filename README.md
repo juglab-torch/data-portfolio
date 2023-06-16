@@ -1,17 +1,17 @@
 <p align="center">
   <a href="https://careamics.github.io/">
-    <img src="https://github.com/CAREamics/.github/blob/main/profile/images/banner_careamics.png">
+    <img src="https://raw.githubusercontent.com/CAREamics/.github/main/profile/images/banner_careamics.png">
   </a>
 </p>
 
 # CAREamics Portfolio
 
-[![License](https://img.shields.io/pypi/l/careamics-portfolio.svg?color=green)](https://github.com/juglab-torch/careamics-portfolio/raw/main/LICENSE)
+[![License](https://img.shields.io/pypi/l/careamics-portfolio.svg?color=green)](https://github.com/CAREamics/careamics-portfolio/raw/main/LICENSE)
 [![PyPI](https://img.shields.io/pypi/v/careamics-portfolio.svg?color=green)](https://pypi.org/project/careamics-portfolio)
 [![Python Version](https://img.shields.io/pypi/pyversions/careamics-portfolio.svg?color=green)](https://python.org)
-[![CI](https://github.com/juglab-torch/careamics-portfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/juglab-torch/careamics-portfolio/actions/workflows/ci.yml)
-[![Datasets CI](https://github.com/juglab-torch/careamics-portfolio/actions/workflows/datasets_ci.yml/badge.svg)](https://github.com/juglab-torch/careamics-portfolio/actions/workflows/datasets_ci.yml)
-[![codecov](https://codecov.io/gh/juglab-torch/careamics-portfolio/branch/main/graph/badge.svg)](https://codecov.io/gh/juglab-torch/careamics-portfolio)
+[![CI](https://github.com/CAREamics/careamics-portfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/CAREamics/careamics-portfolio/actions/workflows/ci.yml)
+[![Datasets CI](https://github.com/CAREamics/careamics-portfolio/actions/workflows/datasets_ci.yml/badge.svg)](https://github.com/CAREamics/careamics-portfolio/actions/workflows/datasets_ci.yml)
+[![codecov](https://codecov.io/gh/CAREamics/careamics-portfolio/branch/main/graph/badge.svg)](https://codecov.io/gh/CAREamics/careamics-portfolio)
 [![linting - Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/charliermarsh/ruff/main/assets/badge/v0.json)](https://github.com/charliermarsh/ruff) 
 [![code style - Black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black) 
 [![types - Mypy](https://img.shields.io/badge/types-Mypy-blue.svg)](https://github.com/python/mypy) 
