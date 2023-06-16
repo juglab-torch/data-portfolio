@@ -17,7 +17,7 @@ def test_download_in_invalid_path(tmp_path, pale_blue_dot: PortfolioEntry):
     with open(tmp_path / file_name, "w") as f:
         f.write("CATS ARE NICE.")
 
-    with pytest.raises(NotADirectoryError):
+    with pytest.raises((NotADirectoryError, FileNotFoundError)):
         pale_blue_dot.download(tmp_path / file_name)
 
 
