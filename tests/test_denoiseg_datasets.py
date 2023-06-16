@@ -1,16 +1,17 @@
 import pytest
-from microscopy_portfolio import Portfolio
-from microscopy_portfolio.denoiseg_datasets import NoiseLevel, NoisyObject
-from microscopy_portfolio.portfolio import PortfolioEntry
+
+from careamics_portfolio import PortfolioManager
+from careamics_portfolio.denoiseg_datasets import NoiseLevel, NoisyObject
+from careamics_portfolio.portfolio import PortfolioEntry
 
 from .utils import (
     download_checker,
     portoflio_entry_checker,
-    unique_md5_checker,
+    unique_hash_checker,
     unique_url_checker,
 )
 
-DATASETS = list(Portfolio().denoiseg)
+DATASETS = list(PortfolioManager().denoiseg)
 
 
 @pytest.mark.dataset
@@ -30,7 +31,7 @@ def test_datasets(tmp_path, dataset: PortfolioEntry):
     download_checker(tmp_path, dataset)
 
 
-def test_unique_hashes(portfolio: Portfolio):
+def test_unique_hashes(portfolio: PortfolioManager):
     """Test that all DenoiSeg dataset hashes are unique.
 
     Parameters
@@ -38,10 +39,10 @@ def test_unique_hashes(portfolio: Portfolio):
     portfolio : Portfolio
         Portfolio object.
     """
-    unique_md5_checker(portfolio.denoiseg)
+    unique_hash_checker(portfolio.denoiseg)
 
 
-def test_unique_urls(portfolio: Portfolio):
+def test_unique_urls(portfolio: PortfolioManager):
     """Test that all DenoiSeg dataset URLs are unique.
 
     Parameters
@@ -52,7 +53,7 @@ def test_unique_urls(portfolio: Portfolio):
     unique_url_checker(portfolio.denoiseg)
 
 
-def test_no_empty_dataset_entry(portfolio: Portfolio):
+def test_no_empty_dataset_entry(portfolio: PortfolioManager):
     """Test that no DenoiSeg dataset entry is empty.
 
     Parameters

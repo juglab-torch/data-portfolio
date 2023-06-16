@@ -1,5 +1,5 @@
 {
-    "Denoising": {
+    "denoising": {
         "N2V_BSD68": {
             "URL": "https://download.fht.org/jug/n2v/BSD68_reproducibility.zip",
             "Description": "This dataset is taken from K. Zhang et al (TIP, 2017). \nIt consists of 400 gray-scale 180x180 images (cropped from the BSD dataset) and splitted between training and validation, and 68 gray-scale test images (BSD68).\nAll images were corrupted with Gaussian noise with standard deviation of 25 pixels. The test dataset contains the uncorrupted images as well.\nOriginal dataset: https://www2.eecs.berkeley.edu/Research/Projects/CS/vision/bsds/",
@@ -36,7 +36,7 @@
             "File size": "344.0 MB"
         }
     },
-    "DenoiSeg": {
+    "denoiseg": {
         "DSB2018_n0": {
             "URL": "https://zenodo.org/record/5156969/files/DSB2018_n0.zip?download=1",
             "Description": "From the Kaggle 2018 Data Science Bowl challenge, the training and validation sets consist of 3800 and 670 patches respectively, while the test set counts 50 images.\nOriginal data: https://www.kaggle.com/competitions/data-science-bowl-2018/data",

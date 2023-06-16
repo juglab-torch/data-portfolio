@@ -1,21 +1,33 @@
-# Microscopy Portfolio
+<p align="center">
+  <a href="https://careamics.github.io/">
+    <img src="https://github.com/CAREamics/.github/blob/main/profile/images/banner_careamics.png">
+  </a>
+</p>
 
-[![License](https://img.shields.io/pypi/l/microscopy-portfolio.svg?color=green)](https://github.com/juglab-torch/microscopy-portfolio/raw/main/LICENSE)
-[![PyPI](https://img.shields.io/pypi/v/microscopy-portfolio.svg?color=green)](https://pypi.org/project/microscopy-portfolio)
-[![Python Version](https://img.shields.io/pypi/pyversions/microscopy-portfolio.svg?color=green)](https://python.org)
-[![CI](https://github.com/juglab-torch/microscopy-portfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/juglab-torch/microscopy-portfolio/actions/workflows/ci.yml)
-[![Datasets CI](https://github.com/juglab-torch/microscopy-portfolio/actions/workflows/datasets_ci.yml/badge.svg)](https://github.com/juglab-torch/microscopy-portfolio/actions/workflows/datasets_ci.yml)
-[![codecov](https://codecov.io/gh/juglab-torch/microscopy-portfolio/branch/main/graph/badge.svg)](https://codecov.io/gh/juglab-torch/microscopy-portfolio)
+# CAREamics Portfolio
+
+[![License](https://img.shields.io/pypi/l/careamics-portfolio.svg?color=green)](https://github.com/juglab-torch/careamics-portfolio/raw/main/LICENSE)
+[![PyPI](https://img.shields.io/pypi/v/careamics-portfolio.svg?color=green)](https://pypi.org/project/careamics-portfolio)
+[![Python Version](https://img.shields.io/pypi/pyversions/careamics-portfolio.svg?color=green)](https://python.org)
+[![CI](https://github.com/juglab-torch/careamics-portfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/juglab-torch/careamics-portfolio/actions/workflows/ci.yml)
+[![Datasets CI](https://github.com/juglab-torch/careamics-portfolio/actions/workflows/datasets_ci.yml/badge.svg)](https://github.com/juglab-torch/careamics-portfolio/actions/workflows/datasets_ci.yml)
+[![codecov](https://codecov.io/gh/juglab-torch/careamics-portfolio/branch/main/graph/badge.svg)](https://codecov.io/gh/juglab-torch/careamics-portfolio)
+[![linting - Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/charliermarsh/ruff/main/assets/badge/v0.json)](https://github.com/charliermarsh/ruff) 
+[![code style - Black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black) 
+[![types - Mypy](https://img.shields.io/badge/types-Mypy-blue.svg)](https://github.com/python/mypy) 
 
 A helper package to download example datasets used in various publications by the Jug lab, including data featured in N2V, P(P)N2V, DivNoising, HDN, EmbedSeg, etc.
 
-The complete list of datasets can be found [here](https://raw.githubusercontent.com/CAREamics/microscopy-portfolio/main/datasets/datasets.json).
+The portfolio relies on [pooch](https://github.com/fatiando/pooch) to download the datasets.
+
+The complete list of datasets can be found [here](https://raw.githubusercontent.com/CAREamics/careamics-portfolio/src/careamics_portfolio/datasets/datasets.json).
+
 
 ## Installation
 
 To install the portfolio in your conda environment, simply use `pip`:
 ```bash
-$ pip install microscopy-portfolio
+$ pip install careamics-portfolio
 ```
 
 ## Usage
@@ -25,9 +37,9 @@ Follow the [example notebook](examples/example.ipynb) for details on how to use 
 The portfolio can be instantiated as follow:
 
 ```python
-from microscopy_portfolio import Portfolio
+from careamics_portfolio import PortfolioManager
 
-portfolio = Portfolio()
+portfolio = PortfolioManager()
 ```
 
 You can explore the different datasets easily:
@@ -45,6 +57,10 @@ data_path = Path('data')
 portfolio.denoising.N2V_SEM.download(data_path)
 ```
 
+By default, if you do not pass `path` to the `download()` method, all datasets
+will be saved in your system's cache. New queries to download will not cause
+the files to be downloaded again (thanks pooch!).
+
 ## Add a dataset to the repository
 
 To add a dataset, subclass a `PortfolioEntry` and enter the following information 
@@ -53,27 +69,30 @@ To add a dataset, subclass a `PortfolioEntry` and enter the following informatio
 class MyDataset(PortfolioEntry):
     def __init__(self) -> None:
         super().__init__(
+            portfolio="Denoising", # for instance
             name="MyDataset",
             url="https://url.to.myfile/MyFile.zip",
             file_name="MyFile.zip",
-            md5_hash="953a815333805a423b7019bd16cc3341",
+            hash="953a815333805a423b7342971289h10121263917019bd16cc3341", # sha256
             description="Description of the dataset.",
-            license="CC-BY",
-            citation="Citation of the dataset',
+            license="CC-BY 3.0",
+            citation="Citation of the dataset",
             files={
                 "/folder/in/the/zip": ["file1.tif", "file2.tif"], # folder can be "."
             },
             size=13.0, # size in MB
+            tags=["tag1", "tag2"],
+            is_zip=True,
         )
 ```
 
-To obtain md5 hash of your file, you can run the following code:
+To obtain sha256 hash of your file, you can run the following code and read out
+the sha256 from pooch prompt:
 ```python
-from pathlib import Path
-import hashlib
+import pooch
 
-file_path = Path("path/to/myfile.zip")
-hashlib.md5(open(file_path, "rb").read()).hexdigest()
+url = "https://url.to.myfile/MyFile.zip"
+pooch.retrieve(url, known_hash=None)
 ```
 
 Likewise, to get the size in MB of your file:

@@ -71,8 +71,8 @@ jobs:
       - name: Coverage
         uses: codecov/codecov-action@v3
 
-  update_json:
-    name: Update datasets summary
+  update_registry:
+    name: Update datasets summary and registry
     needs: test
     # run on PR so that we can check it out later
     if: success() && github.event_name == 'pull_request'
@@ -97,18 +97,23 @@ jobs:
       - name: Run json export script
         run: python scripts/export_portfolio_to_json.py
 
+      - name: Run json export script
+        run: python scripts/export_portfolio_to_registry.py
+
       - name: Verify Changed files
         uses: tj-actions/verify-changed-files@v15
         id: verify-changed-files
         with:
-          files: datasets/datasets.json
+          files: |
+            src/careamics_portfolio/datasets/datasets.json
+            src/careamics_portfolio/datasets/registry.txt
 
       - name: Commit changes
         if: steps.verify-changed-files.outputs.files_changed == 'true'
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'  
-          git add datasets/datasets.json
+          git add src/careamics_portfolio/datasets/datasets.json
           git commit -m "Update datasets.json"
 
       - name: Push changes

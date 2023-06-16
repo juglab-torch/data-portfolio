@@ -3,8 +3,9 @@ from pathlib import Path
 from typing import Dict, List
 
 import pytest
-from microscopy_portfolio.portfolio import IterablePortfolio
-from microscopy_portfolio.portfolio_entry import PortfolioEntry
+
+from careamics_portfolio.portfolio import IterablePortfolio
+from careamics_portfolio.portfolio_entry import PortfolioEntry
 
 
 def file_checker(path: Path, root_name: str, files: Dict[str, List[str]]) -> None:
@@ -25,11 +26,11 @@ def unique_url_checker(iter_portfolio: IterablePortfolio) -> None:
     assert len(urls) == len(set(urls)), f"Duplicated urls in {iter_portfolio.name}."
 
 
-def unique_md5_checker(iter_portfolio: IterablePortfolio) -> None:
+def unique_hash_checker(iter_portfolio: IterablePortfolio) -> None:
     hashes = []
     for entry in iter_portfolio:
         # add to list of hashes
-        hashes.append(entry.md5_hash)
+        hashes.append(entry.hash)
 
     assert len(hashes) == len(
         set(hashes)
@@ -39,9 +40,7 @@ def unique_md5_checker(iter_portfolio: IterablePortfolio) -> None:
 def portoflio_entry_checker(entry: PortfolioEntry) -> None:
     assert entry.name is not None and entry.name != "", f"Invalid name in {entry}"
     assert entry.url is not None and entry.url != "", f"Invalid url in {entry}"
-    assert (
-        entry.md5_hash is not None and entry.md5_hash != ""
-    ), f"Invalid md5 hash in {entry}"
+    assert entry.hash is not None and entry.hash != "", f"Invalid md5 hash in {entry}"
     assert (
         entry.description is not None and entry.description != ""
     ), f"Invalid description in {entry}"
@@ -60,14 +59,17 @@ def portoflio_entry_checker(entry: PortfolioEntry) -> None:
 
 def download_checker(path: Path, dataset: PortfolioEntry) -> None:
     # download dataset
-    dataset.download(path, check_md5=True)
+    dataset.download(path)
 
     # check that the zip file exists
-    path_to_zip = path / dataset.file_name
-    assert path_to_zip.exists(), f"{dataset.file_name} does not exist after download."
+    path_to_zip = path / dataset.get_registry_name()
+    assert (
+        path_to_zip.exists()
+    ), f"{dataset.get_registry_name()} does not exist after download."
 
     # check that the files are there
-    file_checker(path, dataset.file_name[:-4], dataset.files)
+    if dataset.is_zip:
+        file_checker(path, dataset.get_registry_name() + ".unzip", dataset.files)
 
     # check file size with a tolerance of 5% or 3MB
     file_size = os.path.getsize(path_to_zip) / 1024 / 1024  # MB

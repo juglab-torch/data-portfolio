@@ -8,8 +8,8 @@ if __name__ == "__main__":
 
     # Path to the datasets list
     path_to_datasets = Path(
-        ".", "src", "careamics_portfolio", "datasets", "datasets.json"
+        ".", "src", "careamics_portfolio", "datasets", "registry.txt"
     )
 
     # Export the portfolio to json
-    portfolio.to_json(path_to_datasets)
+    portfolio.to_registry(path_to_datasets)

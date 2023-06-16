@@ -5,9 +5,23 @@ from dataclasses import dataclass
 from json import JSONEncoder
 from pathlib import Path
 
-from .denoiseg_datasets import DSB2018, MouseNuclei, NoiseLevel, SegFlywing
-from .denoising_datasets import N2V_BSD68, N2V_RGB, N2V_SEM, Convallaria, Flywing
+from .denoiseg_datasets import (
+    DENOISEG,
+    DSB2018,
+    MouseNuclei,
+    NoiseLevel,
+    SegFlywing,
+)
+from .denoising_datasets import (
+    DENOISING,
+    N2V_BSD68,
+    N2V_RGB,
+    N2V_SEM,
+    Convallaria,
+    Flywing,
+)
 from .portfolio_entry import PortfolioEntry
+from .utils.pale_blue_dot import PaleBlueDot
 
 
 class IterablePortfolio:
@@ -177,7 +191,7 @@ class DenoiSeg(IterablePortfolio):
         self._MouseNuclei_n10 = MouseNuclei(NoiseLevel.N10)
         self._MouseNuclei_n20 = MouseNuclei(NoiseLevel.N20)
 
-        super().__init__("DenoiSeg")
+        super().__init__(DENOISEG)
 
     @property
     def DSB2018_n0(self) -> DSB2018:
@@ -298,7 +312,7 @@ class Denoising(IterablePortfolio):
         self._flywing = Flywing()
         self._Convallaria = Convallaria()
 
-        super().__init__("Denoising")
+        super().__init__(DENOISING)
 
     @property
     def N2V_BSD68(self) -> N2V_BSD68:
@@ -357,7 +371,7 @@ class Denoising(IterablePortfolio):
 
 
 @dataclass
-class Portfolio:
+class PortfolioManager:
     """Portfolio of datasets.
 
     Attributes
@@ -422,7 +436,8 @@ class Portfolio:
         attributes = {}
 
         for attribute in vars(self).values():
-            attributes[attribute.name] = attribute
+            if isinstance(attribute, IterablePortfolio):
+                attributes[attribute.name] = attribute
 
         return attributes
 
@@ -436,3 +451,30 @@ class Portfolio:
         """
         with open(path, "w") as f:
             json.dump(self.as_dict(), f, indent=4, cls=ItarablePortfolioEncoder)
+
+    def to_registry(self, path: str | Path) -> None:
+        """Save portfolio as registry (Pooch).
+
+        See: https://www.fatiando.org/pooch/latest/registry-files.html
+
+        Parameters
+        ----------
+        path : str or Path
+            Path to json file.
+        """
+        portfolios = self.as_dict()
+        with open(path, "w") as file:
+            for key in portfolios.keys():
+                for entry in portfolios[key]:
+                    file.write(
+                        f"{entry.get_registry_name()} " f"{entry.hash} {entry.url}\n"
+                    )
+
+            # add pale blue dot for testing purposes
+            file.write("\n")
+            file.write("# Test sample\n")
+            pale_blue_dot = PaleBlueDot()
+            file.write(
+                f"{pale_blue_dot.get_registry_name()} "
+                f"{pale_blue_dot.hash} {pale_blue_dot.url}\n"
+            )
