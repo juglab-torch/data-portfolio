@@ -1,7 +1,7 @@
 import hashlib
 import zipfile
 from pathlib import Path
-from typing import Dict, Union
+from typing import Dict, List, Union
 from urllib import request
 
 from tqdm import tqdm
@@ -35,6 +35,7 @@ class PortfolioEntry:
 
     Attributes
     ----------
+        portfolio (str): Name of the portfolio to which the dataset belong.
         name (str): Name of the dataset.
         url (str): URL of the dataset.
         description (str): Description of the dataset.
@@ -44,10 +45,12 @@ class PortfolioEntry:
         md5_hash (str): MD5 hash of the downloaded file.
         files (dict[str, list]): Dictionary of files in the dataset.
         size (int): Size of the dataset in MB.
+        tags (list[str]): List of tags associated to the dataset.
     """
 
     def __init__(
         self,
+        portfolio: str,
         name: str,
         url: str,
         description: str,
@@ -56,9 +59,11 @@ class PortfolioEntry:
         file_name: str,
         md5_hash: str,
         files: Dict[str, list],
-        size: float = 0,
+        size: float,
+        tags: List[str],
         **kwargs: str,
     ) -> None:
+        self._portfolio = portfolio
         self._name = name
         self._url = url
         self._description = description
@@ -68,6 +73,18 @@ class PortfolioEntry:
         self._md5_hash = md5_hash
         self._files = files
         self._size = size
+        self._tags = tags
+
+    @property
+    def portfolio(self) -> str:
+        """Name of the portfolio the dataset belong to.
+
+        Returns
+        -------
+        str
+            Name of the portfolio the dataset belong to.
+        """
+        return self._portfolio
 
     @property
     def name(self) -> str:
@@ -167,6 +184,17 @@ class PortfolioEntry:
             Size of the dataset in MB.
         """
         return self._size
+
+    @property
+    def tags(self) -> List[str]:
+        """List of tags associated to the dataset.
+
+        Returns
+        -------
+        List[str]
+            List of tags associated to the dataset.
+        """
+        return self._tags
 
     def download(
         self,

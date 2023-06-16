@@ -2,6 +2,8 @@ from enum import Enum
 
 from .portfolio_entry import PortfolioEntry
 
+DENOISEG = "denoiseg"
+
 
 class NoiseLevel(str, Enum):
     """An IntEnum representing the noise level of a dataset.
@@ -41,7 +43,18 @@ class DSB2018(PortfolioEntry, NoisyObject):
 
     Attributes
     ----------
-    noise_level (NoiseLevel): Noise level of the dataset.
+        portfolio (str): Name of the portfolio to which the dataset.
+        noise_level (NoiseLevel): Noise level of the dataset.
+        name (str): Name of the dataset.
+        url (str): URL of the dataset.
+        file_name (str): Name of the downloaded file.
+        md5_hash (str): MD5 hash of the downloaded file.
+        description (str): Description of the dataset.
+        license (str): License of the dataset.
+        citation (str): Citation to use when referring to the dataset.
+        files (dict): Dictionary containing the files to download.
+        size (float): Size of the dataset in MB.
+        tags (list): List of tags associated to the dataset.
     """
 
     def __init__(self, noise_level: NoiseLevel = NoiseLevel.N0) -> None:
@@ -53,6 +66,7 @@ class DSB2018(PortfolioEntry, NoisyObject):
             Noise level of the dataset, by default NoiseLevel.N0
         """
         super().__init__(
+            portfolio=DENOISEG,
             noise_level=noise_level,
             name=f"DSB2018_n{noise_level.value}",
             url=self._get_url(noise_level),
@@ -73,6 +87,7 @@ class DSB2018(PortfolioEntry, NoisyObject):
                 f"DSB2018_n{noise_level.value}/test": ["test_data.npz"],
             },
             size=self._get_size(noise_level),
+            tags=["denoising", "segmentation", "nuclei", "fluorescence"],
         )
 
     @staticmethod
@@ -111,7 +126,18 @@ class SegFlywing(PortfolioEntry, NoisyObject):
 
     Attributes
     ----------
-    noise_level (NoiseLevel): Noise level of the dataset.
+        portfolio (str): Name of the portfolio to which the dataset.
+        noise_level (NoiseLevel): Noise level of the dataset.
+        name (str): Name of the dataset.
+        url (str): URL of the dataset.
+        file_name (str): Name of the downloaded file.
+        md5_hash (str): MD5 hash of the downloaded file.
+        description (str): Description of the dataset.
+        license (str): License of the dataset.
+        citation (str): Citation to use when referring to the dataset.
+        files (dict): Dictionary containing the files to download.
+        size (float): Size of the dataset in MB.
+        tags (list): List of tags associated to the dataset.
     """
 
     def __init__(self, noise_level: NoiseLevel = NoiseLevel.N0) -> None:
@@ -123,6 +149,7 @@ class SegFlywing(PortfolioEntry, NoisyObject):
             Noise level of the dataset, by default NoiseLevel.N0
         """
         super().__init__(
+            portfolio=DENOISEG,
             noise_level=noise_level,
             name=f"Flywing_n{noise_level.value}",
             url=self._get_url(noise_level),
@@ -140,6 +167,7 @@ class SegFlywing(PortfolioEntry, NoisyObject):
                 f"Flywing_n{noise_level.value}/test": ["test_data.npz"],
             },
             size=self._get_size(noise_level),
+            tags=["denoising", "segmentation", "membrane", "fluorescence"],
         )
 
     @staticmethod
@@ -178,7 +206,18 @@ class MouseNuclei(PortfolioEntry, NoisyObject):
 
     Attributes
     ----------
-    noise_level (NoiseLevel): Noise level of the dataset.
+        portfolio (str): Name of the portfolio to which the dataset.
+        noise_level (NoiseLevel): Noise level of the dataset.
+        name (str): Name of the dataset.
+        url (str): URL of the dataset.
+        file_name (str): Name of the downloaded file.
+        md5_hash (str): MD5 hash of the downloaded file.
+        description (str): Description of the dataset.
+        license (str): License of the dataset.
+        citation (str): Citation to use when referring to the dataset.
+        files (dict): Dictionary containing the files to download.
+        size (float): Size of the dataset in MB.
+        tags (list): List of tags associated to the dataset.
     """
 
     def __init__(self, noise_level: NoiseLevel = NoiseLevel.N0) -> None:
@@ -190,6 +229,7 @@ class MouseNuclei(PortfolioEntry, NoisyObject):
             Noise level of the dataset, by default NoiseLevel.N0
         """
         super().__init__(
+            portfolio=DENOISEG,
             noise_level=noise_level,
             name=f"MouseNuclei_n{noise_level.value}",
             url=self._get_url(noise_level),
@@ -207,6 +247,7 @@ class MouseNuclei(PortfolioEntry, NoisyObject):
                 f"Mouse_n{noise_level.value}/test": ["test_data.npz"],
             },
             size=self._get_size(noise_level),
+            tags=["denoising", "segmentation", "nuclei", "fluorescence"],
         )
 
     @staticmethod

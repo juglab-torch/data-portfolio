@@ -59,7 +59,7 @@ class MyDataset(PortfolioEntry):
             md5_hash="953a815333805a423b7019bd16cc3341",
             description="Description of the dataset.",
             license="CC-BY",
-            citation="Citation of the dataset',
+            citation="Citation of the dataset",
             files={
                 "/folder/in/the/zip": ["file1.tif", "file2.tif"], # folder can be "."
             },

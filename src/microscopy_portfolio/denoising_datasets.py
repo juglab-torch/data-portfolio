@@ -1,6 +1,6 @@
 from .portfolio_entry import PortfolioEntry
 
-# TODO add descriptions in the class docstrings
+DENOISING = "denoising"
 
 
 class N2V_BSD68(PortfolioEntry):
@@ -8,19 +8,22 @@ class N2V_BSD68(PortfolioEntry):
 
     Attributes
     ----------
-    name (str): Name of the dataset.
-    url (str): URL of the dataset.
-    file_name (str): Name of the downloaded file.
-    md5_hash (str): MD5 hash of the downloaded file.
-    description (str): Description of the dataset.
-    license (str): License of the dataset.
-    citation (str): Citation to use when referring to the dataset.
-    files (dict): Dictionary containing the files to download.
-    size (float): Size of the dataset in MB.
+        portfolio (str): Name of the portfolio to which the dataset.
+        name (str): Name of the dataset.
+        url (str): URL of the dataset.
+        file_name (str): Name of the downloaded file.
+        md5_hash (str): MD5 hash of the downloaded file.
+        description (str): Description of the dataset.
+        license (str): License of the dataset.
+        citation (str): Citation to use when referring to the dataset.
+        files (dict): Dictionary containing the files to download.
+        size (float): Size of the dataset in MB.
+        tags (list): List of tags associated to the dataset.
     """
 
     def __init__(self) -> None:
         super().__init__(
+            portfolio=DENOISING,
             name="N2V_BSD68",
             url="https://download.fht.org/jug/n2v/BSD68_reproducibility.zip",
             file_name="BSD68_reproducibility.zip",
@@ -51,6 +54,7 @@ class N2V_BSD68(PortfolioEntry):
                 "BSD68_reproducibility_data/val": ["DCNN400_validation_gaussian25.npy"],
             },
             size=875.0,
+            tags=["denoising", "natural images"],
         )
 
 
@@ -59,19 +63,22 @@ class N2V_SEM(PortfolioEntry):
 
     Attributes
     ----------
-    name (str): Name of the dataset.
-    url (str): URL of the dataset.
-    file_name (str): Name of the downloaded file.
-    md5_hash (str): MD5 hash of the downloaded file.
-    description (str): Description of the dataset.
-    license (str): License of the dataset.
-    citation (str): Citation to use when referring to the dataset.
-    files (dict): Dictionary containing the files to download.
-    size (float): Size of the dataset in MB.
+        portfolio (str): Name of the portfolio to which the dataset.
+        name (str): Name of the dataset.
+        url (str): URL of the dataset.
+        file_name (str): Name of the downloaded file.
+        md5_hash (str): MD5 hash of the downloaded file.
+        description (str): Description of the dataset.
+        license (str): License of the dataset.
+        citation (str): Citation to use when referring to the dataset.
+        files (dict): Dictionary containing the files to download.
+        size (float): Size of the dataset in MB.
+        tags (list): List of tags associated to the dataset.
     """
 
     def __init__(self) -> None:
         super().__init__(
+            portfolio=DENOISING,
             name="N2V_SEM",
             url="https://download.fht.org/jug/n2v/SEM.zip",
             file_name="SEM.zip",
@@ -86,6 +93,7 @@ class N2V_SEM(PortfolioEntry):
                 ".": ["train.tif", "validation.tif"],
             },
             size=13.0,
+            tags=["denoising", "electron microscopy"],
         )
 
 
@@ -94,19 +102,22 @@ class N2V_RGB(PortfolioEntry):
 
     Attributes
     ----------
-    name (str): Name of the dataset.
-    url (str): URL of the dataset.
-    file_name (str): Name of the downloaded file.
-    md5_hash (str): MD5 hash of the downloaded file.
-    description (str): Description of the dataset.
-    license (str): License of the dataset.
-    citation (str): Citation to use when referring to the dataset.
-    files (dict): Dictionary containing the files to download.
-    size (float): Size of the dataset in MB.
+        portfolio (str): Name of the portfolio to which the dataset.
+        name (str): Name of the dataset.
+        url (str): URL of the dataset.
+        file_name (str): Name of the downloaded file.
+        md5_hash (str): MD5 hash of the downloaded file.
+        description (str): Description of the dataset.
+        license (str): License of the dataset.
+        citation (str): Citation to use when referring to the dataset.
+        files (dict): Dictionary containing the files to download.
+        size (float): Size of the dataset in MB.
+        tags (list): List of tags associated to the dataset.
     """
 
     def __init__(self) -> None:
         super().__init__(
+            portfolio=DENOISING,
             name="N2V_RGB",
             url="https://download.fht.org/jug/n2v/RGB.zip",
             file_name="RGB.zip",
@@ -121,6 +132,7 @@ class N2V_RGB(PortfolioEntry):
                 ".": ["longBeach.png"],
             },
             size=10.4,
+            tags=["denoising", "natural images", "RGB"],
         )
 
 
@@ -129,19 +141,22 @@ class Flywing(PortfolioEntry):
 
     Attributes
     ----------
-    name (str): Name of the dataset.
-    url (str): URL of the dataset.
-    file_name (str): Name of the downloaded file.
-    md5_hash (str): MD5 hash of the downloaded file.
-    description (str): Description of the dataset.
-    license (str): License of the dataset.
-    citation (str): Citation to use when referring to the dataset.
-    files (dict): Dictionary containing the files to download.
-    size (float): Size of the dataset in MB.
+        portfolio (str): Name of the portfolio to which the dataset.
+        name (str): Name of the dataset.
+        url (str): URL of the dataset.
+        file_name (str): Name of the downloaded file.
+        md5_hash (str): MD5 hash of the downloaded file.
+        description (str): Description of the dataset.
+        license (str): License of the dataset.
+        citation (str): Citation to use when referring to the dataset.
+        files (dict): Dictionary containing the files to download.
+        size (float): Size of the dataset in MB.
+        tags (list): List of tags associated to the dataset.
     """
 
     def __init__(self) -> None:
         super().__init__(
+            portfolio=DENOISING,
             name="Flywing",
             url="https://download.fht.org/jug/n2v/flywing-data.zip",
             file_name="flywing-data.zip",
@@ -155,6 +170,7 @@ class Flywing(PortfolioEntry):
                 ".": ["flywing.tif"],
             },
             size=10.2,
+            tags=["denoising", "membrane", "fluorescence"],
         )
 
 
@@ -163,19 +179,22 @@ class Convallaria(PortfolioEntry):
 
     Attributes
     ----------
-    name (str): Name of the dataset.
-    url (str): URL of the dataset.
-    file_name (str): Name of the file to download.
-    md5_hash (str): MD5 hash of the file to download.
-    description (str): Description of the dataset.
-    license (str): License of the dataset.
-    citation (str): Citation to use when referring to the dataset.
-    files (dict): Dictionary containing the files to download.
-    size (float): Size of the dataset in MB.
+        portfolio (str): Name of the portfolio to which the dataset.
+        name (str): Name of the dataset.
+        url (str): URL of the dataset.
+        file_name (str): Name of the file to download.
+        md5_hash (str): MD5 hash of the file to download.
+        description (str): Description of the dataset.
+        license (str): License of the dataset.
+        citation (str): Citation to use when referring to the dataset.
+        files (dict): Dictionary containing the files to download.
+        size (float): Size of the dataset in MB.
+        tags (list): List of tags associated to the dataset.
     """
 
     def __init__(self) -> None:
         super().__init__(
+            portfolio=DENOISING,
             name="Convallaria",
             url="https://cloud.mpi-cbg.de/index.php/s/BE8raMtHQlgLDF3/download",
             file_name="Convallaria_diaphragm.zip",
@@ -194,4 +213,5 @@ class Convallaria(PortfolioEntry):
                 ],
             },
             size=344.0,
+            tags=["denoising", "membrane", "fluorescence"],
         )
