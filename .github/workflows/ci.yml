@@ -105,8 +105,8 @@ jobs:
         id: verify-changed-files
         with:
           files: |
-            src/microscopy_portfolio/datasets/datasets.json
-            src/microscopy_portfolio/datasets/registry.txt
+            src/careamics_portfolio/datasets/datasets.json
+            src/careamics_portfolio/datasets/registry.txt
 
       - name: Commit changes
         if: steps.verify-changed-files.outputs.files_changed == 'true'

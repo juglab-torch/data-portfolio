@@ -2,7 +2,7 @@ from pathlib import Path
 
 import pytest
 
-from microscopy_portfolio.portfolio_entry import PortfolioEntry
+from careamics_portfolio.portfolio_entry import PortfolioEntry
 
 # TODO test invalid hash
 

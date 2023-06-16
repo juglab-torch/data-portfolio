@@ -1,11 +1,11 @@
 # CAREamics Portfolio
 
-[![License](https://img.shields.io/pypi/l/microscopy-portfolio.svg?color=green)](https://github.com/juglab-torch/microscopy-portfolio/raw/main/LICENSE)
-[![PyPI](https://img.shields.io/pypi/v/microscopy-portfolio.svg?color=green)](https://pypi.org/project/microscopy-portfolio)
-[![Python Version](https://img.shields.io/pypi/pyversions/microscopy-portfolio.svg?color=green)](https://python.org)
-[![CI](https://github.com/juglab-torch/microscopy-portfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/juglab-torch/microscopy-portfolio/actions/workflows/ci.yml)
-[![Datasets CI](https://github.com/juglab-torch/microscopy-portfolio/actions/workflows/datasets_ci.yml/badge.svg)](https://github.com/juglab-torch/microscopy-portfolio/actions/workflows/datasets_ci.yml)
-[![codecov](https://codecov.io/gh/juglab-torch/microscopy-portfolio/branch/main/graph/badge.svg)](https://codecov.io/gh/juglab-torch/microscopy-portfolio)
+[![License](https://img.shields.io/pypi/l/careamics-portfolio.svg?color=green)](https://github.com/juglab-torch/careamics-portfolio/raw/main/LICENSE)
+[![PyPI](https://img.shields.io/pypi/v/careamics-portfolio.svg?color=green)](https://pypi.org/project/careamics-portfolio)
+[![Python Version](https://img.shields.io/pypi/pyversions/careamics-portfolio.svg?color=green)](https://python.org)
+[![CI](https://github.com/juglab-torch/careamics-portfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/juglab-torch/careamics-portfolio/actions/workflows/ci.yml)
+[![Datasets CI](https://github.com/juglab-torch/careamics-portfolio/actions/workflows/datasets_ci.yml/badge.svg)](https://github.com/juglab-torch/careamics-portfolio/actions/workflows/datasets_ci.yml)
+[![codecov](https://codecov.io/gh/juglab-torch/careamics-portfolio/branch/main/graph/badge.svg)](https://codecov.io/gh/juglab-torch/careamics-portfolio)
 [![linting - Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/charliermarsh/ruff/main/assets/badge/v0.json)](https://github.com/charliermarsh/ruff) 
 [![code style - Black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black) 
 [![types - Mypy](https://img.shields.io/badge/types-Mypy-blue.svg)](https://github.com/python/mypy) 
@@ -14,13 +14,13 @@ A helper package to download example datasets used in various publications by th
 
 The portfolio relies on [pooch](https://github.com/fatiando/pooch) to download the datasets.
 
-The complete list of datasets can be found [here](src/microscopy_portfolio/datasets/datasets.json).
+The complete list of datasets can be found [here](src/careamics_portfolio/datasets/datasets.json).
 
 ## Installation
 
 To install the portfolio in your conda environment, simply use `pip`:
 ```bash
-$ pip install microscopy-portfolio
+$ pip install careamics-portfolio
 ```
 
 ## Usage
@@ -30,7 +30,7 @@ Follow the [example notebook](examples/example.ipynb) for details on how to use 
 The portfolio can be instantiated as follow:
 
 ```python
-from microscopy_portfolio import PortfolioManager
+from careamics_portfolio import PortfolioManager
 
 portfolio = PortfolioManager()
 ```

@@ -1,7 +1,7 @@
 import pytest
 
-from microscopy_portfolio import PortfolioManager
-from microscopy_portfolio.portfolio import IterablePortfolio
+from careamics_portfolio import PortfolioManager
+from careamics_portfolio.portfolio import IterablePortfolio
 
 
 def list_iterable_portfolios():

@@ -15,7 +15,7 @@ sources = ["src"]
 
 # https://peps.python.org/pep-0621/
 [project]
-name = "microscopy-portfolio"
+name = "careamics-portfolio"
 dynamic = ["version"]
 description = "A helper package to download example datasets used in various publications and deep-learning algorithms, including data featured in N2V, P(P)N2V, DivNoising, HDN, EmbedSeg, etc."
 readme = "README.md"
@@ -56,8 +56,8 @@ example = [
 ]
 
 [project.urls]
-homepage = "https://github.com/juglab-torch/microscopy-portfolio"
-repository = "https://github.com/juglab-torch/microscopy-portfolio"
+homepage = "https://github.com/juglab-torch/careamics-portfolio"
+repository = "https://github.com/juglab-torch/careamics-portfolio"
 
 # Entry points
 # https://peps.python.org/pep-0621/#entry-points
@@ -144,7 +144,7 @@ exclude_lines = [
     "except PackageNotFoundError"
 ]
 [tool.coverage.run]
-source = ["microscopy_portfolio"]
+source = ["careamics_portfolio"]
 
 # https://github.com/mgedmin/check-manifest#configuration
 # add files that you want check-manifest to explicitly ignore here

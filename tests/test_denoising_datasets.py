@@ -1,7 +1,7 @@
 import pytest
 
-from microscopy_portfolio import PortfolioManager
-from microscopy_portfolio.portfolio_entry import PortfolioEntry
+from careamics_portfolio import PortfolioManager
+from careamics_portfolio.portfolio_entry import PortfolioEntry
 
 from .utils import (
     download_checker,

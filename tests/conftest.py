@@ -2,9 +2,9 @@ import hashlib
 
 import pytest
 
-from microscopy_portfolio import PortfolioManager
-from microscopy_portfolio.portfolio_entry import PortfolioEntry
-from microscopy_portfolio.utils.pale_blue_dot import PaleBlueDot
+from careamics_portfolio import PortfolioManager
+from careamics_portfolio.portfolio_entry import PortfolioEntry
+from careamics_portfolio.utils.pale_blue_dot import PaleBlueDot
 
 
 class FaultyMD5(PortfolioEntry):

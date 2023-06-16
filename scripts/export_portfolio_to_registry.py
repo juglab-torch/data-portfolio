@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from microscopy_portfolio import PortfolioManager
+from careamics_portfolio import PortfolioManager
 
 if __name__ == "__main__":
     # Create a portfolio object
