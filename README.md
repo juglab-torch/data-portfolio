@@ -6,6 +6,8 @@
 [![CI](https://github.com/juglab-torch/microscopy-portfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/juglab-torch/microscopy-portfolio/actions/workflows/ci.yml)
 [![Datasets CI](https://github.com/juglab-torch/microscopy-portfolio/actions/workflows/datasets_ci.yml/badge.svg)](https://github.com/juglab-torch/microscopy-portfolio/actions/workflows/datasets_ci.yml)
 [![codecov](https://codecov.io/gh/juglab-torch/microscopy-portfolio/branch/main/graph/badge.svg)](https://codecov.io/gh/juglab-torch/microscopy-portfolio)
+
+
 [![linting - Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/charliermarsh/ruff/main/assets/badge/v0.json)](https://github.com/charliermarsh/ruff) 
 [![code style - Black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black) 
 [![types - Mypy](https://img.shields.io/badge/types-Mypy-blue.svg)](https://github.com/python/mypy) 
