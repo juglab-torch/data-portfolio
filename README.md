@@ -14,7 +14,8 @@ A helper package to download example datasets used in various publications by th
 
 The portfolio relies on [pooch](https://github.com/fatiando/pooch) to download the datasets.
 
-The complete list of datasets can be found [here](src/careamics_portfolio/datasets/datasets.json).
+The complete list of datasets can be found [here](https://raw.githubusercontent.com/CAREamics/careamics-portfolio/src/careamics_portfolio/datasets/datasets.json).
+
 
 ## Installation
 
