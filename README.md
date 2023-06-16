@@ -50,6 +50,10 @@ data_path = Path('data')
 portfolio.denoising.N2V_SEM.download(data_path)
 ```
 
+By default, if you do not pass `path` to the `download()` method, all datasets
+will be saved in your system's cache. New queries to download will not cause
+the files to be downloaded again (thanks pooch!).
+
 ## Add a dataset to the repository
 
 To add a dataset, subclass a `PortfolioEntry` and enter the following information 
