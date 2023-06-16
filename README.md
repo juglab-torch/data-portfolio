@@ -1,4 +1,4 @@
-# Microscopy Portfolio
+# CAREamics Portfolio
 
 [![License](https://img.shields.io/pypi/l/microscopy-portfolio.svg?color=green)](https://github.com/juglab-torch/microscopy-portfolio/raw/main/LICENSE)
 [![PyPI](https://img.shields.io/pypi/v/microscopy-portfolio.svg?color=green)](https://pypi.org/project/microscopy-portfolio)
@@ -11,6 +11,8 @@
 [![types - Mypy](https://img.shields.io/badge/types-Mypy-blue.svg)](https://github.com/python/mypy) 
 
 A helper package to download example datasets used in various publications by the Jug lab, including data featured in N2V, P(P)N2V, DivNoising, HDN, EmbedSeg, etc.
+
+The portfolio relies on [pooch](https://github.com/fatiando/pooch) to download the datasets.
 
 The complete list of datasets can be found [here](src/microscopy_portfolio/datasets/datasets.json).
 
@@ -56,27 +58,30 @@ To add a dataset, subclass a `PortfolioEntry` and enter the following informatio
 class MyDataset(PortfolioEntry):
     def __init__(self) -> None:
         super().__init__(
+            portfolio="Denoising", # for instance
             name="MyDataset",
             url="https://url.to.myfile/MyFile.zip",
             file_name="MyFile.zip",
-            md5_hash="953a815333805a423b7019bd16cc3341",
+            hash="953a815333805a423b7342971289h10121263917019bd16cc3341", # sha256
             description="Description of the dataset.",
-            license="CC-BY",
+            license="CC-BY 3.0",
             citation="Citation of the dataset",
             files={
                 "/folder/in/the/zip": ["file1.tif", "file2.tif"], # folder can be "."
             },
             size=13.0, # size in MB
+            tags=["tag1", "tag2"],
+            is_zip=True,
         )
 ```
 
-To obtain md5 hash of your file, you can run the following code:
+To obtain sha256 hash of your file, you can run the following code and read out
+the sha256 from pooch prompt:
 ```python
-from pathlib import Path
-import hashlib
+import pooch
 
-file_path = Path("path/to/myfile.zip")
-hashlib.md5(open(file_path, "rb").read()).hexdigest()
+url = "https://url.to.myfile/MyFile.zip"
+pooch.retrieve(url, known_hash=None)
 ```
 
 Likewise, to get the size in MB of your file:
