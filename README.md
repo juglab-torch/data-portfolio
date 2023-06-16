@@ -1,3 +1,9 @@
+<p align="center">
+  <a href="https://careamics.github.io/">
+    <img src="https://github.com/CAREamics/.github/blob/main/profile/images/banner_careamics.png">
+  </a>
+</p>
+
 # CAREamics Portfolio
 
 [![License](https://img.shields.io/pypi/l/careamics-portfolio.svg?color=green)](https://github.com/juglab-torch/careamics-portfolio/raw/main/LICENSE)
