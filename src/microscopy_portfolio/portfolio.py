@@ -455,6 +455,7 @@ class Portfolio:
             Path to json file.
         """
         portfolios = self.as_dict()
-        with open(path, "w"):
-            for _key in portfolios.keys():
-                pass
+        with open(path, "w") as file:
+            for key in portfolios.keys():
+                for entry in portfolios[key]:
+                    file.write(f"{entry.get_registry_name()} {entry.url}\n")

@@ -105,3 +105,47 @@ def test_export_to_json(tmp_path, portfolio: Portfolio):
         for entry in ITERABLES:
             assert entry.name in data
             assert data[entry.name] == entry.as_dict()
+
+
+def test_export_to_registry(tmp_path, portfolio: Portfolio):
+    """Test that the export Portfolio to registry works.
+
+    Parameters
+    ----------
+    tmp_path : Path
+        Temporary path.
+    portfolio : Portfolio
+        Portfolio to test.
+    """
+    # export to registry
+    path_to_file = tmp_path / "registry.txt"
+    portfolio.to_registry(path_to_file)
+
+    # check that the file exists
+    assert path_to_file.exists()
+
+    # portfolio as dict
+    portfolio_dict = portfolio.as_dict()
+
+    # count the number of entries
+    count_entries = 0
+    for key in portfolio_dict.keys():
+        count_entries += len(portfolio_dict[key].list_datasets())
+
+    # load registry file
+    with open(path_to_file) as f:
+        # read lines
+        lines = f.readlines()
+        assert len(lines) == count_entries
+
+        # iterate over lines
+        for line in lines:
+            # split line and name
+            name, url = line.strip().split(" ")
+            portfolio_name, entry_name = name.split("-")
+
+            # check that the portfolio exists
+            assert portfolio_name in portfolio_dict
+
+            # check that the entry exists
+            assert entry_name in portfolio_dict[portfolio_name].list_datasets()
