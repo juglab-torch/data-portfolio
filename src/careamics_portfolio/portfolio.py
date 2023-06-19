@@ -21,9 +21,6 @@ from .denoising_datasets import (
     Flywing,
 )
 from .portfolio_entry import PortfolioEntry
-from .segmentation_datasets import (
-    SEGMENTATION,
-)
 from .utils.download_utils import get_registry_path
 from .utils.pale_blue_dot import PaleBlueDot
 
@@ -376,13 +373,6 @@ class Denoising(IterablePortfolio):
         return self._Convallaria
 
 
-class Segmentation(IterablePortfolio):
-    """An IterablePortfolio of denoising datasets."""
-
-    def __init__(self) -> None:
-        super().__init__(SEGMENTATION)
-
-
 @dataclass
 class PortfolioManager:
     """Portfolio of datasets.
@@ -491,7 +481,6 @@ class PortfolioManager:
                 file.write("\n")
 
             # add pale blue dot for testing purposes
-            file.write("\n")
             file.write("# Test sample\n")
             pale_blue_dot = PaleBlueDot()
             file.write(
@@ -500,7 +489,10 @@ class PortfolioManager:
             )
 
 
-def update_registry() -> None:
+def update_registry(path: str | Path | None) -> None:
     """Update the registry.txt file."""
+    if path is None:
+        path = get_registry_path()
+
     portfolio = PortfolioManager()
-    portfolio.to_registry(get_registry_path())
+    portfolio.to_registry(path)
