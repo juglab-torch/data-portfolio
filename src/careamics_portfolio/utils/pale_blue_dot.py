@@ -24,9 +24,9 @@ class PaleBlueDot(PortfolioEntry):
         super().__init__(
             portfolio="test",
             name="PaleBlueDot",
-            url="https://solarsystem.nasa.gov/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBaUZoIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--4b5b6d8ce74a6930534a08e4d7dd002f24f1efcb/P36254.jpg",
+            url="https://upload.wikimedia.org/wikipedia/commons/7/73/Pale_Blue_Dot.png",
             file_name="P36254.jpg",
-            sha256="c83d5de3361a964370fc392ab213c3cf1a23d046406de377a8ac9cb5fbb087f0",
+            sha256="68d0f037a448dc099e893b8cbf4d303ffa4b4289903c764f737101d6ad7555dd",
             description="Pale Blue Dot, credit NASA/JPL-Caltech."
             "Original caption: This narrow-angle color image of the"
             " Earth, dubbed 'Pale Blue Dot', is a part of the first"
