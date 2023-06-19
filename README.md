@@ -71,12 +71,23 @@ and you will not have to download them again!
 ## Add a dataset to the portfolio
 
 There are a few steps to follow in order to add a new dataset to the repository:
-:white_check_mark: Create a `PortfolioEntry` child class
-:white_check_mark: Instantiate the portfolio entry in an `IterablePortfolio`
-:white_check_mark: Update `registry.txt`
+
+:white_check_mark: 1 - Create a `PortfolioEntry` child class
+
+:white_check_mark: 2 - Instantiate the portfolio entry in an `IterablePortfolio`
+
+:white_check_mark: 3 - Update `registry.txt`
+
+:white_check_mark: 4 - Make sure all tests pass
 
 
-### Create a portfolio entry
+> Note: To run the tests, you will need to have `pytest` installed. You can
+> create an environment with `careamics-portfolio` and `pytest` by running:
+> ```bash
+> pip install "careamics-portfolio[test]"
+> ```
+
+### 1 - Create a portfolio entry
 
 To add a dataset, subclass a `PortfolioEntry` and enter the following information 
 (preferably in one of the current categories, e.g. `denoising_datasets.py`):
@@ -117,7 +128,8 @@ import os
 os.path.getsize(file_path) / 1024 / 1024
 ```
 
-### Add the entry to a portfolio
+
+### 2 - Add the entry to a portfolio
 
 Add the file class to one of the categories (e.g. denoising) in 
 `portfolio.py`:
@@ -140,7 +152,7 @@ class Denoising(IterablePortfolio):
         return self._myDataset
 ```
 
-### Update registry
+### 3 - Update registry
 
 Finally, update the registry by running the following pythons script:
 ```bash
@@ -158,3 +170,12 @@ file is updated using:
 ```bash
 python script/update_json.py
 ```
+
+### 4 - Verify that all tests pass
+
+Verify that all tests pass, it can take a while:
+
+```bash
+pytest
+```
+
