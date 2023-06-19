@@ -223,9 +223,10 @@ class PortfolioEntry:
             "license": self.license,
             "citation": self.citation,
             "file_name": self.file_name,
-            "md5_hash": self.hash,
+            "hash": self.hash,
             "files": self.files,
             "size": self.size,
+            "tags": self.tags,
         }
 
     def download(

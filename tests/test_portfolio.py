@@ -36,8 +36,6 @@ def test_iterable_portfolios(iter_portfolio: IterablePortfolio):
 def test_iterable_portfolio_list_datasets(iter_portfolio: IterablePortfolio):
     """Test that the list_datasets method works on portfolios.
 
-    Note: the list_datasets
-
     Parameters
     ----------
     portfolio : Portfolio
@@ -65,6 +63,7 @@ def test_iterable_portfolio_as_dict(iter_portfolio: IterablePortfolio):
         assert "Description" in entry
         assert "License" in entry
         assert "File size" in entry
+        assert "Tags" in entry
 
 
 def test_portfolio_as_dict(portfolio: PortfolioManager):

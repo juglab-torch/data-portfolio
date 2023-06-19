@@ -21,4 +21,4 @@ denoiseg-MouseNuclei_n20 d3d1bf8c89bb97a673a0791874e5b75a6a516ccaaeece0244b4e1e0
 
 
 # Test sample
-test-PaleBlueDot c83d5de3361a964370fc392ab213c3cf1a23d046406de377a8ac9cb5fbb087f0 https://solarsystem.nasa.gov/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBaUZoIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--4b5b6d8ce74a6930534a08e4d7dd002f24f1efcb/P36254.jpg
+test-PaleBlueDot 68d0f037a448dc099e893b8cbf4d303ffa4b4289903c764f737101d6ad7555dd https://upload.wikimedia.org/wikipedia/commons/7/73/Pale_Blue_Dot.png

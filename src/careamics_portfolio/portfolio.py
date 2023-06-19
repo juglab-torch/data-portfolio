@@ -112,10 +112,10 @@ class IterablePortfolio:
 
         return attributes
 
-    def as_dict(self) -> dict[str, dict[str, str]]:
+    def as_dict(self) -> dict:
         """Dictionary representation of a portfolio.
 
-        Used to serialize the class to json, with friendly name as entries.
+        Used to serialize the class to json, with friendly names as entries.
 
         Returns
         -------
@@ -134,7 +134,9 @@ class IterablePortfolio:
                     "Description": attribute.description,
                     "Citation": attribute.citation,
                     "License": attribute.license,
+                    "Hash": attribute.hash,
                     "File size": f"{attribute.size} MB",
+                    "Tags": attribute.tags,
                 }
         return entries
 
@@ -394,7 +396,7 @@ class PortfolioManager:
     def __init__(self) -> None:
         self._denoising = Denoising()
         self._denoiseg = DenoiSeg()
-        self._segmentation = Segmentation()
+        # self._segmentation = Segmentation()
 
     @property
     def denoising(self) -> Denoising:
@@ -417,17 +419,6 @@ class PortfolioManager:
             DenoiSeg datasets.
         """
         return self._denoiseg
-
-    @property
-    def segmentation(self) -> Segmentation:
-        """Segmentation datasets.
-
-        Returns
-        -------
-        Segmentation
-            Segmentation datasets.
-        """
-        return self._segmentation
 
     def __str__(self) -> str:
         """String representation of the portfolio.
