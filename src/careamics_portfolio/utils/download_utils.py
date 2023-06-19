@@ -5,6 +5,17 @@ import pooch
 from pooch import Pooch
 
 
+def get_registry_path() -> Path:
+    """Get the path to the registry.txt file.
+
+    Returns
+    -------
+    Path
+        Path to the registry.txt file.
+    """
+    return Path(__file__).parent / "../registry/registry.txt"
+
+
 def get_poochfolio(path: Optional[Union[str, Path]] = None) -> Pooch:
     """Create the pooch object for the whole portfolio.
 
@@ -33,6 +44,6 @@ def get_poochfolio(path: Optional[Union[str, Path]] = None) -> Pooch:
     )
 
     # Path to the registry.txt file
-    poochfolio.load_registry(Path(__file__).parent / "../datasets/registry.txt")
+    poochfolio.load_registry(get_registry_path())
 
     return poochfolio
