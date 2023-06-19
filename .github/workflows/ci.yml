@@ -115,7 +115,7 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'  
-          git add src/careamics_portfolio/datasets/datasets.json
+          git add datasets/datasets.json
           git commit -m "Update datasets.json"
 
       - name: Push changes
