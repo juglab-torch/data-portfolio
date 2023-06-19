@@ -20,6 +20,7 @@ including data featured in N2V, P(P)N2V, DivNoising, HDN, EmbedSeg, etc.
 The complete list of datasets can be found in 
 [datasets.json](https://raw.githubusercontent.com/CAREamics/careamics-portfolio/main/datasets/datasets.json).
 
+CAREamics-portfolio was generated using [pydev-guide/pyrepo-copier](https://github.com/pydev-guide/pyrepo-copier).
 
 ## Installation
 
