@@ -12,9 +12,6 @@
 [![CI](https://github.com/CAREamics/careamics-portfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/CAREamics/careamics-portfolio/actions/workflows/ci.yml)
 [![Datasets CI](https://github.com/CAREamics/careamics-portfolio/actions/workflows/datasets_ci.yml/badge.svg)](https://github.com/CAREamics/careamics-portfolio/actions/workflows/datasets_ci.yml)
 [![codecov](https://codecov.io/gh/CAREamics/careamics-portfolio/branch/main/graph/badge.svg)](https://codecov.io/gh/CAREamics/careamics-portfolio)
-[![linting - Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/charliermarsh/ruff/main/assets/badge/v0.json)](https://github.com/charliermarsh/ruff) 
-[![code style - Black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black) 
-[![types - Mypy](https://img.shields.io/badge/types-Mypy-blue.svg)](https://github.com/python/mypy) 
 
 A helper package to download example datasets used in various publications by the Jug lab, including data featured in N2V, P(P)N2V, DivNoising, HDN, EmbedSeg, etc.
 
