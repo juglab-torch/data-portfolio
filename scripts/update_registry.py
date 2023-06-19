@@ -8,7 +8,12 @@ if __name__ == "__main__":
 
     # Path to the datasets list
     path_to_datasets = Path(
-        ".", "src", "careamics_portfolio", "datasets", "registry.txt"
+        # Export to ./src/, the file will be packaged with the library
+        ".",
+        "src",
+        "careamics_portfolio",
+        "registry",
+        "registry.txt",
     )
 
     # Export the portfolio to json

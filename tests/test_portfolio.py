@@ -1,7 +1,47 @@
+from pathlib import Path
+
 import pytest
 
-from careamics_portfolio import PortfolioManager
+from careamics_portfolio import PortfolioManager, update_registry
 from careamics_portfolio.portfolio import IterablePortfolio
+
+
+def registry_checker(portfolio: PortfolioManager, path_to_file: Path) -> None:
+    """Test integrity of registry.txt."""
+
+    # portfolio as dict
+    portfolio_dict = portfolio.as_dict()
+
+    # count the number of entries
+    count_entries = 1  # count test dataset
+    for key in portfolio_dict.keys():
+        count_entries += len(portfolio_dict[key].list_datasets())
+
+    # load registry file
+    with open(path_to_file) as f:
+        # read lines
+        lines = f.readlines()
+
+        # remove comments and empty lines
+        lines = [
+            line
+            for line in lines
+            if not line.startswith("#") and not line.startswith("\n")
+        ]
+        assert len(lines) == count_entries
+
+        # iterate over lines
+        for line in lines:
+            # split line and name
+            name, _, _ = line.strip().split(" ")
+            portfolio_name, entry_name = name.split("-")
+
+            if portfolio_name != "test":
+                # check that the portfolio exists
+                assert portfolio_name in portfolio_dict
+
+                # check that the entry exists
+                assert entry_name in portfolio_dict[portfolio_name].list_datasets()
 
 
 def list_iterable_portfolios():
@@ -36,8 +76,6 @@ def test_iterable_portfolios(iter_portfolio: IterablePortfolio):
 def test_iterable_portfolio_list_datasets(iter_portfolio: IterablePortfolio):
     """Test that the list_datasets method works on portfolios.
 
-    Note: the list_datasets
-
     Parameters
     ----------
     portfolio : Portfolio
@@ -65,6 +103,7 @@ def test_iterable_portfolio_as_dict(iter_portfolio: IterablePortfolio):
         assert "Description" in entry
         assert "License" in entry
         assert "File size" in entry
+        assert "Tags" in entry
 
 
 def test_portfolio_as_dict(portfolio: PortfolioManager):
@@ -108,7 +147,7 @@ def test_export_to_json(tmp_path, portfolio: PortfolioManager):
             assert data[entry.name] == entry.as_dict()
 
 
-def test_export_to_registry(tmp_path, portfolio: PortfolioManager):
+def test_export_registry(tmp_path, portfolio: PortfolioManager):
     """Test that the export Portfolio to registry works.
 
     Parameters
@@ -125,36 +164,17 @@ def test_export_to_registry(tmp_path, portfolio: PortfolioManager):
     # check that the file exists
     assert path_to_file.exists()
 
-    # portfolio as dict
-    portfolio_dict = portfolio.as_dict()
+    # verify registry
+    registry_checker(portfolio, path_to_file)
 
-    # count the number of entries
-    count_entries = 1  # count test dataset
-    for key in portfolio_dict.keys():
-        count_entries += len(portfolio_dict[key].list_datasets())
 
-    # load registry file
-    with open(path_to_file) as f:
-        # read lines
-        lines = f.readlines()
+def test_update_registry(tmp_path, portfolio: PortfolioManager):
+    # export registry to temp folder
+    path_to_file = tmp_path / "registry.txt"
+    update_registry(path_to_file)
 
-        # remove comments and empty lines
-        lines = [
-            line
-            for line in lines
-            if not line.startswith("#") and not line.startswith("\n")
-        ]
-        assert len(lines) == count_entries
+    # check that the file exists
+    assert path_to_file.exists()
 
-        # iterate over lines
-        for line in lines:
-            # split line and name
-            name, _, _ = line.strip().split(" ")
-            portfolio_name, entry_name = name.split("-")
-
-            if portfolio_name != "test":
-                # check that the portfolio exists
-                assert portfolio_name in portfolio_dict
-
-                # check that the entry exists
-                assert entry_name in portfolio_dict[portfolio_name].list_datasets()
+    # verify registry
+    registry_checker(portfolio, path_to_file)

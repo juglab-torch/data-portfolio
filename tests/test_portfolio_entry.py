@@ -4,8 +4,6 @@ import pytest
 
 from careamics_portfolio.portfolio_entry import PortfolioEntry
 
-# TODO test invalid hash
-
 
 def test_download(tmp_path, pale_blue_dot: PortfolioEntry):
     assert Path(pale_blue_dot.download(tmp_path)).exists()

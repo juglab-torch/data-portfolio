@@ -13,11 +13,12 @@
 [![Datasets CI](https://github.com/CAREamics/careamics-portfolio/actions/workflows/datasets_ci.yml/badge.svg)](https://github.com/CAREamics/careamics-portfolio/actions/workflows/datasets_ci.yml)
 [![codecov](https://codecov.io/gh/CAREamics/careamics-portfolio/branch/main/graph/badge.svg)](https://codecov.io/gh/CAREamics/careamics-portfolio)
 
-A helper package to download example datasets used in various publications by the Jug lab, including data featured in N2V, P(P)N2V, DivNoising, HDN, EmbedSeg, etc.
+A helper package based on [pooch](https://github.com/fatiando/pooch) allowing
+downloading various example datasets used in publications by the Jug lab,
+including data featured in N2V, P(P)N2V, DivNoising, HDN, EmbedSeg, etc.
 
-The portfolio relies on [pooch](https://github.com/fatiando/pooch) to download the datasets.
-
-The complete list of datasets can be found [here](https://raw.githubusercontent.com/CAREamics/careamics-portfolio/src/careamics_portfolio/datasets/datasets.json).
+The complete list of datasets can be found in 
+[datasets.json](https://raw.githubusercontent.com/CAREamics/careamics-portfolio/main/datasets/datasets.json).
 
 
 ## Installation
@@ -51,14 +52,31 @@ Finally, you can download the dataset of your choice:
 from pathlib import Path
 
 data_path = Path('data')
+
+# to the path of your choice
 portfolio.denoising.N2V_SEM.download(data_path)
+
+# or to your system's cache
+portfolio.denoising.N2V_SEM.download()
 ```
 
 By default, if you do not pass `path` to the `download()` method, all datasets
 will be saved in your system's cache. New queries to download will not cause
-the files to be downloaded again (thanks pooch!).
+the files to be downloaded again (thanks pooch!!).
 
-## Add a dataset to the repository
+**Important**: if you download all datasets of interest using the same path, 
+[pooch](https://github.com/fatiando/pooch) will maintain a regsitry of files
+and you will not have to download them again!
+
+## Add a dataset to the portfolio
+
+There are a few steps to follow in order to add a new dataset to the repository:
+:white_check_mark: Create a `PortfolioEntry` child class
+:white_check_mark: Instantiate the portfolio entry in an `IterablePortfolio`
+:white_check_mark: Update `registry.txt`
+
+
+### Create a portfolio entry
 
 To add a dataset, subclass a `PortfolioEntry` and enter the following information 
 (preferably in one of the current categories, e.g. `denoising_datasets.py`):
@@ -84,7 +102,7 @@ class MyDataset(PortfolioEntry):
 ```
 
 To obtain sha256 hash of your file, you can run the following code and read out
-the sha256 from pooch prompt:
+the sha256 from the pooch prompt:
 ```python
 import pooch
 
@@ -99,7 +117,9 @@ import os
 os.path.getsize(file_path) / 1024 / 1024
 ```
 
-Finally, add the file class to one of the categories (e.g. denoising) in 
+### Add the entry to a portfolio
+
+Add the file class to one of the categories (e.g. denoising) in 
 `portfolio.py`:
 ```python
 class Denoising(IterablePortfolio):
@@ -118,4 +138,23 @@ class Denoising(IterablePortfolio):
     @property
     def MyDataset(self) -> MyDataset:
         return self._myDataset
+```
+
+### Update registry
+
+Finally, update the registry by running the following pythons script:
+```bash
+python script/update_registry.py
+```
+
+or run:
+```python
+from careamics_portfolio import update_registry
+update_registry()
+```
+
+The [datasets.json](https://raw.githubusercontent.com/CAREamics/careamics-portfolio/main/datasets/datasets.json)
+file is updated using:
+```bash
+python script/update_json.py
 ```
