@@ -1,7 +1,7 @@
 from ..portfolio_entry import PortfolioEntry
 
 
-class PaleBlueDot(PortfolioEntry):
+class PaleBlueDotZip(PortfolioEntry):
     """The original Pale Blue Dot image.
 
     Attributes
@@ -23,10 +23,10 @@ class PaleBlueDot(PortfolioEntry):
     def __init__(self) -> None:
         super().__init__(
             portfolio="test",
-            name="PaleBlueDot",
-            url="https://download.fht.org/jug/careamics/P36254.jpg",
-            file_name="P36254.jpg",
-            sha256="68d0f037a448dc099e893b8cbf4d303ffa4b4289903c764f737101d6ad7555dd",
+            name="PaleBlueDotZip",
+            url="https://download.fht.org/jug/careamics/pale_blue_dot.zip",
+            file_name="pale_blue_dot.zip",
+            sha256="90b03ec7a9e1980fd112a40c2c935015bb349cdf89fbf3db78c715dd2a49db47",
             description="Pale Blue Dot, credit NASA/JPL-Caltech."
             "Original caption: This narrow-angle color image of the"
             " Earth, dubbed 'Pale Blue Dot', is a part of the first"
@@ -52,5 +52,5 @@ class PaleBlueDot(PortfolioEntry):
             ],
             size=0.4,
             tags=["pale blue dot", "voyager", "nasa", "jpl"],
-            is_zip=False,
+            is_zip=True,
         )

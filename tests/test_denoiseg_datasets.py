@@ -14,6 +14,18 @@ from .utils import (
 DATASETS = list(PortfolioManager().denoiseg)
 
 
+def all_datasets_getters(portfolio: PortfolioManager):
+    assert isinstance(portfolio.denoiseg.DSB2018_n0, PortfolioEntry)
+    assert isinstance(portfolio.denoiseg.DSB2018_n10, PortfolioEntry)
+    assert isinstance(portfolio.denoiseg.DSB2018_n20, PortfolioEntry)
+    assert isinstance(portfolio.denoiseg.Flywing_n0, PortfolioEntry)
+    assert isinstance(portfolio.denoiseg.Flywing_n10, PortfolioEntry)
+    assert isinstance(portfolio.denoiseg.Flywing_n20, PortfolioEntry)
+    assert isinstance(portfolio.denoiseg.MouseNuclei_n0, PortfolioEntry)
+    assert isinstance(portfolio.denoiseg.MouseNuclei_n10, PortfolioEntry)
+    assert isinstance(portfolio.denoiseg.MouseNuclei_n20, PortfolioEntry)
+
+
 @pytest.mark.dataset
 @pytest.mark.parametrize("dataset", DATASETS)
 def test_datasets(tmp_path, dataset: PortfolioEntry):

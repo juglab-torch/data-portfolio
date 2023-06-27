@@ -13,6 +13,14 @@ from .utils import (
 DATASETS = list(PortfolioManager().denoising)
 
 
+def all_datasets_getters(portfolio: PortfolioManager):
+    assert isinstance(portfolio.denoising.N2V_SEM, PortfolioEntry)
+    assert isinstance(portfolio.denoising.N2V_BSD68, PortfolioEntry)
+    assert isinstance(portfolio.denoising.N2V_RGB, PortfolioEntry)
+    assert isinstance(portfolio.denoising.flywing, PortfolioEntry)
+    assert isinstance(portfolio.denoising.Convallaria, PortfolioEntry)
+
+
 @pytest.mark.dataset
 @pytest.mark.parametrize("dataset", DATASETS)
 def test_datasets(tmp_path, dataset: PortfolioEntry):

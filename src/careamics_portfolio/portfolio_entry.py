@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, List, Optional, Union
 
 from pooch import Unzip
 
@@ -19,7 +19,7 @@ class PortfolioEntry:
         citation (str): Citation to use when referring to the dataset.
         file_name (str): Name of the downloaded file.
         hash (str): SHA256 hash of the downloaded file.
-        files (dict[str, list]): Dictionary of files in the dataset.
+        files (list[str]): List of files in the dataset.
         size (int): Size of the dataset in MB.
         tags (list[str]): List of tags associated to the dataset.
         is_zip (bool): Whether the dataset is a zip file.
@@ -35,7 +35,7 @@ class PortfolioEntry:
         citation: str,
         file_name: str,
         sha256: str,
-        files: Dict[str, list],
+        files: List[str],
         size: float,
         tags: List[str],
         is_zip: bool = True,
@@ -147,7 +147,7 @@ class PortfolioEntry:
         return self._hash
 
     @property
-    def files(self) -> Dict[str, list]:
+    def files(self) -> List[str]:
         """Dictionary of files in the dataset.
 
         Returns

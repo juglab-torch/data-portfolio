@@ -8,17 +8,17 @@ class N2V_BSD68(PortfolioEntry):
 
     Attributes
     ----------
-        portfolio (str): Name of the portfolio to which the dataset.
+        portfolio (str): Name of the portfolio to which the dataset belong.
         name (str): Name of the dataset.
         url (str): URL of the dataset.
-        file_name (str): Name of the downloaded file.
-        hash (str): SHA256 hash of the downloaded file.
         description (str): Description of the dataset.
         license (str): License of the dataset.
         citation (str): Citation to use when referring to the dataset.
-        files (dict): Dictionary containing the files to download.
-        size (float): Size of the dataset in MB.
-        tags (list): List of tags associated to the dataset.
+        file_name (str): Name of the downloaded file.
+        hash (str): SHA256 hash of the downloaded file.
+        files (list[str]): List of files in the dataset.
+        size (int): Size of the dataset in MB.
+        tags (list[str]): List of tags associated to the dataset.
         is_zip (bool): Whether the dataset is a zip file.
     """
 
@@ -46,14 +46,12 @@ class N2V_BSD68(PortfolioEntry):
             "Conference on Computer Vision. ICCV 2001, Vancouver, BC, "
             "Canada, 2001, pp. 416-423 vol.2, doi: "
             "10.1109/ICCV.2001.937655.",
-            files={
-                "BSD68_reproducibility_data/test": [
-                    "bsd68_gaussian25.npy",
-                    "bsd68_groundtruth.npy",
-                ],
-                "BSD68_reproducibility_data/train": ["DCNN400_train_gaussian25.npy"],
-                "BSD68_reproducibility_data/val": ["DCNN400_validation_gaussian25.npy"],
-            },
+            files=[
+                "BSD68_reproducibility_data/test/bsd68_gaussian25.npy",
+                "BSD68_reproducibility_data/test/bsd68_groundtruth.npy",
+                "BSD68_reproducibility_data/train/DCNN400_train_gaussian25.npy",
+                "BSD68_reproducibility_data/val/DCNN400_validation_gaussian25.npy",
+            ],
             size=875.0,
             tags=["denoising", "natural images"],
         )
@@ -64,17 +62,17 @@ class N2V_SEM(PortfolioEntry):
 
     Attributes
     ----------
-        portfolio (str): Name of the portfolio to which the dataset.
+        portfolio (str): Name of the portfolio to which the dataset belong.
         name (str): Name of the dataset.
         url (str): URL of the dataset.
-        file_name (str): Name of the downloaded file.
-        hash (str): SHA256 hash of the downloaded file.
         description (str): Description of the dataset.
         license (str): License of the dataset.
         citation (str): Citation to use when referring to the dataset.
-        files (dict): Dictionary containing the files to download.
-        size (float): Size of the dataset in MB.
-        tags (list): List of tags associated to the dataset.
+        file_name (str): Name of the downloaded file.
+        hash (str): SHA256 hash of the downloaded file.
+        files (list[str]): List of files in the dataset.
+        size (int): Size of the dataset in MB.
+        tags (list[str]): List of tags associated to the dataset.
         is_zip (bool): Whether the dataset is a zip file.
     """
 
@@ -91,9 +89,7 @@ class N2V_SEM(PortfolioEntry):
             citation="T.-O. Buchholz, A. Krull, R. Shahidi, G. Pigino, G. Jékely, "
             'F. Jug, "Content-aware image restoration for electron '
             'microscopy", Methods Cell Biol 152, 277-289',
-            files={
-                ".": ["train.tif", "validation.tif"],
-            },
+            files=["train.tif", "validation.tif"],
             size=13.0,
             tags=["denoising", "electron microscopy"],
         )
@@ -104,17 +100,17 @@ class N2V_RGB(PortfolioEntry):
 
     Attributes
     ----------
-        portfolio (str): Name of the portfolio to which the dataset.
+        portfolio (str): Name of the portfolio to which the dataset belong.
         name (str): Name of the dataset.
         url (str): URL of the dataset.
-        file_name (str): Name of the downloaded file.
-        hash (str): SHA256 hash of the downloaded file.
         description (str): Description of the dataset.
         license (str): License of the dataset.
         citation (str): Citation to use when referring to the dataset.
-        files (dict): Dictionary containing the files to download.
-        size (float): Size of the dataset in MB.
-        tags (list): List of tags associated to the dataset.
+        file_name (str): Name of the downloaded file.
+        hash (str): SHA256 hash of the downloaded file.
+        files (list[str]): List of files in the dataset.
+        size (int): Size of the dataset in MB.
+        tags (list[str]): List of tags associated to the dataset.
         is_zip (bool): Whether the dataset is a zip file.
     """
 
@@ -131,9 +127,9 @@ class N2V_RGB(PortfolioEntry):
             'Denoising From Single Noisy Images," 2019 IEEE/CVF '
             "Conference on Computer Vision and Pattern Recognition (CVPR),"
             " 2019, pp. 2124-2132",
-            files={
-                ".": ["longBeach.png"],
-            },
+            files=[
+                "longBeach.png",
+            ],
             size=10.4,
             tags=["denoising", "natural images", "RGB"],
         )
@@ -144,17 +140,17 @@ class Flywing(PortfolioEntry):
 
     Attributes
     ----------
-        portfolio (str): Name of the portfolio to which the dataset.
+        portfolio (str): Name of the portfolio to which the dataset belong.
         name (str): Name of the dataset.
         url (str): URL of the dataset.
-        file_name (str): Name of the downloaded file.
-        hash (str): SHA256 hash of the downloaded file.
         description (str): Description of the dataset.
         license (str): License of the dataset.
         citation (str): Citation to use when referring to the dataset.
-        files (dict): Dictionary containing the files to download.
-        size (float): Size of the dataset in MB.
-        tags (list): List of tags associated to the dataset.
+        file_name (str): Name of the downloaded file.
+        hash (str): SHA256 hash of the downloaded file.
+        files (list[str]): List of files in the dataset.
+        size (int): Size of the dataset in MB.
+        tags (list[str]): List of tags associated to the dataset.
         is_zip (bool): Whether the dataset is a zip file.
     """
 
@@ -170,9 +166,9 @@ class Flywing(PortfolioEntry):
             citation="Buchholz, T.O., Prakash, M., Schmidt, D., Krull, A., Jug, "
             "F.: Denoiseg: joint denoising and segmentation. In: European "
             "Conference on Computer Vision (ECCV). pp. 324-337. Springer (2020) 8, 9",
-            files={
-                ".": ["flywing.tif"],
-            },
+            files=[
+                "flywing.tif",
+            ],
             size=10.2,
             tags=["denoising", "membrane", "fluorescence"],
         )
@@ -183,17 +179,17 @@ class Convallaria(PortfolioEntry):
 
     Attributes
     ----------
-        portfolio (str): Name of the portfolio to which the dataset.
+        portfolio (str): Name of the portfolio to which the dataset belong.
         name (str): Name of the dataset.
         url (str): URL of the dataset.
-        file_name (str): Name of the file to download.
-        hash (str): SHA256 hash of the downloaded file.
         description (str): Description of the dataset.
         license (str): License of the dataset.
         citation (str): Citation to use when referring to the dataset.
-        files (dict): Dictionary containing the files to download.
-        size (float): Size of the dataset in MB.
-        tags (list): List of tags associated to the dataset.
+        file_name (str): Name of the downloaded file.
+        hash (str): SHA256 hash of the downloaded file.
+        files (list[str]): List of files in the dataset.
+        size (int): Size of the dataset in MB.
+        tags (list[str]): List of tags associated to the dataset.
         is_zip (bool): Whether the dataset is a zip file.
     """
 
@@ -211,12 +207,10 @@ class Convallaria(PortfolioEntry):
             citation="Krull, A., Vičar, T., Prakash, M., Lalit, M., & Jug, F. (2020). "
             "Probabilistic noise2void: Unsupervised content-aware denoising. Frontiers"
             " in Computer Science, 2, 5.",
-            files={
-                "Convallaria_diaphragm": [
-                    "20190520_tl_25um_50msec_05pc_488_130EM_Conv.tif",
-                    "20190726_tl_50um_500msec_wf_130EM_FD.tif",
-                ],
-            },
+            files=[
+                "Convallaria_diaphragm/20190520_tl_25um_50msec_05pc_488_130EM_Conv.tif",
+                "Convallaria_diaphragm/20190726_tl_50um_500msec_wf_130EM_FD.tif",
+            ],
             size=344.0,
             tags=["denoising", "membrane", "fluorescence"],
         )

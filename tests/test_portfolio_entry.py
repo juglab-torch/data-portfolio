@@ -9,6 +9,13 @@ def test_download(tmp_path, pale_blue_dot: PortfolioEntry):
     assert Path(pale_blue_dot.download(tmp_path)).exists()
 
 
+def test_download_zip(tmp_path, pale_blue_dot_zip: PortfolioEntry):
+    files = pale_blue_dot_zip.download(tmp_path)
+
+    for file in files:
+        assert Path(file).exists(), f"{file} does not exist."
+
+
 def test_download_in_invalid_path(tmp_path, pale_blue_dot: PortfolioEntry):
     """Test that downloading to an invalid path raises an error."""
     file_name = "file.txt"
@@ -63,9 +70,31 @@ def test_change_entry(pale_blue_dot: PortfolioEntry):
         pale_blue_dot.files = {}
 
 
-def test_registry_name(pale_blue_dot):
+def test_registry_name(pale_blue_dot: PortfolioEntry):
     """Test that the registry name is correct."""
     assert (
         pale_blue_dot.get_registry_name()
         == pale_blue_dot.portfolio + "-" + pale_blue_dot.name
     )
+
+
+def test_name_with_space():
+    with pytest.raises(ValueError):
+        PortfolioEntry(
+            name="name with space",
+            url="url",
+            portfolio="portfolio",
+            description="description",
+            license="license",
+            citation="citation",
+            file_name="file name",
+            sha256="34973248736ygdw3",
+            files=["dsada"],
+            size=1,
+            tags=["dsadas"],
+        )
+
+
+def test_entry_to_str(pale_blue_dot: PortfolioEntry):
+    """Test the export to str and dict."""
+    assert str(pale_blue_dot) == str(pale_blue_dot.to_dict())

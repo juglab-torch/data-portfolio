@@ -13,7 +13,7 @@ def test_get_pooch(portfolio: PortfolioManager):
     for key in portfolio_dict.keys():
         count_entries += len(portfolio_dict[key].list_datasets())
 
-    assert len(poochfolio.registry) == count_entries + 1  # count test dataset
+    assert len(poochfolio.registry) == count_entries + 2  # count test datasets
 
 
 def test_get_registry_path():
