@@ -14,7 +14,7 @@ from .utils import (
 DATASETS = list(PortfolioManager().denoiseg)
 
 
-def all_datasets_getters(portfolio: PortfolioManager):
+def test_all_datasets_getters(portfolio: PortfolioManager):
     assert isinstance(portfolio.denoiseg.DSB2018_n0, PortfolioEntry)
     assert isinstance(portfolio.denoiseg.DSB2018_n10, PortfolioEntry)
     assert isinstance(portfolio.denoiseg.DSB2018_n20, PortfolioEntry)
