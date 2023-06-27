@@ -23,6 +23,7 @@ from .denoising_datasets import (
 from .portfolio_entry import PortfolioEntry
 from .utils.download_utils import get_registry_path
 from .utils.pale_blue_dot import PaleBlueDot
+from .utils.pale_blue_dot_zip import PaleBlueDotZip
 
 
 class IterablePortfolio:
@@ -487,9 +488,14 @@ class PortfolioManager:
                 f"{pale_blue_dot.get_registry_name()} "
                 f"{pale_blue_dot.hash} {pale_blue_dot.url}\n"
             )
+            pale_blue_dot_zip = PaleBlueDotZip()
+            file.write(
+                f"{pale_blue_dot_zip.get_registry_name()} "
+                f"{pale_blue_dot_zip.hash} {pale_blue_dot_zip.url}\n"
+            )
 
 
-def update_registry(path: str | Path | None) -> None:
+def update_registry(path: str | Path | None = None) -> None:
     """Update the registry.txt file."""
     if path is None:
         path = get_registry_path()

@@ -4,6 +4,7 @@ import pytest
 
 from careamics_portfolio import PortfolioManager, update_registry
 from careamics_portfolio.portfolio import IterablePortfolio
+from careamics_portfolio.utils import get_registry_path
 
 
 def registry_checker(portfolio: PortfolioManager, path_to_file: Path) -> None:
@@ -13,7 +14,7 @@ def registry_checker(portfolio: PortfolioManager, path_to_file: Path) -> None:
     portfolio_dict = portfolio.as_dict()
 
     # count the number of entries
-    count_entries = 1  # count test dataset
+    count_entries = 2  # count test dataset
     for key in portfolio_dict.keys():
         count_entries += len(portfolio_dict[key].list_datasets())
 
@@ -68,6 +69,7 @@ def test_iterable_portfolios(iter_portfolio: IterablePortfolio):
     portfolio : Portfolio
         Portfolio to test.
     """
+    # iterate over portfolio
     entries = [entry.name for entry in iter_portfolio]
     assert entries == iter_portfolio.list_datasets()
 
@@ -106,6 +108,14 @@ def test_iterable_portfolio_as_dict(iter_portfolio: IterablePortfolio):
         assert "Tags" in entry
 
 
+@pytest.mark.parametrize("iter_portfolio", ITERABLES)
+def test_iterableportfolio_as_str(iter_portfolio: IterablePortfolio):
+    """Test that the str method works on portfolios."""
+    str_portfolio = str(iter_portfolio)
+    for entry in iter_portfolio:
+        assert entry.name in str_portfolio, f"{entry.name} not in {str_portfolio}"
+
+
 def test_portfolio_as_dict(portfolio: PortfolioManager):
     """Test that the as_dict method works on portfolios.
 
@@ -117,6 +127,23 @@ def test_portfolio_as_dict(portfolio: PortfolioManager):
     portfolio_dict = portfolio.as_dict()
     assert len(portfolio_dict) > 0
     assert len(portfolio_dict) == len(ITERABLES)
+
+
+def test_portfolio_as_str(portfolio: PortfolioManager):
+    """Test that the str method works on portfolios.
+
+    Note: we took a shortcut here since 'denoiseg' vs 'DenoiSeg'
+    is annoying to check.
+    """
+    dict_portfolio = portfolio.as_dict()
+    str_portfolio = str(portfolio)
+
+    for key in dict_portfolio.keys():
+        name = dict_portfolio[key].name
+        assert name in str_portfolio.lower(), f"{name} not in {str_portfolio}"
+
+        for entry in dict_portfolio[key]:
+            assert entry.name in str_portfolio, f"{entry.name} not in {str_portfolio}"
 
 
 def test_export_to_json(tmp_path, portfolio: PortfolioManager):
@@ -178,3 +205,9 @@ def test_update_registry(tmp_path, portfolio: PortfolioManager):
 
     # verify registry
     registry_checker(portfolio, path_to_file)
+
+    # when using no argument, the default path is used
+    update_registry()
+
+    # verify registry
+    registry_checker(portfolio, get_registry_path())

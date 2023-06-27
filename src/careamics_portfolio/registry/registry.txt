@@ -21,3 +21,4 @@ denoiseg-MouseNuclei_n20 d3d1bf8c89bb97a673a0791874e5b75a6a516ccaaeece0244b4e1e0
 
 # Test sample
 test-PaleBlueDot 68d0f037a448dc099e893b8cbf4d303ffa4b4289903c764f737101d6ad7555dd https://download.fht.org/jug/careamics/P36254.jpg
+test-PaleBlueDotZip 90b03ec7a9e1980fd112a40c2c935015bb349cdf89fbf3db78c715dd2a49db47 https://download.fht.org/jug/careamics/pale_blue_dot.zip
