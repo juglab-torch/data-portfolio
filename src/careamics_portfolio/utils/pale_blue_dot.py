@@ -8,15 +8,15 @@ class PaleBlueDot(PortfolioEntry):
     ----------
         portfolio (str): Name of the portfolio to which the dataset belong.
         name (str): Name of the dataset.
-        url (str): URL to the dataset.
-        file_name (str): Name of the file.
-        hash (str): SHA256 hash of the downloaded file.
+        url (str): URL of the dataset.
         description (str): Description of the dataset.
-        citation (str): Citation of the dataset.
         license (str): License of the dataset.
-        files (dict): Dictionary of files.
-        size (float): Size of the dataset in MB.
-        tags (list): List of tags associated to the dataset.
+        citation (str): Citation to use when referring to the dataset.
+        file_name (str): Name of the downloaded file.
+        hash (str): SHA256 hash of the downloaded file.
+        files (list[str]): List of files in the dataset.
+        size (int): Size of the dataset in MB.
+        tags (list[str]): List of tags associated to the dataset.
         is_zip (bool): Whether the dataset is a zip file.
     """
 
@@ -24,7 +24,7 @@ class PaleBlueDot(PortfolioEntry):
         super().__init__(
             portfolio="test",
             name="PaleBlueDot",
-            url="https://upload.wikimedia.org/wikipedia/commons/7/73/Pale_Blue_Dot.png",
+            url="https://download.fht.org/jug/careamics/P36254.jpg",
             file_name="P36254.jpg",
             sha256="68d0f037a448dc099e893b8cbf4d303ffa4b4289903c764f737101d6ad7555dd",
             description="Pale Blue Dot, credit NASA/JPL-Caltech."
@@ -47,9 +47,9 @@ class PaleBlueDot(PortfolioEntry):
             "artifacts resulting from the magnification.",
             citation="NASA/JPL-Caltech",
             license="Public domain",
-            files={
-                ".": ["P36254.jpg"],
-            },
+            files=[
+                "P36254.jpg",
+            ],
             size=0.4,
             tags=["pale blue dot", "voyager", "nasa", "jpl"],
             is_zip=False,

@@ -1,6 +1,5 @@
 import os
 from pathlib import Path
-from typing import Dict, List
 
 import pytest
 
@@ -8,16 +7,8 @@ from careamics_portfolio.portfolio import IterablePortfolio
 from careamics_portfolio.portfolio_entry import PortfolioEntry
 
 
-def file_checker(path: Path, root_name: str, files: Dict[str, List[str]]) -> None:
-    for folder, file_list in files.items():
-        folder_path = path / root_name / folder
-        for file in file_list:
-            assert (
-                folder_path / file
-            ).is_file(), f"{file} does not exist in {folder_path}."
-
-
 def unique_url_checker(iter_portfolio: IterablePortfolio) -> None:
+    """Check that all urls are unique."""
     urls = []
     for entry in iter_portfolio:
         # add to list of urls
@@ -27,6 +18,7 @@ def unique_url_checker(iter_portfolio: IterablePortfolio) -> None:
 
 
 def unique_hash_checker(iter_portfolio: IterablePortfolio) -> None:
+    """Check that all hashes are unique."""
     hashes = []
     for entry in iter_portfolio:
         # add to list of hashes
@@ -38,6 +30,8 @@ def unique_hash_checker(iter_portfolio: IterablePortfolio) -> None:
 
 
 def portoflio_entry_checker(entry: PortfolioEntry) -> None:
+    """Check that the PortfolioEntry does not have null or empty fields,
+    as well as a non-null size and at least one file."""
     assert entry.name is not None and entry.name != "", f"Invalid name in {entry}"
     assert entry.url is not None and entry.url != "", f"Invalid url in {entry}"
     assert entry.hash is not None and entry.hash != "", f"Invalid md5 hash in {entry}"
@@ -58,8 +52,10 @@ def portoflio_entry_checker(entry: PortfolioEntry) -> None:
 
 
 def download_checker(path: Path, dataset: PortfolioEntry) -> None:
+    """Test that the file can be downloaded and that all fields
+    correspond to reality."""
     # download dataset
-    dataset.download(path)
+    files = dataset.download(path)
 
     # check that the zip file exists
     path_to_zip = path / dataset.get_registry_name()
@@ -67,9 +63,19 @@ def download_checker(path: Path, dataset: PortfolioEntry) -> None:
         path_to_zip.exists()
     ), f"{dataset.get_registry_name()} does not exist after download."
 
-    # check that the files are there
+    # root folder where the downloaded files are
     if dataset.is_zip:
-        file_checker(path, dataset.get_registry_name() + ".unzip", dataset.files)
+        folder_root = path / (dataset.get_registry_name() + ".unzip")
+    else:
+        folder_root = path
+
+    # check that the files exist and are in the returned list
+    # TODO: currently some files have hidden macOS files that need to be removed in the
+    # future
+    files_portfolio = [str(Path(folder_root, s)) for s in dataset.files]
+    for file in files_portfolio:
+        assert Path(file).exists(), f"{file} does not exist."
+        assert file in files, f"{file} not in downloaded files."
 
     # check file size with a tolerance of 5% or 3MB
     file_size = os.path.getsize(path_to_zip) / 1024 / 1024  # MB
