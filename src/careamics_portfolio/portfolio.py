@@ -352,7 +352,7 @@ class Denoising(IterablePortfolio):
         return self._N2V_RGB
 
     @property
-    def flywing(self) -> Flywing:
+    def Flywing(self) -> Flywing:
         """Flywing dataset.
 
         Returns
