@@ -1,14 +1,9 @@
-name: CI
+name: Release
 
 on:
   push:
-    branches:
-      - main
-  pull_request:
-  workflow_dispatch:
-  schedule:
-    # run every week (for --pre release tests)
-    - cron: "0 0 * * 0"
+    tags:
+      - "v*.*.*"
 
 jobs:
   check-manifest:
@@ -69,56 +64,37 @@ jobs:
       - name: Coverage
         uses: codecov/codecov-action@v3
 
-  update_registry:
-    name: Update datasets summary and registry
+  deploy:
+    name: Release
     needs: test
-    # run on PR so that we can check it out later
-    if: success() && github.event_name == 'pull_request'
+    if: success() && startsWith(github.ref, 'refs/tags/')
     runs-on: ubuntu-latest
+    environment: release
+    permissions:
+      # IMPORTANT: this permission is mandatory for trusted publishing
+      id-token: write
+
+      # This permission allows writing releases
+      contents: write
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - name: Checkout PR
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh pr checkout ${{ github.event.pull_request.number }}
-
-      - name: 🐍 Set up Python
+      - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: "3.x"
 
-      - name: Build package
-        run: python -m pip install .
-
-      # important to maintain the json summary
-      - name: Run json export script
-        run: python scripts/update_json.py
-
-      # not sure that is useful since tests will not pass with the wrong registry
-      - name: Run json export script
-        run: python scripts/update_registry.py
-
-      - name: Verify Changed files
-        uses: tj-actions/verify-changed-files@v16
-        id: verify-changed-files
-        with:
-          files: |
-            datasets/datasets.json
-            src/careamics_portfolio/registry/registry.txt
-
-      - name: Commit changes
-        if: steps.verify-changed-files.outputs.files_changed == 'true'
+      - name: Build
         run: |
-          git config user.name 'github-actions[bot]'
-          git config user.email 'github-actions[bot]@users.noreply.github.com'  
-          git add datasets/datasets.json
-          git add src/careamics_portfolio/registry/registry.txt
-          git commit -m "Update datasets.json"
+          python -m pip install build
+          python -m build
 
-      - name: Push changes
-        if: steps.verify-changed-files.outputs.files_changed == 'true'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: git push
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+
+      - uses: softprops/action-gh-release@v1
+        with:
+          generate_release_notes: true
