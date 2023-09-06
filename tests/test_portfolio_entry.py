@@ -35,14 +35,14 @@ def test_change_entry(pale_blue_dot: PortfolioEntry):
         Test PortfolioEntry.
     """
     # Verify that we can access the members
-    pale_blue_dot.name
-    pale_blue_dot.url
-    pale_blue_dot.description
-    pale_blue_dot.license
-    pale_blue_dot.citation
-    pale_blue_dot.file_name
-    pale_blue_dot.hash
-    pale_blue_dot.files
+    _ = pale_blue_dot.name
+    _ = pale_blue_dot.url
+    _ = pale_blue_dot.description
+    _ = pale_blue_dot.license
+    _ = pale_blue_dot.citation
+    _ = pale_blue_dot.file_name
+    _ = pale_blue_dot.hash
+    _ = pale_blue_dot.files
 
     # Check that changing members raises errors
     with pytest.raises(AttributeError):
