@@ -157,7 +157,7 @@ class Denoising(IterablePortfolio):
 
 Finally, update the registry by running the following pythons script:
 ```bash
-python script/update_registry.py
+python scripts/update_registry.py
 ```
 
 or run:
@@ -169,7 +169,7 @@ update_registry()
 The [datasets.json](https://raw.githubusercontent.com/CAREamics/careamics-portfolio/main/datasets/datasets.json)
 file is updated using:
 ```bash
-python script/update_json.py
+python scripts/update_json.py
 ```
 
 ### 4 - Verify that all tests pass
