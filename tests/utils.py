@@ -74,8 +74,12 @@ def download_checker(path: Path, dataset: PortfolioEntry) -> None:
     # future
     files_portfolio = [str(Path(folder_root, s)) for s in dataset.files]
     for file in files_portfolio:
-        assert Path(file).exists(), f"{file} does not exist."
-        assert file in files, f"{file} not in downloaded files."
+        assert Path(file).name in [
+            f.name for f in list(Path(file).parent.rglob("*"))
+        ], f"{file} does not exist."
+        assert Path(file).name in [
+            Path(f).name for f in files
+        ], f"{file} not in downloaded files."
 
     # check file size with a tolerance of 5% or 3MB
     file_size = os.path.getsize(path_to_zip) / 1024 / 1024  # MB

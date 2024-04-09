@@ -26,17 +26,17 @@ class N2N_SEM(PortfolioEntry):
         super().__init__(
             portfolio=DENOISING,
             name="N2N_SEM",
-            url="https://download.fht.org/jug/n2n/n2n_sem_data.zip",
-            file_name="n2n_sem_data.zip",
-            sha256="cffe262efaa30e99129268d6eb9399c20417333b77fbdb82abf661a8d42b9551",
+            url="https://download.fht.org/jug/n2n/SEM.zip",
+            file_name="SEM.zip",
+            sha256="03aca31eac4d00a8381577579de2d48b98c77bab91e2f8f925999ec3252d0dac",
             description="SEM dataset from T.-O. Buchholz et al "
             "(Methods Cell Biol, 2020).",
             license="CC-BY-4.0",
             citation="T.-O. Buchholz, A. Krull, R. Shahidi, G. Pigino, G. Jékely, "
             'F. Jug, "Content-aware image restoration for electron '
             'microscopy", Methods Cell Biol 152, 277-289',
-            files=["train.tif", "validation.tif"],
-            size=167.0,
+            files=["train.tif", "test.tif"],
+            size=172.7,
             tags=["denoising", "electron microscopy"],
         )
 
