@@ -17,6 +17,7 @@ def test_all_datasets_getters(portfolio: PortfolioManager):
     assert isinstance(portfolio.denoising.N2V_SEM, PortfolioEntry)
     assert isinstance(portfolio.denoising.N2V_BSD68, PortfolioEntry)
     assert isinstance(portfolio.denoising.N2V_RGB, PortfolioEntry)
+    assert isinstance(portfolio.denoising.N2N_SEM, PortfolioEntry)
     assert isinstance(portfolio.denoising.Flywing, PortfolioEntry)
     assert isinstance(portfolio.denoising.Convallaria, PortfolioEntry)
 

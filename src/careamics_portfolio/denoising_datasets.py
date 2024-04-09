@@ -3,6 +3,44 @@ from .portfolio_entry import PortfolioEntry
 DENOISING = "denoising"
 
 
+class N2N_SEM(PortfolioEntry):
+    """SEM dataset.
+
+    Attributes
+    ----------
+        portfolio (str): Name of the portfolio to which the dataset belong.
+        name (str): Name of the dataset.
+        url (str): URL of the dataset.
+        description (str): Description of the dataset.
+        license (str): License of the dataset.
+        citation (str): Citation to use when referring to the dataset.
+        file_name (str): Name of the downloaded file.
+        hash (str): SHA256 hash of the downloaded file.
+        files (list[str]): List of files in the dataset.
+        size (int): Size of the dataset in MB.
+        tags (list[str]): List of tags associated to the dataset.
+        is_zip (bool): Whether the dataset is a zip file.
+    """
+
+    def __init__(self) -> None:
+        super().__init__(
+            portfolio=DENOISING,
+            name="N2N_SEM",
+            url="https://download.fht.org/jug/n2n/SEM.zip",
+            file_name="SEM.zip",
+            sha256="03aca31eac4d00a8381577579de2d48b98c77bab91e2f8f925999ec3252d0dac",
+            description="SEM dataset from T.-O. Buchholz et al "
+            "(Methods Cell Biol, 2020).",
+            license="CC-BY-4.0",
+            citation="T.-O. Buchholz, A. Krull, R. Shahidi, G. Pigino, G. Jékely, "
+            'F. Jug, "Content-aware image restoration for electron '
+            'microscopy", Methods Cell Biol 152, 277-289',
+            files=["train.tif", "test.tif"],
+            size=172.7,
+            tags=["denoising", "electron microscopy"],
+        )
+
+
 class N2V_BSD68(PortfolioEntry):
     """BSD68 dataset.
 

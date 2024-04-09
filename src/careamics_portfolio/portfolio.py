@@ -14,6 +14,7 @@ from .denoiseg_datasets import (
 )
 from .denoising_datasets import (
     DENOISING,
+    N2N_SEM,
     N2V_BSD68,
     N2V_RGB,
     N2V_SEM,
@@ -310,6 +311,7 @@ class Denoising(IterablePortfolio):
     """
 
     def __init__(self) -> None:
+        self._N2N_SEM = N2N_SEM()
         self._N2V_BSD68 = N2V_BSD68()
         self._N2V_SEM = N2V_SEM()
         self._N2V_RGB = N2V_RGB()
@@ -317,6 +319,17 @@ class Denoising(IterablePortfolio):
         self._Convallaria = Convallaria()
 
         super().__init__(DENOISING)
+
+    @property
+    def N2N_SEM(self) -> N2N_SEM:
+        """SEM dataset.
+
+        Returns
+        -------
+        N2N_SEM
+            SEM dataset.
+        """
+        return self._N2N_SEM
 
     @property
     def N2V_BSD68(self) -> N2V_BSD68:
