@@ -1,7 +1,7 @@
 {
     "denoising": {
         "N2N_SEM": {
-            "URL": "https://download.fht.org/jug/n2n_sem_data/n2n_sem_data.zip",
+            "URL": "https://download.fht.org/jug/n2n/n2n_sem_data.zip",
             "Description": "SEM dataset from T.-O. Buchholz et al (Methods Cell Biol, 2020).",
             "Citation": "T.-O. Buchholz, A. Krull, R. Shahidi, G. Pigino, G. J\u00e9kely, F. Jug, \"Content-aware image restoration for electron microscopy\", Methods Cell Biol 152, 277-289",
             "License": "CC-BY-4.0",

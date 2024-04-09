@@ -5,6 +5,7 @@
 denoising-N2V_BSD68 e31d77060d4104d5a5ac14c11ad88e5e83636d396de8b80f294dd2033b4ba5a6 https://download.fht.org/jug/n2v/BSD68_reproducibility_data.zip
 denoising-N2V_SEM 7600a17c3dbd4992ea547be12458640c21e797eef6a9f776f36ba5890f26855d https://download.fht.org/jug/n2v/SEM.zip
 denoising-N2V_RGB 4c2010c6b5c253d3a580afe744cbff969d387617c9dde29fea4463636d285657 https://download.fht.org/jug/n2v/RGB.zip
+denoising-N2N_SEM cffe262efaa30e99129268d6eb9399c20417333b77fbdb82abf661a8d42b9551 https://download.fht.org/jug/n2n/n2n_sem_data.zip
 denoising-Flywing 01106b6dc096c423babfca47ef27059a01c2ca053769da06e8649381089a559f https://download.fht.org/jug/n2v/flywing-data.zip
 denoising-Convallaria 8a2ac3e2792334c833ee8a3ca449fc14eada18145f9d56fa2cb40f462c2e8909 https://cloud.mpi-cbg.de/index.php/s/BE8raMtHQlgLDF3/download
 

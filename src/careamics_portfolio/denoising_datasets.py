@@ -26,7 +26,7 @@ class N2N_SEM(PortfolioEntry):
         super().__init__(
             portfolio=DENOISING,
             name="N2N_SEM",
-            url="https://download.fht.org/jug/n2n_sem_data/n2n_sem_data.zip",
+            url="https://download.fht.org/jug/n2n/n2n_sem_data.zip",
             file_name="n2n_sem_data.zip",
             sha256="cffe262efaa30e99129268d6eb9399c20417333b77fbdb82abf661a8d42b9551",
             description="SEM dataset from T.-O. Buchholz et al "
