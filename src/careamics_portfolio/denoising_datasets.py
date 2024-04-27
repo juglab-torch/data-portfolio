@@ -3,6 +3,44 @@ from .portfolio_entry import PortfolioEntry
 DENOISING = "denoising"
 
 
+class CARE_U2OS(PortfolioEntry):
+    """U2OS cells with artificial noise dataset.
+
+    Attributes
+    ----------
+        portfolio (str): Name of the portfolio to which the dataset belong.
+        name (str): Name of the dataset.
+        url (str): URL of the dataset.
+        description (str): Description of the dataset.
+        license (str): License of the dataset.
+        citation (str): Citation to use when referring to the dataset.
+        file_name (str): Name of the downloaded file.
+        hash (str): SHA256 hash of the downloaded file.
+        size (int): Size of the dataset in MB.
+        tags (list[str]): List of tags associated to the dataset.
+        is_zip (bool): Whether the dataset is a zip file.
+    """
+
+    def __init__(self) -> None:
+        super().__init__(
+            portfolio=DENOISING,
+            name="CARE_U2OS",
+            url="https://dl-at-mbl-2023-data.s3.us-east-2.amazonaws.com/"
+            "image_restoration_data.zip",
+            file_name="image_restoration_data.zip",
+            sha256="4112d3666a4f419bbd51ab0b7853c12e16c904f89481cbe7f1a90e48f3241f72",
+            description="CARE dataset used during the MBL course. Original data from"
+            "the image set BBBC006v1 of the Broad Bioimage Benchmark Collection "
+            "(Ljosa et al., Nature Methods, 2012). The iamges were corrupted with "
+            "artificial noise.",
+            license="CC0-1.0",
+            citation="We used the image set BBBC006v1 from the Broad Bioimage "
+            "Benchmark Collection [Ljosa et al., Nature Methods, 2012].",
+            size=760.5,
+            tags=["denoising", "nuclei", "fluorescence"],
+        )
+
+
 class N2N_SEM(PortfolioEntry):
     """SEM dataset.
 
