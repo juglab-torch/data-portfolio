@@ -74,6 +74,19 @@
                 "membrane",
                 "fluorescence"
             ]
+        },
+        "CARE_U2OS": {
+            "URL": "https://dl-at-mbl-2023-data.s3.us-east-2.amazonaws.com/image_restoration_data.zip",
+            "Description": "CARE dataset used during the MBL course. Original data fromthe image set BBBC006v1 of the Broad Bioimage Benchmark Collection (Ljosa et al., Nature Methods, 2012). The iamges were corrupted with artificial noise.",
+            "Citation": "We used the image set BBBC006v1 from the Broad Bioimage Benchmark Collection [Ljosa et al., Nature Methods, 2012].",
+            "License": "CC0-1.0",
+            "Hash": "4112d3666a4f419bbd51ab0b7853c12e16c904f89481cbe7f1a90e48f3241f72",
+            "File size": "760.5 MB",
+            "Tags": [
+                "denoising",
+                "nuclei",
+                "fluorescence"
+            ]
         }
     },
     "denoiseg": {
