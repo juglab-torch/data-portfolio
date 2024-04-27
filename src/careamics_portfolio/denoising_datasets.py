@@ -16,7 +16,6 @@ class N2N_SEM(PortfolioEntry):
         citation (str): Citation to use when referring to the dataset.
         file_name (str): Name of the downloaded file.
         hash (str): SHA256 hash of the downloaded file.
-        files (list[str]): List of files in the dataset.
         size (int): Size of the dataset in MB.
         tags (list[str]): List of tags associated to the dataset.
         is_zip (bool): Whether the dataset is a zip file.
@@ -35,7 +34,6 @@ class N2N_SEM(PortfolioEntry):
             citation="T.-O. Buchholz, A. Krull, R. Shahidi, G. Pigino, G. Jékely, "
             'F. Jug, "Content-aware image restoration for electron '
             'microscopy", Methods Cell Biol 152, 277-289',
-            files=["train.tif", "test.tif"],
             size=172.7,
             tags=["denoising", "electron microscopy"],
         )
@@ -54,7 +52,6 @@ class N2V_BSD68(PortfolioEntry):
         citation (str): Citation to use when referring to the dataset.
         file_name (str): Name of the downloaded file.
         hash (str): SHA256 hash of the downloaded file.
-        files (list[str]): List of files in the dataset.
         size (int): Size of the dataset in MB.
         tags (list[str]): List of tags associated to the dataset.
         is_zip (bool): Whether the dataset is a zip file.
@@ -84,146 +81,6 @@ class N2V_BSD68(PortfolioEntry):
             "Conference on Computer Vision. ICCV 2001, Vancouver, BC, "
             "Canada, 2001, pp. 416-423 vol.2, doi: "
             "10.1109/ICCV.2001.937655.",
-            files=[
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_1.tiff",
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_2.tiff",
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_3.tiff",
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_4.tiff",
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_5.tiff",
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_6.tiff",
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_7.tiff",
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_8.tiff",
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_9.tiff",
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_10.tiff",
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_11.tiff",
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_12.tiff",
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_13.tiff",
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_14.tiff",
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_15.tiff",
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_16.tiff",
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_17.tiff",
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_18.tiff",
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_19.tiff",
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_20.tiff",
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_21.tiff",
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_22.tiff",
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_23.tiff",
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_24.tiff",
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_25.tiff",
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_26.tiff",
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_27.tiff",
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_28.tiff",
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_29.tiff",
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_30.tiff",
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_31.tiff",
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_32.tiff",
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_33.tiff",
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_34.tiff",
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_35.tiff",
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_36.tiff",
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_37.tiff",
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_38.tiff",
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_39.tiff",
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_40.tiff",
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_41.tiff",
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_42.tiff",
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_43.tiff",
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_44.tiff",
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_45.tiff",
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_46.tiff",
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_47.tiff",
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_48.tiff",
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_49.tiff",
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_50.tiff",
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_51.tiff",
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_52.tiff",
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_53.tiff",
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_54.tiff",
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_55.tiff",
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_56.tiff",
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_57.tiff",
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_58.tiff",
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_59.tiff",
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_60.tiff",
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_61.tiff",
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_62.tiff",
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_63.tiff",
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_64.tiff",
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_65.tiff",
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_66.tiff",
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_67.tiff",
-                "BSD68_reproducibility_data/test/images/bsd68_gaussian25_68.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_1.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_2.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_3.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_4.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_5.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_6.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_7.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_8.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_9.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_10.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_11.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_12.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_13.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_14.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_15.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_16.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_17.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_18.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_19.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_20.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_21.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_22.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_23.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_24.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_25.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_26.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_27.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_28.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_29.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_30.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_31.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_32.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_33.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_34.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_35.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_36.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_37.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_38.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_39.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_40.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_41.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_42.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_43.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_44.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_45.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_46.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_47.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_48.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_49.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_50.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_51.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_52.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_53.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_54.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_55.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_56.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_57.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_58.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_59.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_60.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_61.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_62.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_63.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_64.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_65.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_66.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_67.tiff",
-                "BSD68_reproducibility_data/test/gt/bsd68_groundtruth_68.tiff",
-                "BSD68_reproducibility_data/train/DCNN400_train_gaussian25.tiff",
-                "BSD68_reproducibility_data/val/DCNN400_validation_gaussian25.tiff",
-            ],
             size=395.0,
             tags=["denoising", "natural images"],
         )
@@ -242,7 +99,6 @@ class N2V_SEM(PortfolioEntry):
         citation (str): Citation to use when referring to the dataset.
         file_name (str): Name of the downloaded file.
         hash (str): SHA256 hash of the downloaded file.
-        files (list[str]): List of files in the dataset.
         size (int): Size of the dataset in MB.
         tags (list[str]): List of tags associated to the dataset.
         is_zip (bool): Whether the dataset is a zip file.
@@ -261,7 +117,6 @@ class N2V_SEM(PortfolioEntry):
             citation="T.-O. Buchholz, A. Krull, R. Shahidi, G. Pigino, G. Jékely, "
             'F. Jug, "Content-aware image restoration for electron '
             'microscopy", Methods Cell Biol 152, 277-289',
-            files=["train.tif", "validation.tif"],
             size=13.0,
             tags=["denoising", "electron microscopy"],
         )
@@ -280,7 +135,6 @@ class N2V_RGB(PortfolioEntry):
         citation (str): Citation to use when referring to the dataset.
         file_name (str): Name of the downloaded file.
         hash (str): SHA256 hash of the downloaded file.
-        files (list[str]): List of files in the dataset.
         size (int): Size of the dataset in MB.
         tags (list[str]): List of tags associated to the dataset.
         is_zip (bool): Whether the dataset is a zip file.
@@ -299,9 +153,6 @@ class N2V_RGB(PortfolioEntry):
             'Denoising From Single Noisy Images," 2019 IEEE/CVF '
             "Conference on Computer Vision and Pattern Recognition (CVPR),"
             " 2019, pp. 2124-2132",
-            files=[
-                "longBeach.png",
-            ],
             size=10.4,
             tags=["denoising", "natural images", "RGB"],
         )
@@ -320,7 +171,6 @@ class Flywing(PortfolioEntry):
         citation (str): Citation to use when referring to the dataset.
         file_name (str): Name of the downloaded file.
         hash (str): SHA256 hash of the downloaded file.
-        files (list[str]): List of files in the dataset.
         size (int): Size of the dataset in MB.
         tags (list[str]): List of tags associated to the dataset.
         is_zip (bool): Whether the dataset is a zip file.
@@ -338,9 +188,6 @@ class Flywing(PortfolioEntry):
             citation="Buchholz, T.O., Prakash, M., Schmidt, D., Krull, A., Jug, "
             "F.: Denoiseg: joint denoising and segmentation. In: European "
             "Conference on Computer Vision (ECCV). pp. 324-337. Springer (2020) 8, 9",
-            files=[
-                "flywing.tif",
-            ],
             size=10.2,
             tags=["denoising", "membrane", "fluorescence"],
         )
@@ -359,7 +206,6 @@ class Convallaria(PortfolioEntry):
         citation (str): Citation to use when referring to the dataset.
         file_name (str): Name of the downloaded file.
         hash (str): SHA256 hash of the downloaded file.
-        files (list[str]): List of files in the dataset.
         size (int): Size of the dataset in MB.
         tags (list[str]): List of tags associated to the dataset.
         is_zip (bool): Whether the dataset is a zip file.
@@ -379,10 +225,6 @@ class Convallaria(PortfolioEntry):
             citation="Krull, A., Vičar, T., Prakash, M., Lalit, M., & Jug, F. (2020). "
             "Probabilistic noise2void: Unsupervised content-aware denoising. Frontiers"
             " in Computer Science, 2, 5.",
-            files=[
-                "Convallaria_diaphragm/20190520_tl_25um_50msec_05pc_488_130EM_Conv.tif",
-                "Convallaria_diaphragm/20190726_tl_50um_500msec_wf_130EM_FD.tif",
-            ],
             size=344.0,
             tags=["denoising", "membrane", "fluorescence"],
         )

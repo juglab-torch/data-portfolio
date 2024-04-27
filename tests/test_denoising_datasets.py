@@ -27,7 +27,7 @@ def test_all_datasets_getters(portfolio: PortfolioManager):
 def test_datasets(tmp_path, dataset: PortfolioEntry):
     """Test that all denoising datasets download properly.
 
-    This test also checks the files and size.
+    This test also checks the size.
 
     Parameters
     ----------

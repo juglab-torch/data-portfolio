@@ -42,7 +42,6 @@ def test_change_entry(pale_blue_dot: PortfolioEntry):
     _ = pale_blue_dot.citation
     _ = pale_blue_dot.file_name
     _ = pale_blue_dot.hash
-    _ = pale_blue_dot.files
 
     # Check that changing members raises errors
     with pytest.raises(AttributeError):
@@ -66,9 +65,6 @@ def test_change_entry(pale_blue_dot: PortfolioEntry):
     with pytest.raises(AttributeError):
         pale_blue_dot.hash = ""
 
-    with pytest.raises(AttributeError):
-        pale_blue_dot.files = {}
-
 
 def test_registry_name(pale_blue_dot: PortfolioEntry):
     """Test that the registry name is correct."""
@@ -89,7 +85,6 @@ def test_name_with_space():
             citation="citation",
             file_name="file name",
             sha256="34973248736ygdw3",
-            files=["dsada"],
             size=1,
             tags=["dsadas"],
         )

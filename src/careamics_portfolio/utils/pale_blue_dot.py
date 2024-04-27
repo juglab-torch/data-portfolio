@@ -14,7 +14,6 @@ class PaleBlueDot(PortfolioEntry):
         citation (str): Citation to use when referring to the dataset.
         file_name (str): Name of the downloaded file.
         hash (str): SHA256 hash of the downloaded file.
-        files (list[str]): List of files in the dataset.
         size (int): Size of the dataset in MB.
         tags (list[str]): List of tags associated to the dataset.
         is_zip (bool): Whether the dataset is a zip file.
@@ -47,9 +46,6 @@ class PaleBlueDot(PortfolioEntry):
             "artifacts resulting from the magnification.",
             citation="NASA/JPL-Caltech",
             license="Public domain",
-            files=[
-                "P36254.jpg",
-            ],
             size=0.4,
             tags=["pale blue dot", "voyager", "nasa", "jpl"],
             is_zip=False,

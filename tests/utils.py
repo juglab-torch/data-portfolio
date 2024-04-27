@@ -47,7 +47,6 @@ def portoflio_entry_checker(entry: PortfolioEntry) -> None:
     assert (
         entry.file_name is not None and entry.file_name != ""
     ), f"Invalid file name in {entry}"
-    assert entry.files is not None and len(entry.files) > 0, f"Invalid files in {entry}"
     assert entry.size is not None and entry.size > 0, f"Invalid size in {entry}"
 
 
@@ -55,31 +54,13 @@ def download_checker(path: Path, dataset: PortfolioEntry) -> None:
     """Test that the file can be downloaded and that all fields
     correspond to reality."""
     # download dataset
-    files = dataset.download(path)
+    _ = dataset.download(path)
 
     # check that the zip file exists
     path_to_zip = path / dataset.get_registry_name()
     assert (
         path_to_zip.exists()
     ), f"{dataset.get_registry_name()} does not exist after download."
-
-    # root folder where the downloaded files are
-    if dataset.is_zip:
-        folder_root = path / (dataset.get_registry_name() + ".unzip")
-    else:
-        folder_root = path
-
-    # check that the files exist and are in the returned list
-    # TODO: currently some files have hidden macOS files that need to be removed in the
-    # future
-    files_portfolio = [str(Path(folder_root, s)) for s in dataset.files]
-    for file in files_portfolio:
-        assert Path(file).name in [
-            f.name for f in list(Path(file).parent.rglob("*"))
-        ], f"{file} does not exist."
-        assert Path(file).name in [
-            Path(f).name for f in files
-        ], f"{file} not in downloaded files."
 
     # check file size with a tolerance of 5% or 3MB
     file_size = os.path.getsize(path_to_zip) / 1024 / 1024  # MB

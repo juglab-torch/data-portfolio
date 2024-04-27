@@ -19,7 +19,6 @@ class PortfolioEntry:
         citation (str): Citation to use when referring to the dataset.
         file_name (str): Name of the downloaded file.
         hash (str): SHA256 hash of the downloaded file.
-        files (list[str]): List of files in the dataset.
         size (int): Size of the dataset in MB.
         tags (list[str]): List of tags associated to the dataset.
         is_zip (bool): Whether the dataset is a zip file.
@@ -35,7 +34,6 @@ class PortfolioEntry:
         citation: str,
         file_name: str,
         sha256: str,
-        files: List[str],
         size: float,
         tags: List[str],
         is_zip: bool = True,
@@ -53,7 +51,6 @@ class PortfolioEntry:
         self._citation = citation
         self._file_name = file_name
         self._hash = sha256
-        self._files = files
         self._size = size
         self._tags = tags
         self._is_zip = is_zip
@@ -147,17 +144,6 @@ class PortfolioEntry:
         return self._hash
 
     @property
-    def files(self) -> List[str]:
-        """Dictionary of files in the dataset.
-
-        Returns
-        -------
-        dict[str, list]
-            Dictionary of files in the dataset.
-        """
-        return self._files
-
-    @property
     def size(self) -> float:
         """Size of the dataset in MB.
 
@@ -224,7 +210,6 @@ class PortfolioEntry:
             "citation": self.citation,
             "file_name": self.file_name,
             "hash": self.hash,
-            "files": self.files,
             "size": self.size,
             "tags": self.tags,
         }

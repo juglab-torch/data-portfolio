@@ -52,7 +52,6 @@ class DSB2018(PortfolioEntry, NoisyObject):
         citation (str): Citation to use when referring to the dataset.
         file_name (str): Name of the downloaded file.
         hash (str): SHA256 hash of the downloaded file.
-        files (list[str]): List of files in the dataset.
         size (int): Size of the dataset in MB.
         tags (list[str]): List of tags associated to the dataset.
         is_zip (bool): Whether the dataset is a zip file.
@@ -83,10 +82,6 @@ class DSB2018(PortfolioEntry, NoisyObject):
             "segmentation across imaging experiments: the 2018 Data Science "
             "Bowl. Nat Methods 16, 1247-1253 (2019). "
             "https://doi.org/10.1038/s41592-019-0612-7",
-            files=[
-                f"DSB2018_n{noise_level.value}/train/train_data.npz",
-                f"DSB2018_n{noise_level.value}/test/test_data.npz",
-            ],
             size=self._get_size(noise_level),
             tags=["denoising", "segmentation", "nuclei", "fluorescence"],
         )
@@ -136,7 +131,6 @@ class SegFlywing(PortfolioEntry, NoisyObject):
         citation (str): Citation to use when referring to the dataset.
         file_name (str): Name of the downloaded file.
         hash (str): SHA256 hash of the downloaded file.
-        files (list[str]): List of files in the dataset.
         size (int): Size of the dataset in MB.
         tags (list[str]): List of tags associated to the dataset.
         is_zip (bool): Whether the dataset is a zip file.
@@ -164,10 +158,6 @@ class SegFlywing(PortfolioEntry, NoisyObject):
             citation="Buchholz, T.O., Prakash, M., Schmidt, D., Krull, A., Jug, "
             "F.: Denoiseg: joint denoising and segmentation. In: European "
             "Conference on Computer Vision (ECCV). pp. 324-337. Springer (2020) 8, 9",
-            files=[
-                f"Flywing_n{noise_level.value}/train/train_data.npz",
-                f"Flywing_n{noise_level.value}/test/test_data.npz",
-            ],
             size=self._get_size(noise_level),
             tags=["denoising", "segmentation", "membrane", "fluorescence"],
         )
@@ -217,7 +207,6 @@ class MouseNuclei(PortfolioEntry, NoisyObject):
         citation (str): Citation to use when referring to the dataset.
         file_name (str): Name of the downloaded file.
         hash (str): SHA256 hash of the downloaded file.
-        files (list[str]): List of files in the dataset.
         size (int): Size of the dataset in MB.
         tags (list[str]): List of tags associated to the dataset.
         is_zip (bool): Whether the dataset is a zip file.
@@ -245,10 +234,6 @@ class MouseNuclei(PortfolioEntry, NoisyObject):
             citation="Buchholz, T.O., Prakash, M., Schmidt, D., Krull, A., Jug, "
             "F.: Denoiseg: joint denoising and segmentation. In: European "
             "Conference on Computer Vision (ECCV). pp. 324-337. Springer (2020) 8, 9",
-            files=[
-                f"Mouse_n{noise_level.value}/train/train_data.npz",
-                f"Mouse_n{noise_level.value}/test/test_data.npz",
-            ],
             size=self._get_size(noise_level),
             tags=["denoising", "segmentation", "nuclei", "fluorescence"],
         )
