@@ -13,6 +13,7 @@ from .denoiseg_datasets import (
     SegFlywing,
 )
 from .denoising_datasets import (
+    CARE_U2OS,
     DENOISING,
     N2N_SEM,
     N2V_BSD68,
@@ -308,6 +309,7 @@ class Denoising(IterablePortfolio):
     N2V_RGB (N2V_RGB): RGB dataset.
     flywing (Flywing): Flywing dataset.
     Convallaria (Convallaria): Convallaria dataset.
+    CARE_U2OS (CARE_U2OS): CARE_U2OS dataset.
     """
 
     def __init__(self) -> None:
@@ -317,6 +319,7 @@ class Denoising(IterablePortfolio):
         self._N2V_RGB = N2V_RGB()
         self._flywing = Flywing()
         self._Convallaria = Convallaria()
+        self._CARE_U2OS = CARE_U2OS()
 
         super().__init__(DENOISING)
 
@@ -385,6 +388,17 @@ class Denoising(IterablePortfolio):
             Convallaria dataset.
         """
         return self._Convallaria
+
+    @property
+    def CARE_U2OS(self) -> CARE_U2OS:
+        """CARE_U2OS dataset.
+
+        Returns
+        -------
+        CARE_U2OS
+            CARE_U2OS dataset.
+        """
+        return self._CARE_U2OS
 
 
 @dataclass
