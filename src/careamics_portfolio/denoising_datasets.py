@@ -148,7 +148,7 @@ class N2V_SEM(PortfolioEntry):
             name="N2V_SEM",
             url="https://download.fht.org/jug/n2v/SEM.zip",
             file_name="SEM.zip",
-            sha256="7600a17c3dbd4992ea547be12458640c21e797eef6a9f776f36ba5890f26855d",
+            sha256="e1999b5d10abb1714b7663463f83d0bfb73990f5e0705b6cd212c4d3e824b96c",
             description="Cropped images from a SEM dataset from T.-O. Buchholz et al "
             "(Methods Cell Biol, 2020).",
             license="CC-BY-4.0",
