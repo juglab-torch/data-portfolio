@@ -504,7 +504,7 @@ class PortfolioManager:
                 file.write(f"# {key} \n")
                 for entry in portfolios[key]:
                     file.write(
-                        f"{entry.get_registry_name()} " f"{entry.hash} {entry.url}\n"
+                        f"{entry.get_registry_name()} {entry.hash} {entry.url}\n"
                     )
                 file.write("\n")
 
