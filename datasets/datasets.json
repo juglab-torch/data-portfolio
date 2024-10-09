@@ -29,7 +29,7 @@
             "Description": "Cropped images from a SEM dataset from T.-O. Buchholz et al (Methods Cell Biol, 2020).",
             "Citation": "T.-O. Buchholz, A. Krull, R. Shahidi, G. Pigino, G. J\u00e9kely, F. Jug, \"Content-aware image restoration for electron microscopy\", Methods Cell Biol 152, 277-289",
             "License": "CC-BY-4.0",
-            "Hash": "7600a17c3dbd4992ea547be12458640c21e797eef6a9f776f36ba5890f26855d",
+            "Hash": "e1999b5d10abb1714b7663463f83d0bfb73990f5e0705b6cd212c4d3e824b96c",
             "File size": "13.0 MB",
             "Tags": [
                 "denoising",
