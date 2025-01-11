@@ -7,10 +7,10 @@ EmbedSeg, etc.
 
 __all__ = [
     "PortfolioManager",
-    "update_registry",
     "__author__",
     "__email__",
     "__version__",
+    "update_registry",
 ]
 
 from importlib.metadata import PackageNotFoundError, version
