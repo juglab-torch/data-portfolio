@@ -66,6 +66,7 @@ class IterablePortfolio:
         IterablePortfolio
             Iterator over the portfolio.
         """
+        self._current_index = 0
         return self
 
     def __next__(self) -> PortfolioEntry:
@@ -311,6 +312,7 @@ class Denoising(IterablePortfolio):
     flywing (Flywing): Flywing dataset.
     Convallaria (Convallaria): Convallaria dataset.
     CARE_U2OS (CARE_U2OS): CARE_U2OS dataset.
+    Tribolium (Tribolium): Tribolium dataset.
     """
 
     def __init__(self) -> None:
