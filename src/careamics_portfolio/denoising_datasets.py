@@ -267,6 +267,7 @@ class Convallaria(PortfolioEntry):
             tags=["denoising", "membrane", "fluorescence"],
         )
 
+
 class Tribolium(PortfolioEntry):
     """Tribolium dataset.
 

@@ -401,7 +401,7 @@ class Denoising(IterablePortfolio):
             CARE_U2OS dataset.
         """
         return self._CARE_U2OS
-    
+
     @property
     def Tribolium(self) -> Tribolium:
         """Tribolium dataset.
