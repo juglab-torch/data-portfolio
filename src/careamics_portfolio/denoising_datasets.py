@@ -267,6 +267,7 @@ class Convallaria(PortfolioEntry):
             tags=["denoising", "membrane", "fluorescence"],
         )
 
+
 class Tribolium(PortfolioEntry):
     """Tribolium dataset.
 
@@ -292,15 +293,19 @@ class Tribolium(PortfolioEntry):
             url="https://edmond.mpg.de/file.xhtml?fileId=264091&version=1.0",
             file_name="Denoising_Tribolium.tar.gz",
             sha256="d6ae165eb94c68fdc4af16796fb12c4c36ad3c23afb3dd791e725069874b2e97",
-            description="Confocal microscopy recordings of developing Tribolium castaneum "
-            "with 4 laser-power imaging conditions: GT and C1-C3 (700x700x50)",
+            description=(
+                "Confocal microscopy recordings of developing Tribolium castaneum "
+                "with 4 laser-power imaging conditions: GT and C1-C3 (700x700x50)"
+            ),
             license="CC0 1.0",
-            citation="M. Weigert, U. Schmidt, T. Boothe, A. Müller, A. Dibrov, A. Jain, "
-            "B. Wilhelm, D. Schmidt, C. Broaddus, S. Culley, M. Rocha-Martins, "
-            "F. Segovia-Miranda, C. Norden, R. Henriques, M. Zerial, M. Solimena, "
-            "J. Rink, P. Tomancak, L. A. Royer, F. Jug, and E. Myers "
-            "Content Aware Image Restoration: Pushing the Limits of Fluorescence "
-            "Microscopy Data, Edmond, vol. 1, 2025. https://doi.org/10.17617/3.FDFZOF.",
+            citation=(
+                "M. Weigert, U. Schmidt, T. Boothe, A. Müller, A. Dibrov, A. Jain, "
+                "B. Wilhelm, D. Schmidt, C. Broaddus, S. Culley, M. Rocha-Martins, "
+                "F. Segovia-Miranda, C. Norden, R. Henriques, M. Zerial, M. Solimena, "
+                "J. Rink, P. Tomancak, L. A. Royer, F. Jug, and E. Myers "
+                "Content Aware Image Restoration: Pushing the Limits of Fluorescence "
+                "Microscopy Data, Edmond, vol. 1, 2025. https://doi.org/10.17617/3.FDFZOF."
+            ),
             size=4812.8,
             tags=["denoising", "nuclei", "fluorescence"],
         )
